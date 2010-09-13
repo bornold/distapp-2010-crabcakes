@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : showHidden
+    Created on : Sep 13, 2010, 8:26:24 PM
+    Author     : flipmo
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <jsp:forward page="WEB-INF/jsp/hidden.xhtml" />
+
+</jsp:root>

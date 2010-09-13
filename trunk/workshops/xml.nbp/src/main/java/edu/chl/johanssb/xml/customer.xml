@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : customer.xml
+    Created on : August 31, 2010, 11:14 AM
+    Author     : flipmo
+    Description:
+        Purpose of the document follows.
+-->
+
+<cu:customer  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns:cu='http://edu.chl.johanssb/schema/customer'
+   xsi:schemaLocation='http://edu.chl.johanssb/schema/customer file:/home/flipmo/NetBeansProjects/da/workshops/xml.nbp/src/main/java/edu/chl/johanssb/xml/customer.xsd' id="0">
+    <cu:fname>Lars</cu:fname>
+    <cu:lname>Göransson</cu:lname>
+    <cu:age>55</cu:age>
+    <cu:address>Gatuvägen 50</cu:address>
+    <cu:email>lars.goran@soviet.su</cu:email>
+</cu:customer>

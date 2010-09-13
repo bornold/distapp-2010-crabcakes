@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   An order to unmarshal
+
+-->
+
+<purchaseOrder xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                   xmlns:po='blabbla'
+                   xsi:schemaLocation='null file:/home/hajo/NetBeansProjects/workshops/xml/jaxb/src/main/resources/po.xsd' orderDate="2011-01-01">
+    <shipTo country="US">
+        <name>aaa</name>
+        <street>aaa</street>
+        <city>aaa</city>
+        <state>aaa</state>
+        <zip>111</zip>
+    </shipTo>
+    <billTo country="US">
+        <name>bbb</name>
+        <street>bbb</street>
+        <city>bbb</city>
+        <state>bbb</state>
+        <zip>111</zip>
+    </billTo>
+    <comment></comment>
+    <items>
+        <item partNum="111-AZ">
+            <productName></productName>
+            <quantity>1</quantity>
+            <USPrice>1</USPrice>
+            <comment>1</comment>
+            <shipDate>2010-01-01</shipDate>
+        </item>
+        <item partNum="222-AZ">
+            <productName>2</productName>
+            <quantity>2</quantity>
+            <USPrice>2</USPrice>
+            <comment>2</comment>
+            <shipDate>2010-01-01</shipDate>
+        </item>
+    </items>
+
+</purchaseOrder>

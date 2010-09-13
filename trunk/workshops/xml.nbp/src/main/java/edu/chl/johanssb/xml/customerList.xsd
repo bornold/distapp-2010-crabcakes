@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://edu.chl.johanssb/schema/customerList"
+    xmlns:tns="http://edu.chl.johanssb/schema/customerList"
+    elementFormDefault="qualified" xmlns:ns0="http://edu.chl.johanssb/schema/customer">
+    <xsd:import schemaLocation="../../../../edu/chl/johanssb/xml/customer.xsd" namespace="http://edu.chl.johanssb/schema/customer"/>
+    <xsd:element name="customerList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="customer" type="ns0:Customer" maxOccurs="500" minOccurs="0"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
