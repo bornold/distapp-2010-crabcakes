@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xml2html.xsl"?>
+
+<!--
+    Document   : customerList.xml
+    Created on : September 6, 2010, 4:56 PM
+    Author     : flipmo
+    Description:
+        Purpose of the document follows.
+-->
+
+<cl:customerList  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns:cu='http://edu.chl.johanssb/schema/customer'
+   xmlns:cl='http://edu.chl.johanssb/schema/customerList'
+   xsi:schemaLocation='http://edu.chl.johanssb/schema/customerList file:/home/flipmo/NetBeansProjects/da/workshops/xml.nbp/src/main/java/edu/chl/johanssb/xml/customerList.xsd'>
+    <cl:customer id="0">
+        <cu:fname>Lars</cu:fname>
+        <cu:lname>Göransson</cu:lname>
+        <cu:age>33</cu:age>
+        <cu:address>Slövägen 3</cu:address>
+        <cu:email>lg@buken.se</cu:email>
+    </cl:customer>
+    <cl:customer id="1">
+        <cu:fname>Peter</cu:fname>
+        <cu:lname>Göransson</cu:lname>
+        <cu:age>35</cu:age>
+        <cu:address>Slövägen 3</cu:address>
+        <cu:email>pg@buken.se</cu:email>
+    </cl:customer>
+</cl:customerList>

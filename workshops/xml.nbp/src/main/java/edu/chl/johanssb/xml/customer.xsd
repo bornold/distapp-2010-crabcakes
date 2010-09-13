@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://edu.chl.johanssb/schema/customer"
+    xmlns:tns="http://edu.chl.johanssb/schema/customer"
+    elementFormDefault="qualified">
+    <xsd:simpleType name="String20">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+            <xsd:minLength value="1"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="String40">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="5"/>
+            <xsd:maxLength value="40"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="IntAge">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="110"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="IntId">
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="10000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Customer">
+        <xsd:sequence>
+            <xsd:element name="fname" type="tns:String20" minOccurs="0"></xsd:element>
+            <xsd:element name="lname" type="tns:String20"></xsd:element>
+            <xsd:element name="age" type="tns:IntAge" minOccurs="0"></xsd:element>
+            <xsd:element name="address" type="tns:String40" minOccurs="0"></xsd:element>
+            <xsd:element name="email" type="tns:String40"></xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="tns:IntId"/>
+    </xsd:complexType>
+    <xsd:element name="customer" type="tns:Customer"></xsd:element>
+</xsd:schema>

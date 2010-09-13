@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : simpleCustomerList.xml
+    Created on : August 31, 2010, 11:10 AM
+    Author     : flipmo
+    Description:
+        Purpose of the document follows.
+-->
+
+<simpleCustomerList len="3">
+    <simpleCustomer id="1">
+        <fname>Lars</fname>
+        <lname>Larsson</lname>
+        <age>30</age>
+        <address>Lunevägen 1</address>
+        <email>lars.larsson@soviet.su</email>
+    </simpleCustomer>
+    <simpleCustomer id="2">
+        <fname>Eva</fname>
+        <lname>Evasson</lname>
+        <age>45</age>
+        <address>Soleilvägen 1</address>
+        <email>eva.evasson@soviet.su</email>
+    </simpleCustomer>
+    <simpleCustomer id="3">
+        <fname>Håkan</fname>
+        <lname>Bråkan</lname>
+        <age>60</age>
+        <address>Marsvägen 1</address>
+        <email>hakan.brakan@soviet.su</email>
+    </simpleCustomer>
+</simpleCustomerList>
