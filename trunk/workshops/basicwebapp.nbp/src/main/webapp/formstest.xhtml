@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Forms test</title>
+    </head>
+    <body>
+        <p>
+            <form action="form" method="POST">
+                <input type="text" name="input" value="" />
+                <input type="submit" value="textSubmit" name="submitButton"/>
+            </form>
+            <br/>
+            <form action="form" method="POST">
+                <input type="checkbox" name="volvo" value="Volvo" />Volvo<br/>
+                <input type="checkbox" name="saab" value="Saab" />Saab<br/>
+                <input type="checkbox" name="porsche" value="Porsche" />Porsche<br/>
+                <input type="submit" value="checkSubmit" name="submitButton"/>
+            </form>
+            <form action="form" method="POST">
+                <input type="radio" name="cars" value="Volvo" />Volvo<br/>
+                <input type="radio" name="cars" value="Saab" />Saab<br/>
+                <input type="radio" name="cars" value="Porsche" />Porsche<br/>
+                <input type="submit" value="radioSubmit" name="submitButton"/>
+            </form>
+            <form action="form" method="POST">
+                <select name="dropCars">
+                    <option>Volvo</option>
+                    <option>Saab</option>
+                    <option>Porsche</option>
+                </select>
+                <input type="submit" value="dropSubmit" name="submitButton"/>
+            </form>
+        </p>
+    </body>
+</html>
