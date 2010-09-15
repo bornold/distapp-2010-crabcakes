@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+                doctype-system="http://www.w3c.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
+    <html>
+        <head>
+            <title>shop.jpsx</title>
+        </head>
+        <body>
+            <jsp:directive.include file="/WEB-INF/jspf/header.jspf" />
+            <h1>shop.jspx</h1>
+            <p>
+            <form action="controller" method="GET">
+                <input type="text" name="item" value="" />
+                <input type="hidden" name="action" value="addItem" />
+                <input type="submit" value="Add item" />
+            </form>
+        </p>
+        <p>
+            <a href="main.jspx">Home</a><br/>
+        </p>
+        <jsp:directive.include file="/WEB-INF/jspf/footer.jspf" />
+    </body>
+</html>
+</jsp:root>
