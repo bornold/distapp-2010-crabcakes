@@ -84,11 +84,18 @@ public class FrontControllerServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/jsp/exit.jspx").forward(request, response);
         } else if (action.equals("addItem")) {
             ArrayList<String> items = (ArrayList<String>) session.getAttribute("items");
-            items.add(request.getParameter("item"));
+            String item = request.getParameter("item");
+            items.add(item);
             session.setAttribute("items", items);
             session.setAttribute("numItems", items.size());
             //Go back to shop more!
-            request.getRequestDispatcher("WEB-INF/jsp/shop.jspx").forward(request, response);
+            response.sendRedirect("controller?action=shop");
+
+        }   else if(action.equals("removeItem")){
+            ArrayList<String> items = (ArrayList<String>) session.getAttribute("items");
+            items.remove(request.getParameter("itemToRemove"));
+            session.setAttribute("items", items);
+            request.getRequestDispatcher("WEB-INF/jsp/viewCart.jspx").forward(request, response);
         }
     }
 

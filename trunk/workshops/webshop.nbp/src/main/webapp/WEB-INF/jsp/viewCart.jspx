@@ -14,16 +14,16 @@
             <h1>viewCart.jspx</h1>
             <p>
             <table border="1">
-                <tr><td><b>Items</b></td></tr>
+                <tr><td><b>Items</b></td><td>Edit</td></tr>
                 <c:forEach var="item" items="${sessionScope['items']}">
                     <tr>
-                        <td> ${item} </td>
+                        <td> ${item} </td><td><form action="controller"><input type="hidden" name="action" value="removeItem"/><input type="hidden" name="itemToRemove" value="${item}"/><input type="submit" value="x"/></form></td>
                     </tr>
                 </c:forEach>
             </table>
-
         </p>
         <p>
+            <a href="controller?action=pay">Pay</a><br/>
             <a href="main.jspx">Home</a><br/>
         </p>
         <jsp:directive.include file="/WEB-INF/jspf/footer.jspf" />

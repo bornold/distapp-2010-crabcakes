@@ -19,6 +19,7 @@
             </form>
         </p>
         <p>
+            <a href="controller?action=viewCart">View cart</a><br/>
             <a href="main.jspx">Home</a><br/>
         </p>
         <jsp:directive.include file="/WEB-INF/jspf/footer.jspf" />
