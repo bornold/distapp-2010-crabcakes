@@ -12,6 +12,9 @@
             <jsp:directive.include file="/WEB-INF/jspf/header.jspf" />
             <h1>exit.jspx</h1>
             <p>
+                Thank you for your order, an email has been sent with details.
+            </p>
+            <p>
                 <a href="main.jspx">Home</a><br/>
             </p>
             <jsp:directive.include file="/WEB-INF/jspf/footer.jspf" />
