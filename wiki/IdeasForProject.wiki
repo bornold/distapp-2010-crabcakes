@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Coolest ideas go here, start another page for uncool ideas
 #labels Phase-Design
 
 = _Ideas!_ =
