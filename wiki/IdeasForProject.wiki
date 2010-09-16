@@ -1,8 +1,11 @@
 #summary Coolest ideas go here, start another page for uncool ideas
 #labels Phase-Design
 
-= _CoolestIdeas!_ =
+= CoolestIdeasInTown =
+----
 
-  * _Azwum_ idea no 1
-  * *Azwum* idea no 2
-  * _*Azwum*_ idea no 3
+  # _Azwum_ idea no 1
+  # *Azwum* idea no 2
+  # _*Azwum*_ idea no 3
+
+----
