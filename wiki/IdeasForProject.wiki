@@ -1,0 +1,8 @@
+#summary One-sentence summary of this page.
+#labels Phase-Design
+
+= _Ideas!_ =
+
+  * _Azwum_ idea no 1
+  * *Azwum* idea no 2
+  * _*Azwum*_ idea no 3
