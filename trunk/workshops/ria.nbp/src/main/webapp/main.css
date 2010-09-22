@@ -18,18 +18,20 @@ div.container{
     width: 50em;
     margin-left:auto;
     margin-right:auto;
+    position: relative;
 }
 div.topleft{
     border-style: solid;
     border-width: 1px;
     height: 3em;
-    background-color: darkseagreen;
+    background-color: #8FBC8F;
 }
-li{
+li.menuItem{
     padding-right: 4em;
     list-style-type: none;
     display: inline;
 }
+
 div.topright{
     border-style: solid;
     border-width: 0px;
@@ -46,7 +48,7 @@ div.content{
     height: 20em;
     margin-top: 10px;
     padding: 10px;
-    background-color: moccasin;
+    background-color: #FFE4B5;
 }
 p{
     color: brown;
@@ -55,4 +57,11 @@ input.js_button{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+div.dropdown{
+    width: 16em;
+    border-width: 1px;
+    border-style: solid;
+    display: none;
+    background-color: #8FBC8F;
 }
