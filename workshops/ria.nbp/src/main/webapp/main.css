@@ -1,0 +1,58 @@
+/* 
+    Document   : main
+    Created on : Sep 21, 2010, 12:53:46 PM
+    Author     : flipmo
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+div.container{
+    width: 50em;
+    margin-left:auto;
+    margin-right:auto;
+}
+div.topleft{
+    border-style: solid;
+    border-width: 1px;
+    height: 3em;
+    background-color: darkseagreen;
+}
+li{
+    padding-right: 4em;
+    list-style-type: none;
+    display: inline;
+}
+div.topright{
+    border-style: solid;
+    border-width: 0px;
+    border-left-width: 1px;
+    float: right;
+    width: 100px;
+    height: 3em;
+    background-image: url("images/200px-Face-smile.png");
+    background-position: center;
+}
+div.content{
+    border-style: solid;
+    border-width: 1px;
+    height: 20em;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: moccasin;
+}
+p{
+    color: brown;
+}
+input.js_button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

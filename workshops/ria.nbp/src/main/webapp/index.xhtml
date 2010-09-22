@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Nuts about Fruit</title>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+        <script src="js/jquery-1.4.2.js" type="text/javascript"/>
+        <script src="js/flash.js" type="text/javascript"/>
+        <script src="js/lighten_jquery.js" type="text/javascript"/>
+        <script src="js/darken_jquery.js" type="text/javascript"/>
+        <script src="js/rgb.js" type="text/javascript"/>
+
+    </head>
+    <body>
+        <div id="container" class="container">
+            <div id="topleft" class="topleft">
+                <div id="topright" class="topright">
+                </div>
+                <ul>
+                    <li>Fruit</li>
+                    <li>Vegetables</li>
+                    <li>Nuts</li>
+                </ul>
+            </div>
+            <div id="content" class="content">
+                <p>content</p>
+            </div>
+            <form>
+                <input class="js_button" type="button" value="Start Obtrusive Flash" onclick="flash('content', 'moccasin')"/>
+                <input class="js_button" type="button" value="Start Unobtrusive Flash" onclick="lighten('topleft')"/>
+            </form>
+        </div>
+    </body>
+</html>
+
