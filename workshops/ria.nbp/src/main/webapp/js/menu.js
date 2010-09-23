@@ -43,9 +43,15 @@ function tomatoClicked(){
 function showFruits(){
     hideNuts();
     hideVegetables();
-    $("div#fruits_dropdown").css("position","absolute");
-    $("div#fruits_dropdown").css("top","2.5em");
-    $("div#fruits_dropdown").css("left","1em");
+    p = $("li#fruitsMenu");
+    position = p.offset();
+    dropPositionLeft = position.left;
+    dropPositionTop = position.top;
+    height = p.outerHeight();
+    newPositionTop = dropPositionTop + height;
+    $("div#fruits_dropdown").css("position","fixed");
+    $("div#fruits_dropdown").css("top",newPositionTop);
+    $("div#fruits_dropdown").css("left",dropPositionLeft);
     $("div#fruits_dropdown").css("display","block");
 }
 function hideFruits(){
@@ -54,11 +60,15 @@ function hideFruits(){
 function showVegetables(){
     hideFruits();
     hideNuts();
-    $("div#nuts_dropdown").css("display","none");
-    $("div#fruits_dropdown").css("display","none");
-    $("div#vegetables_dropdown").css("position","absolute");
-    $("div#vegetables_dropdown").css("top","2.5em");
-    $("div#vegetables_dropdown").css("left","8em");
+    p = $("li#vegetablesMenu");
+    position = p.offset();
+    dropPositionLeft = position.left;
+    dropPositionTop = position.top;
+    height = p.outerHeight();
+    newPositionTop = dropPositionTop + height;
+    $("div#vegetables_dropdown").css("position","fixed");
+    $("div#vegetables_dropdown").css("top",newPositionTop);
+    $("div#vegetables_dropdown").css("left",dropPositionLeft);
     $("div#vegetables_dropdown").css("display","block");
 }
 function hideVegetables(){
@@ -67,11 +77,15 @@ function hideVegetables(){
 function showNuts(){
     hideFruits();
     hideVegetables();
-    $("div#vegetables_dropdown").css("display","none");
-    $("div#fruits_dropdown").css("display","none");
-    $("div#nuts_dropdown").css("position","absolute");
-    $("div#nuts_dropdown").css("top","2.5em");
-    $("div#nuts_dropdown").css("left","18em");
+    p = $("li#nutsMenu");
+    position = p.offset();
+    dropPositionLeft = position.left;
+    dropPositionTop = position.top;
+    height = p.outerHeight();
+    newPositionTop = dropPositionTop + height;
+    $("div#nuts_dropdown").css("position","fixed");
+    $("div#nuts_dropdown").css("top",newPositionTop);
+    $("div#nuts_dropdown").css("left",dropPositionLeft);
     $("div#nuts_dropdown").css("display","block");
 }
 function hideNuts(){
