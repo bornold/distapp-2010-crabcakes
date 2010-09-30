@@ -16,12 +16,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ *JTAJTA
  * @author flipmo
  */
 public class WebShopTest {
 
     public WebShopTest() {
+
+        
+        
     }
 
     @BeforeClass
@@ -34,6 +37,7 @@ public class WebShopTest {
 
     @Before
     public void setUp() {
+        
     }
 
     @After
@@ -49,6 +53,7 @@ public class WebShopTest {
     public void testAddProduct() {
         assertTrue(true);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("webshop_pu_test");
+        
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -59,10 +64,10 @@ public class WebShopTest {
         tx.begin();
         em.persist(prod);
         tx.commit();
-
-        //Product newProd = em.getReference(Product.class, prod.getId());
-        //assertTrue(newProd.getName().equals(prod.getName()));
-        assertTrue(true);
+        
+        Product newProd = em.getReference(Product.class, prod.getId());
+        assertTrue(newProd.getName().equals(prod.getName()));
+        //assertTrue(true);
         em.close();
     }
 }
