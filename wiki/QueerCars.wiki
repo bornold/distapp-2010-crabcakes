@@ -18,6 +18,7 @@ QueerCars makes renting cars awesome!
   * Absolutely *no* Hitlers
 
 ===Relations==
+As per [http://distapp-2010-crabcakes.googlecode.com/svn/trunk/project/documents/ER-diagram.dia ER-diagram.dia]
 {{{
 Users(_id,name)
 Cars(_id)
