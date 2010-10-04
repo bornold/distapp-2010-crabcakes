@@ -73,7 +73,7 @@ public class Product implements Serializable {
         if (!(object instanceof Product)) {
             return false;
         }
-        Product other = (Product) object;
+        final Product other = (Product) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
