@@ -7,7 +7,7 @@ QueerCars makes renting cars awesome!
 
 = Details =
 
-===Functionality===
+==Functionality==
   * User registration
   * Admin interface
   * Multiple pickup locations
@@ -16,3 +16,13 @@ QueerCars makes renting cars awesome!
   * Alternate transportation solution (i.e. Västtrafik)
   * Pink fluffy stuff
   * Absolutely *no* Hitlers
+
+===Relations==
+{{{
+Users(_id,name)
+Cars(_id)
+Administrators(_id,name)
+Rentals(_car,user)
+    car -> Cars.id
+    user -> Users.id
+}}}
