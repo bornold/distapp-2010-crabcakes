@@ -1,0 +1,16 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+QueerCars makes renting cars awesome!
+
+
+= Details =
+
+===Functionality===
+  * User registration
+  * Admin interface
+  * Multiple pickup locations
+  * Webservice for rental terminals
+  * Kittens
+  * Alternate transportation solution (i.e. Västtrafik)
