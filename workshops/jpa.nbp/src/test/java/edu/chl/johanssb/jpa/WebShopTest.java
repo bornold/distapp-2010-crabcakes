@@ -4,6 +4,9 @@
  */
 package edu.chl.johanssb.jpa;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -158,5 +161,37 @@ public class WebShopTest {
         assertTrue(test.getCity().equals("Hallywuud"));
         em.close();
     }
+    @Test
+    public void testCustomer(){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
 
+        List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
+        
+        PurchaseOrder p1 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        PurchaseOrder p2 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        PurchaseOrder p3 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        
+        orders.add(0, p1);
+        orders.add(1, p2);
+        orders.add(2, p3);
+
+        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        cust1.setOrders(orders);
+
+        p1.setCustomer(cust1);
+        p2.setCustomer(cust1);
+        p3.setCustomer(cust1);
+
+        tx.begin();
+        em.persist(cust1);
+        tx.commit();
+
+        Customer cust2 = em.getReference(Customer.class, cust1.getId());
+        assertEquals(cust1,cust2);
+        assertEquals(p1, cust2.getOrders().get(0));
+        assertEquals(p2, cust2.getOrders().get(1));
+        assertEquals(p3, cust2.getOrders().get(2));
+        em.close();
+    }
 }

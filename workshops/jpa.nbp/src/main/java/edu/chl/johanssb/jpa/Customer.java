@@ -6,11 +6,9 @@
 package edu.chl.johanssb.jpa;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  *
@@ -29,7 +27,9 @@ public class Customer implements Serializable {
     private String email;
     @NotNull
     private Address address;
-
+    @OneToMany(mappedBy="customer",cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    fetch = FetchType.LAZY)
+    private List<PurchaseOrder> orders;
     public Customer() {
     }
 
@@ -78,6 +78,14 @@ public class Customer implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<PurchaseOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<PurchaseOrder> orders) {
+        this.orders = orders;
     }
     
     @Override
