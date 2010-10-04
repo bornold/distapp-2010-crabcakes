@@ -14,3 +14,5 @@ QueerCars makes renting cars awesome!
   * Webservice for rental terminals
   * Kittens
   * Alternate transportation solution (i.e. Västtrafik)
+  * Pink fluffy stuff
+  * Absolutely *no* Hitlers
