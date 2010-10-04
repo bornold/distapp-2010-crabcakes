@@ -21,10 +21,9 @@ import static org.junit.Assert.*;
  */
 public class WebShopTest {
 
-    public WebShopTest() {
+    EntityManagerFactory emf;
 
-        
-        
+    public WebShopTest() {
     }
 
     @BeforeClass
@@ -37,11 +36,12 @@ public class WebShopTest {
 
     @Before
     public void setUp() {
-        
+        emf = Persistence.createEntityManagerFactory("webshop_pu_test");
     }
 
     @After
     public void tearDown() {
+        emf.close();
     }
 
     // TODO add test methods here.
@@ -51,23 +51,112 @@ public class WebShopTest {
     // public void hello() {}
     @Test
     public void testAddProduct() {
-        assertTrue(true);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("webshop_pu_test");
-        
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
-        Product prod = new Product();
-        prod.setName("MegaStrong 3000");
-        prod.setCat("ropes");
-        prod.setPrice(9.90);
+        Product prod1 = new Product();
+        prod1.setName("MegaStrong 3000");
+        prod1.setCat("ropes");
+        prod1.setPrice(9.90);
+        Product prod2;
+
+        assertFalse(em.contains(prod1));
+
         tx.begin();
-        em.persist(prod);
-        tx.commit();
-        
-        Product newProd = em.getReference(Product.class, prod.getId());
-        assertTrue(newProd.getName().equals(prod.getName()));
-        //assertTrue(true);
+        em.persist(prod1); //Add to DB.
+        tx.commit(); //Commit changes.
+
+        assertTrue(em.contains(prod1));
+
+        prod2 = em.getReference(Product.class, prod1.getId());
+
+        assertTrue(em.contains(prod2));
+        assertTrue(prod1 == prod2);
+        assertTrue(prod1.equals(prod2));
+
+        em.detach(prod1);
+        assertFalse(em.contains(prod1));
+
         em.close();
     }
+
+    @Test
+    public void testUpdateProduct() {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Product prod1 = new Product();
+        prod1.setName("MegaStrong 3000");
+        prod1.setCat("ropes");
+        prod1.setPrice(9.90);
+        Product prod2 = prod1;
+        double newprice = 11.90;
+
+        tx.begin();
+        em.persist(prod1);
+        tx.commit();
+
+        em.clear();
+
+        prod1.setPrice(newprice);
+
+        tx.begin();
+        prod1 = em.merge(prod1);
+        tx.commit();
+
+        assertTrue(prod1.equals(prod2));
+        assertFalse(prod1 == prod2);
+
+        prod2 = em.getReference(Product.class, prod1.getId());
+        assertTrue(prod2.getPrice() == newprice);
+
+        em.close();
+    }
+
+    @Test
+    public void testDeleteProduct() {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Product prod1 = new Product();
+        prod1.setName("MegaStrong 3000");
+        prod1.setCat("ropes");
+        prod1.setPrice(9.90);
+        Product prod2 = prod1;
+
+        tx.begin();
+        em.persist(prod1);
+        tx.commit();
+
+        prod2 = em.getReference(Product.class, prod1.getId());
+        tx.begin();
+        em.remove(prod2);
+        tx.commit();
+
+        assertFalse(em.contains(prod1));
+        assertFalse(em.contains(prod2));
+        prod2 = em.find(Product.class, prod1.getId());
+
+        assertTrue(prod2 == null);
+        em.close();
+    }
+    @Test
+    public void testAddCustomer(){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Customer cust1 = new Customer("Rick", "Astley", "rick@rolled.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        Customer cust2;
+
+        tx.begin();
+        em.persist(cust1);
+        tx.commit();
+
+        cust2 = em.getReference(Customer.class, cust1.getId());
+        assertTrue(cust2.equals(cust1));
+        Address test = cust2.getAddress();
+        assertTrue(test.getCity().equals("Hallywuud"));
+        em.close();
+    }
+
 }
