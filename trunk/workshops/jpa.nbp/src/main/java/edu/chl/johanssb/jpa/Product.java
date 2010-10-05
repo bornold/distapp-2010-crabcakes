@@ -27,6 +27,15 @@ public class Product implements Serializable {
     private String name;
     private String cat;
     private double price;
+
+    public Product() {
+    }
+
+    public Product(String name, String cat, double price) {
+        this.name = name;
+        this.cat = cat;
+        this.price = price;
+    }
     
     public String getCat() {
         return cat;

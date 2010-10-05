@@ -5,6 +5,7 @@
     <class>edu.chl.johanssb.jpa.Customer</class>
     <class>edu.chl.johanssb.jpa.Product</class>
     <class>edu.chl.johanssb.jpa.PurchaseOrder</class>
+    <class>edu.chl.johanssb.jpa.OrderItem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>

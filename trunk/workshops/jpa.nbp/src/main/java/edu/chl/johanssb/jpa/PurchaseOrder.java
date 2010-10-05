@@ -7,6 +7,7 @@ package edu.chl.johanssb.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -22,15 +23,28 @@ public class PurchaseOrder implements Serializable {
     @Column(name="ORDER_DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
-
     @ManyToOne(cascade={CascadeType.PERSIST})
     private Customer customer;
+    @OneToMany(mappedBy="purchaseOrder",cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    fetch = FetchType.EAGER)
+    private List<OrderItem> orderItems;
 
     public PurchaseOrder() {
     }
 
     public PurchaseOrder(Date date) {
         this.date = date;
+    }
+
+    public PurchaseOrder(Date date, List<OrderItem> orderItems) {
+        this.date = date;
+        this.orderItems = orderItems;
+    }
+
+    public PurchaseOrder(Date date, Customer customer, List<OrderItem> orderItems) {
+        this.date = date;
+        this.customer = customer;
+        this.orderItems = orderItems;
     }
 
     public Long getId() {
