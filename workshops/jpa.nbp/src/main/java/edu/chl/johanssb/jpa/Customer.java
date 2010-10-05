@@ -20,11 +20,11 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String email;
     @NotNull
     private String fname;
     @NotNull
     private String lname;
-    private String email;
     @NotNull
     private Address address;
     @OneToMany(mappedBy="customer",cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
