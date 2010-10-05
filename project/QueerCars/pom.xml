@@ -25,7 +25,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.2</version>
+            <version>4.5</version>
             <scope>test</scope>
         </dependency>
 
@@ -88,6 +88,8 @@
             </build>
         </profile>
     </profiles>
-
+    <properties>
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+    </properties>
 </project>
 
