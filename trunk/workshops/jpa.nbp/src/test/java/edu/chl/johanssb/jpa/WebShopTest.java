@@ -40,7 +40,7 @@ public class WebShopTest {
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("webshop_pu");
+        emf = Persistence.createEntityManagerFactory("webshop_pu_test");
     }
 
     @After
@@ -90,7 +90,7 @@ public class WebShopTest {
         EntityTransaction tx = em.getTransaction();
 
         Product prod1 = new Product();
-        prod1.setName("MegaStrong 3000");
+        prod1.setName("Ropetastic 4000");
         prod1.setCat("ropes");
         prod1.setPrice(9.90);
         Product prod2 = prod1;
@@ -123,9 +123,9 @@ public class WebShopTest {
         EntityTransaction tx = em.getTransaction();
 
         Product prod1 = new Product();
-        prod1.setName("MegaStrong 3000");
+        prod1.setName("Cotton Yarn");
         prod1.setCat("ropes");
-        prod1.setPrice(9.90);
+        prod1.setPrice(2.90);
         Product prod2 = prod1;
 
         tx.begin();
@@ -177,7 +177,7 @@ public class WebShopTest {
         orders.add(1, p2);
         orders.add(2, p3);
 
-        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("1600 Pennsylvania Avenue", "Washington D.C.", "USA"));
         cust1.setOrders(orders);
 
         p1.setCustomer(cust1);
@@ -211,7 +211,7 @@ public class WebShopTest {
         orders.add(1, p2);
         orders.add(2, p3);
 
-        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        Customer cust1 = new Customer("Corey", "Hart", "coreyhart@the80s.com", new Address("Washed Up Musicians", "California", "USA"));
         cust1.setOrders(orders);
 
         p1.setCustomer(cust1);
@@ -254,7 +254,7 @@ public class WebShopTest {
         orders.add(1, p2);
         orders.add(2, p3);
 
-        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        Customer cust1 = new Customer("Mike", "Rotch", "mikerotch@itsajoke.com", new Address("123 Fake Street", "Las Vegas", "USA"));
         cust1.setOrders(orders);
 
         p1.setCustomer(cust1);
@@ -313,7 +313,7 @@ public class WebShopTest {
         orders.add(po2);
         
         //We need a customer to pay for all this stuff. This guy will do.
-        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        Customer cust1 = new Customer("Thor", "Awesomespeed", "thor@stuff.se", new Address("Bakgatan 5", "Göteborg", "Sweden"));
 
         //Tie it all together.
         cust1.setOrders(orders);
