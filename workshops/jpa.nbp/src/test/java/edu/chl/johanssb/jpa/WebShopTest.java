@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import org.eclipse.persistence.internal.jpa.querydef.OrderImpl;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,7 +40,7 @@ public class WebShopTest {
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("webshop_pu_test");
+        emf = Persistence.createEntityManagerFactory("webshop_pu");
     }
 
     @After
@@ -192,6 +193,143 @@ public class WebShopTest {
         assertEquals(p1, cust2.getOrders().get(0));
         assertEquals(p2, cust2.getOrders().get(1));
         assertEquals(p3, cust2.getOrders().get(2));
+        em.close();
+    }
+
+    @Test
+    public void testUpdateCustomer(){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
+
+        PurchaseOrder p1 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        PurchaseOrder p2 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        PurchaseOrder p3 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+
+        orders.add(0, p1);
+        orders.add(1, p2);
+        orders.add(2, p3);
+
+        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        cust1.setOrders(orders);
+
+        p1.setCustomer(cust1);
+        p2.setCustomer(cust1);
+        p3.setCustomer(cust1);
+
+        Customer cust2 = cust1;
+
+        tx.begin();
+        em.persist(cust1);
+        tx.commit();
+
+        em.clear();
+        
+        PurchaseOrder p4 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        orders.add(3, p4);
+        p4.setCustomer(cust1);
+
+        tx.begin();
+        cust1 = em.merge(cust1);
+        tx.commit();
+
+        assertFalse(cust1 == cust2);
+        assertNotNull(cust1.equals(cust2));
+        em.close();
+    }
+
+    @Test
+    public void testCustomerRemove(){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
+
+        PurchaseOrder p1 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        PurchaseOrder p2 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+        PurchaseOrder p3 = new PurchaseOrder(new Date(System.currentTimeMillis()));
+
+        orders.add(0, p1);
+        orders.add(1, p2);
+        orders.add(2, p3);
+
+        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+        cust1.setOrders(orders);
+
+        p1.setCustomer(cust1);
+        p2.setCustomer(cust1);
+        p3.setCustomer(cust1);
+
+        Customer cust2 = cust1;
+
+        tx.begin();
+        em.persist(cust1);
+        tx.commit();
+
+        cust2 = em.getReference(Customer.class, cust1.getId());
+
+        tx.begin();
+        em.remove(cust2);
+        tx.commit();
+
+        assertFalse(em.contains(cust1));
+        assertFalse(em.contains(cust2));
+
+        cust2 = em.find(Customer.class, cust1.getId());
+        assertNull(cust2);
+        em.close();
+    }
+
+    @Test
+    public void testCompleteGraph(){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Create a few products.
+        Product prod1 = new Product("Kittens", "Pets", 100.0);
+        Product prod2 = new Product("Cat Food", "Petfood", 30.0);
+        Product prod3 = new Product("Puppies", "Pets", 120.0);
+        Product prod4 = new Product("Dog Food", "Petfood", 35.0);
+
+        //Create a few order items.
+        OrderItem oi1 = new OrderItem(prod1, 2); //2 kittens!
+        OrderItem oi2 = new OrderItem(prod2, 6); //Lots of cat food.
+        ArrayList<OrderItem> orderItems1 = new ArrayList();
+        orderItems1.add(oi1);
+        orderItems1.add(oi2);
+        
+        OrderItem oi3 = new OrderItem(prod3, 1); //1 cute puppy.
+        OrderItem oi4 = new OrderItem(prod4, 10); //Even more dog food for hungry puppy.
+        ArrayList<OrderItem> orderItems2 = new ArrayList();
+        orderItems2.add(oi3);
+        orderItems2.add(oi4);
+
+        //Create some purchase orders with our order items.
+        PurchaseOrder po1 = new PurchaseOrder(new Date(System.currentTimeMillis()),orderItems1);
+        PurchaseOrder po2 = new PurchaseOrder(new Date(System.currentTimeMillis()),orderItems2);
+        List<PurchaseOrder> orders = new ArrayList<PurchaseOrder>();
+        orders.add(po1);
+        orders.add(po2);
+        
+        //We need a customer to pay for all this stuff. This guy will do.
+        Customer cust1 = new Customer("Don", "Johnson", "don@johnson.com", new Address("Rodeo drive 1", "Hallywuud", "U.S. of EY"));
+
+        //Tie it all together.
+        cust1.setOrders(orders);
+        po1.setCustomer(cust1);
+        po2.setCustomer(cust1);
+        oi1.setPurchaseOrder(po1);
+        oi2.setPurchaseOrder(po1);
+        oi3.setPurchaseOrder(po2);
+        oi4.setPurchaseOrder(po2);
+
+        tx.begin();
+        em.persist(cust1);
+        tx.commit();
+
+        assertTrue(true);
+
         em.close();
     }
 }
