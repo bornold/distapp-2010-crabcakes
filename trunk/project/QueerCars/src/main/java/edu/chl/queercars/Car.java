@@ -19,10 +19,15 @@ import javax.persistence.Id;
 public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //Registreringsnummer
-    private String id;
+    private String id; //Registreringsnummer
 
+    public Car() {
+    }
+
+    public Car(String id) {
+        this.id = id;
+    }
+    
     public String getId() {
         return id;
     }
