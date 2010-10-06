@@ -4,6 +4,9 @@
  */
 package edu.chl.queercars.servlets;
 
+import edu.chl.queercars.Administrator;
+import edu.chl.queercars.Car;
+import edu.chl.queercars.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
@@ -46,18 +49,13 @@ public class InitServlet extends HttpServlet {
             out.println("<body>");
             if (action == null) {
                 showMenuPage(out);
-            } else if (action.equals("dropandrecreate")) {
+            } else if (action.equals("recreate")) {
                 recreateData(out);
             }
             out.println("</body>");
             out.println("</html>");
         } finally {
             out.close();
-        }
-        if (action == null) {
-            showMenuPage(out);
-        } else if (action.equals("dropandrecreate")) {
-            recreateData(out);
         }
         emf.close();
     }
@@ -99,7 +97,7 @@ public class InitServlet extends HttpServlet {
     }// </editor-fold>
 
     private void showMenuPage(PrintWriter out) {
-        out.println("<p><a href=\"?action=dropandrecreate\">Recreate data after run.</a></p>");
+        out.println("<p><a href=\"?action=recreate\">Recreate data after run.</a></p>");
     }
 
     private void recreateData(PrintWriter out) {
@@ -107,6 +105,36 @@ public class InitServlet extends HttpServlet {
         emf = Persistence.createEntityManagerFactory("queercars_pu");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
+
+        Customer cust1 = new Customer("4412121234","Lennart");
+        Customer cust2 = new Customer("3312121234","Emil");
+        Customer cust3 = new Customer("2212121234","Filip");
+        Customer cust4 = new Customer("1112121234","Jens");
+        Customer cust5 = new Customer("5512121234","Mio");
+        Car car1 = new Car("KKN111");
+        Car car2 = new Car("KKN222");
+        Car car3 = new Car("KKN333");
+        Car car4 = new Car("KKN444");
+        Car car5 = new Car("KKN555");
+        Car car6 = new Car("KKN666");
+        Administrator admin1 = new Administrator("jakob", "Jakob");
+        Administrator admin2 = new Administrator("damien", "Damien");
+
+        tx.begin();
+        em.persist(cust1);
+        em.persist(cust2);
+        em.persist(cust3);
+        em.persist(cust4);
+        em.persist(cust5);
+        em.persist(car1);
+        em.persist(car2);
+        em.persist(car3);
+        em.persist(car4);
+        em.persist(car5);
+        em.persist(car6);
+        em.persist(admin1);
+        em.persist(admin2);
+        tx.commit();
         em.close();
     }
 }

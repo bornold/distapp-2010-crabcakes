@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -19,9 +20,18 @@ import javax.persistence.Id;
 public class Administrator implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String id; //Username.
+    @NotNull
     private String fname;
+
+    public Administrator() {
+    }
+
+    public Administrator(String id, String fname) {
+        this.id = id;
+        this.fname = fname;
+    }
+
     public String getId() {
         return id;
     }
@@ -52,7 +62,7 @@ public class Administrator implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Admnistrator[id=" + id + "]";
+        return "edu.chl.queercars.Administrator[id=" + id + "]";
     }
 
 }
