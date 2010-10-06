@@ -7,11 +7,16 @@ package edu.chl.queercars.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transaction;
 
 /**
  *
@@ -19,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="InitServlet", urlPatterns={"/InitServlet"})
 public class InitServlet extends HttpServlet {
-   
+    EntityManagerFactory emf;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -31,6 +36,9 @@ public class InitServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
             /* TODO output your page here
             out.println("<html>");
@@ -45,6 +53,8 @@ public class InitServlet extends HttpServlet {
         } finally { 
             out.close();
         }
+        em.close();
+        emf.close();
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
