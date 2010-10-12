@@ -31,23 +31,13 @@ public class AdminServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
         String action = request.getParameter("action");
 
-        try {
             //TODO real pages
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>AddCar</title>");
-            out.println("</head>");
-            out.println("<body>");
             if (action == null) {
                 //TODO indexpage
-                request.getRequestDispatcher("WEB-INF/adminIndex.xhtml").forward(request, response);
-            } else if(action.equals("showIndexPage")){
-                //TODO indexPage
-                request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
+                //Show initial admin navigation page.
+                request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
             } else if(action.equals("showCarPage")){
                 //TODO adminPage
                 request.getRequestDispatcher("car.page.AWSWUZM").forward(request, response);
@@ -80,13 +70,7 @@ public class AdminServlet extends HttpServlet {
                 response.sendRedirect("adminServlet?action=showCarPage");
             } else {
                 request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
-            }
-            
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
-        }
+            }   
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
