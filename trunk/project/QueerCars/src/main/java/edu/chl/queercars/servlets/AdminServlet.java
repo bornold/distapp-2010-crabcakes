@@ -116,7 +116,7 @@ public class AdminServlet extends HttpServlet {
         EntityTransaction tx = em.getTransaction();
 
         //Create car from input in browser
-        Car car = new Car(request.getParameter("id"), new Model(request.getParameter("model"));
+        Car car = new Car(request.getParameter("id"), new Model(request.getParameter("model")));
 
         tx.begin();
         em.persist(car);
