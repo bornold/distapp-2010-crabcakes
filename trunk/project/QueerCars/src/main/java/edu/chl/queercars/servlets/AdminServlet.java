@@ -44,7 +44,7 @@ public class AdminServlet extends HttpServlet {
             out.println("<body>");
             if (action == null) {
                 //TODO indexpage
-                request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/adminIndex.xhtml").forward(request, response);
             } else if(action.equals("showIndexPage")){
                 //TODO indexPage
                 request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
