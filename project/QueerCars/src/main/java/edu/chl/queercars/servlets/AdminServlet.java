@@ -50,7 +50,7 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
             } else if(action.equals("showCarPage")){
                 //TODO adminPage
-                request.getRequestDispatcher("admin.page.AWSWUZM").forward(request, response);
+                request.getRequestDispatcher("car.page.AWSWUZM").forward(request, response);
             } else if(action.equals("showCustomerPage")){
                 //TODO userPage
                 request.getRequestDispatcher("customer.page.AWSWUZM").forward(request, response);
