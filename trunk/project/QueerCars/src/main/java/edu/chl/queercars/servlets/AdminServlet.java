@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chl.queercars.servlets;
 
+import edu.chl.queercars.Car;
+import edu.chl.queercars.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
@@ -16,10 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transaction;
 
 /**
- *
  * @author mviktor
  */
 @WebServlet(name="InitServlet", urlPatterns={"/InitServlet"})
@@ -36,25 +31,37 @@ public class AdminServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+
+        String action = request.getParameter("action");
         try {
-            /* TODO output your page here
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InitServlet</title>");  
+            out.println("<title>AddCar</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet InitServlet at " + request.getContextPath () + "</h1>");
+            if (action == null) {
+                //TODO nullhandling
+            } else if(action.equals("showCarPage")){
+                //TODO adminPage
+                request.getRequestDispatcher("admin.page.AWSWUZM").forward(request, response);
+            } else if(action.equals("showUserPage")){
+                //TODO userPage
+                request.getRequestDispatcher("user.page.AWSWUZM").forward(request, response);
+            } else if(action.equals("addCustomer")){
+                addCustomer(request);
+            } else if(action.equals("removeCustomer")){
+                removeCustomer(request);
+            } else if (action.equals("addCar")) {
+                addCar(request);
+                response.sendRedirect("adminServlet?action=showPage");
+            } else if (action.equals("removeCar")){
+                removeCar(request);
+            }
             out.println("</body>");
             out.println("</html>");
-            */
-        } finally { 
+        } finally {
             out.close();
         }
-        em.close();
-        emf.close();
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,4 +100,67 @@ public class AdminServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void addCar(HttpServletRequest request) {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Create car from input in browser
+        Car car = new Car(request.getParameter("id"));
+
+        tx.begin();
+        em.persist(car);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
+
+    private void removeCar(HttpServletRequest request) {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Get reference to the car with link in the browser
+        Car car = em.getReference(Car.class, request.getParameter("id"));
+
+        tx.begin();
+        em.remove(car);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
+
+    private void addCustomer(HttpServletRequest request) {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Create new customer from information in browser
+        Customer customer = new Customer(request.getParameter("id"), request.getParameter("fname"));
+
+        tx.begin();
+        em.persist(customer);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
+
+    private void removeCustomer(HttpServletRequest request) {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Get reference to the car with link in the browser
+        Customer customer = em.getReference(Customer.class, request.getParameter("id"));
+
+        tx.begin();
+        em.remove(customer);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
 }
