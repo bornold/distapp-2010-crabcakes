@@ -58,17 +58,17 @@ public class AdminServlet extends HttpServlet {
 
             } else if(action.equals("addAdministrator")){
                 addAdministrator(request);
-                response.sendRedirect("adminServlet?action=showAdministratorPage");
+                response.sendRedirect("AdminServlet?action=showAdministratorPage");
             } else if(action.equals("removeAdministrator")){
                 removeAdministrator(request);
-                response.sendRedirect("adminServlet?action=showAdministratorPage");
+                response.sendRedirect("AdminServlet?action=showAdministratorPage");
 
             } else if (action.equals("addCar")) {
                 addCar(request);
-                response.sendRedirect("adminServlet?action=showCarPage");
+                response.sendRedirect("AdminServlet?action=showCarPage");
             } else if (action.equals("removeCar")){
                 removeCar(request);
-                response.sendRedirect("adminServlet?action=showCarPage");
+                response.sendRedirect("AdminServlet?action=showCarPage");
             } else {
                 request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
             }   
