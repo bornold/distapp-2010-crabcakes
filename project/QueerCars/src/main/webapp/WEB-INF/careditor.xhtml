@@ -11,7 +11,34 @@ and open the template in the editor.
     </head>
     <body>
         <p>
-            TODO write content
+            Insert your car here
+            <form action="AdminServlet" method="POST">
+                <table>
+                    <tr>
+                        <td>
+                            Car id
+                        </td>
+                        <td>
+                            <input type="text" name="id" value="Insert Car ID here" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Car model
+                        </td>
+                        <td>
+                            <select name="model">
+                                <option value="blackCar">Black Car</option>
+                                <option value="queerCar">Queer Car</option>
+                                <option value="mercuryCar">Mercury</option>
+                                <option value="cadillacCar">Cadillac</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="action" value="addCar" />
+                <input type="submit" value="Add Car" />
+            </form>
         </p>
     </body>
 </html>
