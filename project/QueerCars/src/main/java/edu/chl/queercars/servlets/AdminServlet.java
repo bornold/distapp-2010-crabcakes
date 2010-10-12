@@ -1,5 +1,6 @@
 package edu.chl.queercars.servlets;
 
+import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author mviktor
  */
-@WebServlet(name="InitServlet", urlPatterns={"/InitServlet"})
+@WebServlet(name="AdminServlet", urlPatterns={"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
     EntityManagerFactory emf;
     /** 
@@ -33,30 +34,54 @@ public class AdminServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String action = request.getParameter("action");
+
         try {
+            //TODO real pages
             out.println("<html>");
             out.println("<head>");
             out.println("<title>AddCar</title>");
             out.println("</head>");
             out.println("<body>");
             if (action == null) {
-                //TODO nullhandling
+                //TODO indexpage
+                request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
+            } else if(action.equals("showIndexPage")){
+                //TODO indexPage
+                request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
             } else if(action.equals("showCarPage")){
                 //TODO adminPage
                 request.getRequestDispatcher("admin.page.AWSWUZM").forward(request, response);
-            } else if(action.equals("showUserPage")){
+            } else if(action.equals("showCustomerPage")){
                 //TODO userPage
-                request.getRequestDispatcher("user.page.AWSWUZM").forward(request, response);
+                request.getRequestDispatcher("customer.page.AWSWUZM").forward(request, response);
+            } else if(action.equals("showAdministratorPage")){
+                //TODO adminPage
+                request.getRequestDispatcher("administrator.page.AWSWUZM").forward(request, response);
+
             } else if(action.equals("addCustomer")){
                 addCustomer(request);
+                response.sendRedirect("adminServlet?action=showCustomerPage");
             } else if(action.equals("removeCustomer")){
                 removeCustomer(request);
+                response.sendRedirect("adminServlet?action=showCustomerPage");
+
+            } else if(action.equals("addAdministrator")){
+                addAdministrator(request);
+                response.sendRedirect("adminServlet?action=showAdministratorPage");
+            } else if(action.equals("removeAdministrator")){
+                removeAdministrator(request);
+                response.sendRedirect("adminServlet?action=showAdministratorPage");
+
             } else if (action.equals("addCar")) {
                 addCar(request);
-                response.sendRedirect("adminServlet?action=showPage");
+                response.sendRedirect("adminServlet?action=showCarPage");
             } else if (action.equals("removeCar")){
                 removeCar(request);
+                response.sendRedirect("adminServlet?action=showCarPage");
+            } else {
+                request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
             }
+            
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -163,4 +188,37 @@ public class AdminServlet extends HttpServlet {
         em.close();
         emf.close();
     }
+    //TODO possible refactor
+    private void addAdministrator(HttpServletRequest request) {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Create new customer from information in browser
+        Administrator administrator = new Administrator(request.getParameter("id"), request.getParameter("fname"));
+
+        tx.begin();
+        em.persist(administrator);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
+    //TODO possible refactor
+    private void removeAdministrator(HttpServletRequest request) {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        //Get reference to the car with link in the browser
+        Administrator administrator = em.getReference(Administrator.class, request.getParameter("id"));
+
+        tx.begin();
+        em.remove(administrator);
+        tx.commit();
+
+        em.close();
+        emf.close();
+    }
+
 }
