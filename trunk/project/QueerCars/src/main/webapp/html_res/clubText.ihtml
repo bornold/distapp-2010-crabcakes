@@ -1,3 +1,8 @@
 <p>
-    Här ska vi skapa konton eller logga in befintliga konton.
+    Logga in befintligt konto.
+<form action="UserLogin" method="POST">
+    <input type="text" name="username" value="" />
+    <input type="hidden" name="action" value="doLogin" />
+    <input type="submit" value="Login" />
+</form>
 </p>
