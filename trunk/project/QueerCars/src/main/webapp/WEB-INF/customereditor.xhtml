@@ -11,7 +11,12 @@ and open the template in the editor.
     </head>
     <body>
         <p>
-            TODO write content
+            <form action="AdminServlet" method="POST">
+                Customer ID: <input type="text" value="" name="customerId"/><br/>
+                Customer name: <input type="text" value="" name="customerName"/><br/>
+                <input type="submit" value="Add customer"/><br/>
+                <input type="hidden" name="action" value="addCustomer"/>
+            </form>
         </p>
     </body>
 </html>

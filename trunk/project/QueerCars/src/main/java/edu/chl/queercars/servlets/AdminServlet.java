@@ -51,10 +51,10 @@ public class AdminServlet extends HttpServlet {
 
             } else if(action.equals("addCustomer")){
                 addCustomer(request);
-                response.sendRedirect("adminServlet?action=showCustomerPage");
+                response.sendRedirect("AdminServlet?action=showCustomerPage");
             } else if(action.equals("removeCustomer")){
                 removeCustomer(request);
-                response.sendRedirect("adminServlet?action=showCustomerPage");
+                response.sendRedirect("AdminServlet?action=showCustomerPage");
 
             } else if(action.equals("addAdministrator")){
                 addAdministrator(request);
@@ -148,7 +148,7 @@ public class AdminServlet extends HttpServlet {
         EntityTransaction tx = em.getTransaction();
 
         //Create new customer from information in browser
-        Customer customer = new Customer(request.getParameter("id"), request.getParameter("fname"));
+        Customer customer = new Customer(request.getParameter("customerId"), request.getParameter("customerName"));
 
         tx.begin();
         em.persist(customer);
