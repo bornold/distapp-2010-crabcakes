@@ -12,6 +12,11 @@
         <servlet-name>UserLogin</servlet-name>
         <servlet-class>edu.chl.queercars.servlets.UserLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet Faces</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
@@ -24,6 +29,10 @@
         <servlet-name>UserLogin</servlet-name>
         <url-pattern>/UserLogin</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet Faces</servlet-name>
+        <url-pattern>/queerclub.xhtml</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -32,4 +41,4 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-</web-app>
+    </web-app>
