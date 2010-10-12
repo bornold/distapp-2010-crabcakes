@@ -13,7 +13,7 @@
                         </a>
                     </li>
                     <li id='id_cars' class='menuListitem'>
-                        <a href="news.xhtml">
+                        <a href="cars.xhtml">
                             <img alt=""  src='cars_logo.png' class="menuImg" id="id_carsImg"/>
                         </a>
                     </li>
