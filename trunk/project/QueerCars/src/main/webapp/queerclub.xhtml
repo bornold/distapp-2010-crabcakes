@@ -4,17 +4,31 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet" type="text/css" href="main.css" />
-        <title>Queer Cars - Queer Club</title>
+        <title>Queer Club</title>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/showTopHat.js" type="text/javascript"/>
-        <script src="JavaScript/textinjector.js" type="text/javascript"/>
-    </head>
-    <body>
+	<script src="JavaScript/showClubText.js" type="text/javascript"/>
+    </h:head>
+    <h:body>
         <div class="topHat" id="topHat"></div>
-        <div class="informativeText" id="clubText"></div>
-    </body>
+        <div class="informativeText" id="serviceText">
+
+	    <h:form>
+		<h:outputLabel for="txtValue" value="Login name atleast 5 character" />
+		<h:inputText  id="txtValue" value="#{Login.id}">
+		    <f:validator validatorId="loginValidator" />
+		</h:inputText >
+		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" /><br/>
+		<h:commandButton id="btnOK" value="Login" action="#{Login.doLogin}"/>
+	    </h:form>
+
+	</div>
+    </h:body>
 </html>
