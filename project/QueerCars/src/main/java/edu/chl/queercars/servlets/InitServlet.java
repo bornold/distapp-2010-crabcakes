@@ -111,10 +111,10 @@ public class InitServlet extends HttpServlet {
         Customer cust3 = new Customer("2212121234","Filip");
         Customer cust4 = new Customer("1112121234","Jens");
         Customer cust5 = new Customer("5512121234","Mio");
-        Model m1 = new Model("blackCar", "black_car.jpg");
-        Model m2 = new Model("queerCar", "queer_car.jpg");
-        Model m3 = new Model("mercuryCar", "mercury.jpg");
-        Model m4 = new Model("cadillacCar", "cadillac.jpg");
+        Model m1 = new Model("blackCar");
+        Model m2 = new Model("queerCar");
+        Model m3 = new Model("mercuryCar");
+        Model m4 = new Model("cadillacCar");
         Car car1 = new Car("KKN111", m1);
         Car car2 = new Car("KKN222", m2);
         Car car3 = new Car("KKN333", m3);
