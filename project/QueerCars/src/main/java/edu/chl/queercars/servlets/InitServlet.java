@@ -130,6 +130,10 @@ public class InitServlet extends HttpServlet {
         em.persist(cust3);
         em.persist(cust4);
         em.persist(cust5);
+        em.persist(m1);
+        em.persist(m2);
+        em.persist(m3);
+        em.persist(m4);
         em.persist(car1);
         em.persist(car2);
         em.persist(car3);
