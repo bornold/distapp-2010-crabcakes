@@ -3,6 +3,7 @@ package edu.chl.queercars.servlets;
 import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
+import edu.chl.queercars.Model;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
@@ -115,7 +116,7 @@ public class AdminServlet extends HttpServlet {
         EntityTransaction tx = em.getTransaction();
 
         //Create car from input in browser
-        Car car = new Car(request.getParameter("id"));
+        Car car = new Car(request.getParameter("id"), new Model("testCar", "black_car.jpg")); //FIXA!!!!!!!
 
         tx.begin();
         em.persist(car);

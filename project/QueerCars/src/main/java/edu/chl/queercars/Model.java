@@ -10,30 +10,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
- * @author flipmo
+ * @author anna
  */
 @Entity
-public class Car implements Serializable {
+public class Model implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    private String id; //Registreringsnummer
-    @ManyToOne
-    private Model model;
+    private String id;
+    private String imgFileName;
 
-    public Car()
+    public Model()
     {
     }
-
-    public Car(String id, Model model)
+    public Model(String id, String imgFileName)
     {
-        this.id = id;
-        this.model=model;
+        this.id=id;
+        this.imgFileName=imgFileName;
     }
-    
+
+    public String getImgFileName() {
+        return imgFileName;
+    }
+
+    public void setImgFileName(String imgFileName) {
+        this.imgFileName = imgFileName;
+    }
+
     public String getId() {
         return id;
     }
@@ -52,10 +57,10 @@ public class Car implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Car)) {
+        if (!(object instanceof Model)) {
             return false;
         }
-        Car other = (Car) object;
+        Model other = (Model) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -64,7 +69,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Car[id=" + id + "]";
+        return "edu.chl.queercars.Model[id=" + id + "]";
     }
 
 }
