@@ -4,9 +4,17 @@
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>edu.chl.queercars.servlets.InitServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>edu.chl.queercars.servlets.AdminServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

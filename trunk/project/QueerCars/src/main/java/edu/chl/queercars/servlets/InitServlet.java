@@ -57,7 +57,6 @@ public class InitServlet extends HttpServlet {
         } finally {
             out.close();
         }
-        emf.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -136,5 +135,6 @@ public class InitServlet extends HttpServlet {
         em.persist(admin2);
         tx.commit();
         em.close();
+        emf.close();
     }
 }
