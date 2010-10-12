@@ -40,13 +40,13 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
             } else if(action.equals("showCarPage")){
                 //TODO adminPage
-                request.getRequestDispatcher("car.page.AWSWUZM").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/careditor.xhtml").forward(request, response);
             } else if(action.equals("showCustomerPage")){
                 //TODO userPage
-                request.getRequestDispatcher("customer.page.AWSWUZM").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
             } else if(action.equals("showAdministratorPage")){
                 //TODO adminPage
-                request.getRequestDispatcher("administrator.page.AWSWUZM").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
 
             } else if(action.equals("addCustomer")){
                 addCustomer(request);
