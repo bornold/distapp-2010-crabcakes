@@ -25,10 +25,10 @@ public class Model implements Serializable {
     public Model()
     {
     }
-    public Model(String id, String imgFileName)
+    public Model(String id)
     {
         this.id=id;
-        this.imgFileName=imgFileName;
+        this.imgFileName = id + ".jpg";
     }
 
     public String getImgFileName() {
