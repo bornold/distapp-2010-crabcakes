@@ -85,7 +85,6 @@ public class OrderItem implements Serializable {
     @PrePersist
     @PreUpdate
     public void checkQuantity(){
-        System.out.println("#################################################33");
         if(quantity<1){
             throw new RollbackException("Quantity less than 1.");
         } else if(quantity>1000){
