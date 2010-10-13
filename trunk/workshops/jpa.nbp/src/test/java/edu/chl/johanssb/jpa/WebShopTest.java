@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import org.eclipse.persistence.internal.jpa.querydef.OrderImpl;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -328,7 +327,29 @@ public class WebShopTest {
         em.persist(cust1);
         tx.commit();
 
-        assertTrue(true);
+        em.clear();
+
+        Customer newcust = em.find(Customer.class, cust1.getId());
+        assertNotNull(newcust);
+        assertFalse(newcust == cust1); //New reference.
+        List<PurchaseOrder> neworders = newcust.getOrders();
+        assertTrue(neworders.size()==2);
+
+        PurchaseOrder npo1 = neworders.get(0);
+        PurchaseOrder npo2 = neworders.get(1);
+        List<OrderItem> noil1 = npo1.getOrderItems();
+        List<OrderItem> noil2 = npo2.getOrderItems();
+        assertTrue(noil1.size()==2);
+        assertTrue(noil1.size()==2);
+
+        OrderItem noi1 = noil1.get(0);
+        OrderItem noi2 = noil1.get(1);
+        OrderItem noi3 = noil2.get(0);
+        OrderItem noi4 = noil2.get(1);
+        assertTrue(noi1.getQuantity()==2);
+        assertTrue(noi2.getQuantity()==6);
+        assertTrue(noi3.getQuantity()==1);
+        assertTrue(noi4.getQuantity()==10);
 
         em.close();
     }
