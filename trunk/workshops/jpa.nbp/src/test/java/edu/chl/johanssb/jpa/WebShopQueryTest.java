@@ -147,7 +147,6 @@ public class WebShopQueryTest {
 
     @Test(expected = RollbackException.class)
     public void testCallback(){
-        System.out.println("*****************************");
         EntityTransaction tx = em.getTransaction();
         
         OrderItem oi = em.getReference(OrderItem.class, 355L);
