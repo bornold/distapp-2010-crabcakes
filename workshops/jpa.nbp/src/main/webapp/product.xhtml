@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Product CRUD</title>
+        <script src="js/jquery-1.4.2.js" type="text/javascript"/>
+        <script src="js/database.js" type="text/javascript"/>
+    </head>
+    <body>
+        <p>
+            <h1>Product CRUD</h1>
+            <form>
+                <input type="text" name="name" id="productName"/><br/>
+                <input type="text" name="category" id="productCategory"/><br/>
+                <input type="text" name="price" id="productPrice"/><br/>
+                <input type="hidden" name="action" value="" id="productId"/>
+                <input type="submit" value="save" id="saveButton"/><br/>
+            </form>
+        </p>
+        <p>
+            <table>
+                <tr><td>id</td><td>name</td><td>cat</td><td>price</td></tr>
+                <div id="tableContents"></div>
+            </table>
+        </p>
+    </body>
+</html>
