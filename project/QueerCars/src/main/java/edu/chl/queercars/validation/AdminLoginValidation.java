@@ -9,20 +9,22 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author hajo
+ * @author Joons
  */
-@FacesValidator(value = "loginValidator")
-public class LoginValidation implements Validator {
+@FacesValidator(value = "adminLoginValidator")
+public class AdminLoginValidation implements Validator {
 
-    private int length = 10;
+
+    private int min = 5;
+    private int max = 20;
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value)
 	    throws ValidatorException {
 
 	String param = value.toString();
-	if (param.length() != length) {
-	    FacesMessage msg = new FacesMessage("Must be  " + this.length + " characters");
+	if (param.length() < min || param.length() > max) {
+	    FacesMessage msg = new FacesMessage("Must be  between" + this.min + " and " +this.max + " characters");
 	    throw new ValidatorException(msg);
 	}
     }
