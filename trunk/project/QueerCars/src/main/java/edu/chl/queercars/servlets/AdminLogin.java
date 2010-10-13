@@ -1,7 +1,7 @@
 
 package edu.chl.queercars.servlets;
 
-import edu.chl.queercars.Customer;
+import edu.chl.queercars.Administrator;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManager;
@@ -10,21 +10,22 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author johanssb & joons
+ * @author joons
  */
-@ManagedBean(name="Login")
+
+@ManagedBean(name="AdminLogin")
 @RequestScoped
-public class Login {
+public class AdminLogin {
     private EntityManagerFactory emf;
-    private Customer cust;
+    private Administrator ad;
 
     private String id;
 
     public String doLogin(){
 
-	cust = validateUser(id);
+	ad = validateUser(id);
 
-        if(cust != null){
+        if(ad != null){
             return "success";
         }else{
             return "failure";
@@ -39,17 +40,18 @@ public class Login {
         this.id = id;
     }
 
-    /** Creates a new instance of Login */
-    public Login() {
+
+    /** Creates a new instance of AdminLogin */
+    public AdminLogin() {
     }
 
-    private Customer validateUser(String username) {
+    private Administrator validateUser(String username) {
         emf = Persistence.createEntityManagerFactory("queercars_pu");
         EntityManager em = emf.createEntityManager();
-        Customer retcust = em.find(Customer.class, username);
+        Administrator retadmin = em.find(Administrator.class, username);
         em.close();
         emf.close();
-        return retcust;
+        return retadmin;
     }
 
 }
