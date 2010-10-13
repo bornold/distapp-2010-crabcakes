@@ -4,6 +4,9 @@
  */
 package edu.chl.johanssb.jpa;
 
+import javax.persistence.EntityTransaction;
+import javax.persistence.RollbackException;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -83,7 +86,7 @@ public class WebShopQueryTest {
     @Test
     public void testQueryForCustomer() {
         String customerQuery = "SELECT c FROM Customer c WHERE c.id = '151'";
-        Query q1  = em.createQuery(customerQuery);
+        Query q1 = em.createQuery(customerQuery);
         List<Customer> customers = q1.getResultList();
         assertNotNull(customers);
         assertTrue(customers.size() == 1);
@@ -93,7 +96,7 @@ public class WebShopQueryTest {
     @Test
     public void testQueryForProduct() {
         String productQuery = "SELECT p FROM Product p WHERE p.id = '1'";
-        Query q1  = em.createQuery(productQuery);
+        Query q1 = em.createQuery(productQuery);
         List<Product> products = q1.getResultList();
         assertNotNull(products);
         assertTrue(products.size() == 1);
@@ -103,7 +106,7 @@ public class WebShopQueryTest {
     @Test
     public void testQueryForCustomerWithPurchaseOrder() {
         String customerQuery = "SELECT po FROM PurchaseOrder po WHERE po.customer.id = '351'"; //Get Thor Awesomespeed.
-        Query q1  = em.createQuery(customerQuery);
+        Query q1 = em.createQuery(customerQuery);
         List<PurchaseOrder> pos = q1.getResultList();
         assertNotNull(pos);
         assertTrue(pos.size() == 2); //Should have 2 purchase orders.
@@ -112,28 +115,57 @@ public class WebShopQueryTest {
     @Test
     public void testQueryForCustomerWithOrderItems() {
         String customerQuery = "SELECT oi FROM OrderItem oi WHERE oi.purchaseOrder.customer.id = '351'"; //Get Thor Awesomespeed.
-        Query q1  = em.createQuery(customerQuery);
+        Query q1 = em.createQuery(customerQuery);
         List<OrderItem> ois = q1.getResultList();
         assertNotNull(ois);
         assertTrue(ois.size() == 4); //Should have 4 orderitems.
     }
 
-    //@Test
+    @Test
     public void testQueryForTotalPrice() {
-        String customerQuery = "SELECT SUM((oi.product.price)*(oi.quantity)) FROM OrderItem oi WHERE oi.purchaseOrder.id = '352'"; //Get specific purchase order.
-        Query q1  = em.createQuery(customerQuery);
-        Double total = (Double)q1.getSingleResult();
-        System.out.println("##############" + total.toString());
-
-        //TODO omgomg
+        String customerQuery = "SELECT NEW edu.chl.johanssb.jpa.LineItemSum(oi.product.price,oi.quantity) FROM OrderItem oi WHERE oi.purchaseOrder.id = '352'"; //Get specific purchase order.
+        Query q1 = em.createQuery(customerQuery);
+        List<LineItemSum> lineItemSums = q1.getResultList();
+        Iterator i = lineItemSums.iterator();
+        LineItemSum lineItemSum;
+        Double sum = 0.0;
+        while (i.hasNext()) {
+            lineItemSum = (LineItemSum) i.next();
+            sum = sum + lineItemSum.getRslt();
+        }
+        assertTrue(sum==6*30.0+2*100.0);
     }
 
     @Test
-    public void testQueryForCategories(){
+    public void testQueryForCategories() {
         String query = "SELECT DISTINCT p.cat FROM OrderItem oi JOIN oi.product p WHERE oi.purchaseOrder.customer.id = '351'";
-        Query q1  = em.createQuery(query);
+        Query q1 = em.createQuery(query);
         List categories = q1.getResultList();
         assertNotNull(categories);
-        assertTrue(categories.size()==2);
+        assertTrue(categories.size() == 2);
+    }
+
+    @Test(expected = RollbackException.class)
+    public void testCallback(){
+        System.out.println("*****************************");
+        EntityTransaction tx = em.getTransaction();
+        
+        OrderItem oi = em.getReference(OrderItem.class, 355L);
+        oi.setQuantity(0);
+        tx.begin();
+        oi = em.merge(oi);
+        tx.commit();
     }
 }
+
+class LineItemSum{
+        private Double rslt;
+
+        public LineItemSum(double price, int quantity) {
+            this.rslt = quantity * price;
+        }
+
+        public Double getRslt() {
+            return this.rslt;
+        }
+    }

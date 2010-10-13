@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.RollbackException;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -77,6 +80,17 @@ public class OrderItem implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void checkQuantity(){
+        System.out.println("#################################################33");
+        if(quantity<1){
+            throw new RollbackException("Quantity less than 1.");
+        } else if(quantity>1000){
+            throw new RollbackException("Quantity greater than 1000.");
+        }
     }
     
     @Override
