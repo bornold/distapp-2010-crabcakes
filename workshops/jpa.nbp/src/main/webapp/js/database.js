@@ -25,7 +25,6 @@ function saveButtonFunction(){
     }
     else
     {
-        alert("fffff");
         $.post("DatabaseServlet", {
             action: "update",
             productName: prodName,
