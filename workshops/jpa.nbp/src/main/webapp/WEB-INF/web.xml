@@ -4,9 +4,17 @@
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>edu.chl.johanssb.jpa.TestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DatabaseServlet</servlet-name>
+        <servlet-class>edu.chl.johanssb.jpa.DatabaseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestServlet</servlet-name>
         <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DatabaseServlet</servlet-name>
+        <url-pattern>/DatabaseServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
