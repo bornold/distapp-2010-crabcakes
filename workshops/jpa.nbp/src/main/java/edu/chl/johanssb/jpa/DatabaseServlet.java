@@ -55,14 +55,6 @@ public class DatabaseServlet extends HttpServlet {
             buildTableResponse(response);
         } else if (action.equals("getAll")) {
             buildTableResponse(response);
-        } else if (action.equals("getProduct")){
-            String prodId = request.getParameter("productId");
-            Product product = db.getProduct(Long.valueOf(prodId));
-            PrintWriter out = response.getWriter();
-            out.println(product.getName());
-            out.println(product.getCat());
-            out.println(product.getPrice());
-            out.println(product.getId());
         }
     }
 
@@ -85,7 +77,6 @@ public class DatabaseServlet extends HttpServlet {
         completeTable += tableFooter;
         PrintWriter out = response.getWriter();
         out.println(completeTable);
-        System.out.println("##########################################" + completeTable);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
