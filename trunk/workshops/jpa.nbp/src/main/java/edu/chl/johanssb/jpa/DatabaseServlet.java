@@ -6,7 +6,7 @@ package edu.chl.johanssb.jpa;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "DatabaseServlet", urlPatterns = {"/DatabaseServlet"})
 public class DatabaseServlet extends HttpServlet {
 
-    IDatabase db = new DatabaseMockup();
+    //IDatabase db = new DatabaseMockup();
+    IDatabase db = new DatabaseImpl();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -66,7 +67,7 @@ public class DatabaseServlet extends HttpServlet {
     }
 
     private void buildTableResponse(HttpServletResponse response) throws IOException{
-        ArrayList<Product> allP = (ArrayList) db.getAllProducts();
+        List<Product> allP = db.getAllProducts();
         String tableHeader = "<table><tr><td>id</td><td>name</td><td>category</td><td>price</td><td></td><td></td></tr>";
 
         String tableFooter = "</table>";

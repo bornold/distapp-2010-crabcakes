@@ -5,12 +5,12 @@
 
 package edu.chl.johanssb.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,10 +28,13 @@ public class DatabaseImpl implements IDatabase{
 
     @Override
     public List<Product> getAllProducts() {
-        ArrayList<Product> products = new ArrayList<Product>();
+        List<Product> products;
 
         EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+        String allProducts = "SELECT p FROM Product p";
+        Query q = em.createQuery(allProducts);
+
+        products = q.getResultList();
         
         return products;
     }
