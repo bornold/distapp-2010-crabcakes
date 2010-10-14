@@ -61,6 +61,7 @@ public class DatabaseMockup implements IDatabase{
         return false;
     }
 
+    /*
     @Override
     public Product getProduct(Long id)
     {
@@ -71,5 +72,5 @@ public class DatabaseMockup implements IDatabase{
         }
         return null;
     }
-
+     */
 }

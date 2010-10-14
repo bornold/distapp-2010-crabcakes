@@ -16,5 +16,4 @@ public interface IDatabase {
     public boolean updateProduct(Product p);
     public boolean addProduct(Product p);
     public boolean removeProduct(Long id);
-    public Product getProduct(Long id);
 }

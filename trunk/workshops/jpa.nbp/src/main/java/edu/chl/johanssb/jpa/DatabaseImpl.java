@@ -35,28 +35,48 @@ public class DatabaseImpl implements IDatabase{
         Query q = em.createQuery(allProducts);
 
         products = q.getResultList();
-        
+
+        em.close();
         return products;
     }
 
     @Override
     public boolean updateProduct(Product p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        tx.begin();
+        em.merge(p);
+        tx.commit();
+
+        em.close();
+        return true;
     }
 
     @Override
     public boolean addProduct(Product p) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        tx.begin();
+        em.persist(p);
+        tx.commit();
+
+        em.close();
+        return true;
     }
 
     @Override
     public boolean removeProduct(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
 
-    @Override
-    public Product getProduct(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+        Product p = em.getReference(Product.class, id);
+        tx.begin();
+        em.remove(p);
+        tx.commit();
 
+        em.close();
+        return true;
+    }
 }
