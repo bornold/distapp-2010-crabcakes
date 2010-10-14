@@ -6,6 +6,7 @@ package edu.chl.johanssb.jpa;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "DatabaseServlet", urlPatterns = {"/DatabaseServlet"})
 public class DatabaseServlet extends HttpServlet {
 
-    IDatabase db;
+    IDatabase db = new DatabaseMockup();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,7 +32,59 @@ public class DatabaseServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        db = new DatabaseMockup();
+        String action = request.getParameter("action");
+        if (action.equals("saveNew")) {
+            String prodName = request.getParameter("productName");
+            String prodCat = request.getParameter("productCategory");
+            String prodPrice = request.getParameter("productPrice");
+            db.addProduct(new Product(prodName, prodCat, Double.valueOf(prodPrice)));
+            buildTableResponse(response);
+        } else if (action.equals("update")) {
+            String prodId = request.getParameter("productId");
+            String prodName = request.getParameter("productName");
+            String prodCat = request.getParameter("productCategory");
+            String prodPrice = request.getParameter("productPrice");
+            Product updated = new Product(prodName, prodCat, Double.valueOf(prodPrice));
+            updated.setId(Long.valueOf(prodId));
+            db.updateProduct(updated);
+            buildTableResponse(response);
+        } else if (action.equals("remove")) {
+            String prodId = request.getParameter("productId");
+            db.removeProduct(Long.valueOf(prodId));
+            buildTableResponse(response);
+        } else if (action.equals("getAll")) {
+            buildTableResponse(response);
+        } else if (action.equals("getProduct")){
+            String prodId = request.getParameter("productId");
+            Product product = db.getProduct(Long.valueOf(prodId));
+            PrintWriter out = response.getWriter();
+            out.println(product.getName());
+            out.println(product.getCat());
+            out.println(product.getPrice());
+            out.println(product.getId());
+        }
+    }
+
+    private void buildTableResponse(HttpServletResponse response) throws IOException{
+        ArrayList<Product> allP = (ArrayList) db.getAllProducts();
+        String tableHeader = "<table><tr><td>id</td><td>name</td><td>category</td><td>price</td><td></td><td></td></tr>";
+
+        String tableFooter = "</table>";
+
+        String completeTable = tableHeader;
+
+        for (Product product : allP) {
+            String buttons = "</td><td>" + "<input type=\"submit\" class=\"editButton\" id=\"" + product.getId() + "\" value=\"edit\"/>" + "</td><td>"
+                    + "<input type=\"submit\" class=\"deleteButton\" id=\"" + product.getId() + "\" value=\"delete\"/>";
+
+            String s = "<tr><td>" + product.getId() + "</td><td>" + product.getName()
+                    + "</td><td>" + product.getCat() + "</td><td>" + product.getPrice() + buttons + "</td></tr>";
+            completeTable += s;
+        }
+        completeTable += tableFooter;
+        PrintWriter out = response.getWriter();
+        out.println(completeTable);
+        System.out.println("##########################################" + completeTable);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

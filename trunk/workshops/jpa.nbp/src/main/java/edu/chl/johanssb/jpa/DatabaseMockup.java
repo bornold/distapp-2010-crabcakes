@@ -13,7 +13,7 @@ import java.util.List;
  * @author flipmo
  */
 public class DatabaseMockup implements IDatabase{
-    private ArrayList<Product> products;
+    private ArrayList<Product> products = new ArrayList<Product>();
     Long currentId;
 
     public DatabaseMockup() {
@@ -36,7 +36,8 @@ public class DatabaseMockup implements IDatabase{
     public boolean updateProduct(Product p) {
         for (Product product : products) {
             if(product.getId()==p.getId()){
-                product = p;
+                products.remove(product);
+                products.add(p);
                 return true;
             }
         }
@@ -51,13 +52,24 @@ public class DatabaseMockup implements IDatabase{
     }
 
     @Override
-    public boolean removeProduct(Product p) {
+    public boolean removeProduct(Long id) {
         for (Product product : products) {
-            if(product.getId()==p.getId()){
+            if(product.getId()==id){
                 return products.remove(product);
             }
         }
         return false;
+    }
+
+    @Override
+    public Product getProduct(Long id)
+    {
+        for (Product product : products) {
+            if(product.getId()==id){
+                return product;
+            }
+        }
+        return null;
     }
 
 }

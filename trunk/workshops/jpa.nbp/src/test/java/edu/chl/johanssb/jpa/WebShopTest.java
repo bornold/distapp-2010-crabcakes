@@ -39,7 +39,7 @@ public class WebShopTest {
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("webshop_pu_test");
+        emf = Persistence.createEntityManagerFactory("webshop_pu");
     }
 
     @After
