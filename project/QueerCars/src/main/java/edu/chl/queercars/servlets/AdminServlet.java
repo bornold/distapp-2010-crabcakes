@@ -22,11 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author mviktor
  */
-@WebServlet(name="AdminServlet", urlPatterns={"/AdminServlet"})
+@WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
-    EntityManagerFactory emf;
+
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
     ICustomerHandler custHandler = new CustomerHandler();
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -34,48 +36,47 @@ public class AdminServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
+        System.out.println("************************************");
+        //TODO real pages
+        if (action == null) {
+            //TODO indexpage
+            //Show initial admin navigation page.
+            request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
+        } else if (action.equals("showCarPage")) {
+            //TODO adminPage
+            request.getRequestDispatcher("WEB-INF/careditor.xhtml").forward(request, response);
+        } else if (action.equals("showCustomerPage")) {
+            //TODO userPage
+            request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
+        } else if (action.equals("showAdministratorPage")) {
+            //TODO adminPage
+            request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
 
-            //TODO real pages
-            if (action == null) {
-                //TODO indexpage
-                //Show initial admin navigation page.
-                request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
-            } else if(action.equals("showCarPage")){
-                //TODO adminPage
-                request.getRequestDispatcher("WEB-INF/careditor.xhtml").forward(request, response);
-            } else if(action.equals("showCustomerPage")){
-                //TODO userPage
-                request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
-            } else if(action.equals("showAdministratorPage")){
-                //TODO adminPage
-                request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
+        } else if (action.equals("saveCustomer")) {
+            saveCustomer(request,response);
+        } else if (action.equals("removeCustomer")) {
+            removeCustomer(request, response);
 
-            } else if(action.equals("addCustomer")){
-                addCustomer(request);
-            } else if(action.equals("removeCustomer")){
-                removeCustomer(request);
-                response.sendRedirect("AdminServlet?action=showCustomerPage");
+        } else if (action.equals("addAdministrator")) {
+            addAdministrator(request);
+            response.sendRedirect("AdminServlet?action=showAdministratorPage");
+        } else if (action.equals("removeAdministrator")) {
+            removeAdministrator(request);
+            response.sendRedirect("AdminServlet?action=showAdministratorPage");
 
-            } else if(action.equals("addAdministrator")){
-                addAdministrator(request);
-                response.sendRedirect("AdminServlet?action=showAdministratorPage");
-            } else if(action.equals("removeAdministrator")){
-                removeAdministrator(request);
-                response.sendRedirect("AdminServlet?action=showAdministratorPage");
-
-            } else if (action.equals("addCar")) {
-                addCar(request);
-                response.sendRedirect("AdminServlet?action=showCarPage");
-            } else if (action.equals("removeCar")){
-                removeCar(request);
-                response.sendRedirect("AdminServlet?action=showCarPage");
-            } else if (action.equals("getCustomerTable")) {
-                sendCustomerTable(response);
-            }
-    } 
+        } else if (action.equals("addCar")) {
+            addCar(request);
+            response.sendRedirect("AdminServlet?action=showCarPage");
+        } else if (action.equals("removeCar")) {
+            removeCar(request);
+            response.sendRedirect("AdminServlet?action=showCarPage");
+        } else if (action.equals("getCustomerTable")) {
+            sendCustomerTable(response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -87,9 +88,9 @@ public class AdminServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -100,7 +101,7 @@ public class AdminServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -114,7 +115,6 @@ public class AdminServlet extends HttpServlet {
     }// </editor-fold>
 
     private void addCar(HttpServletRequest request) {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -126,11 +126,9 @@ public class AdminServlet extends HttpServlet {
         tx.commit();
 
         em.close();
-        emf.close();
     }
 
     private void removeCar(HttpServletRequest request) {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -142,43 +140,23 @@ public class AdminServlet extends HttpServlet {
         tx.commit();
 
         em.close();
-        emf.close();
     }
 
-    private void addCustomer(HttpServletRequest request) {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
+    private void saveCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //Create new customer from information in browser
         Customer customer = new Customer(request.getParameter("customerId"), request.getParameter("customerName"));
-
-        tx.begin();
-        em.persist(customer);
-        tx.commit();
-
-        em.close();
-        emf.close();
+        custHandler.addCustomer(customer);
+        sendCustomerTable(response);
     }
 
-    private void removeCustomer(HttpServletRequest request) {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        //Get reference to the car with link in the browser
-        Customer customer = em.getReference(Customer.class, request.getParameter("id"));
-
-        tx.begin();
-        em.remove(customer);
-        tx.commit();
-
-        em.close();
-        emf.close();
+    private void removeCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Customer customer = new Customer(request.getParameter("customerId"), request.getParameter("customerName"));
+        custHandler.removeCustomer(customer.getId());
+        sendCustomerTable(response);
     }
     //TODO possible refactor
+
     private void addAdministrator(HttpServletRequest request) {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -190,11 +168,10 @@ public class AdminServlet extends HttpServlet {
         tx.commit();
 
         em.close();
-        emf.close();
     }
     //TODO possible refactor
+
     private void removeAdministrator(HttpServletRequest request) {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -206,13 +183,12 @@ public class AdminServlet extends HttpServlet {
         tx.commit();
 
         em.close();
-        emf.close();
     }
 
     /*
      * Method to return a HTML table of customers with headers, content and individualized buttons for editing and deleting users.
      */
-    private void sendCustomerTable(HttpServletResponse response) throws IOException{
+    private void sendCustomerTable(HttpServletResponse response) throws IOException {
         List<Customer> allCustomers = custHandler.getAllCustomers();
         String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
         String tableFooter = "</table>";
@@ -220,7 +196,7 @@ public class AdminServlet extends HttpServlet {
         for (Customer customer : allCustomers) {
             String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + customer.getId() + "\" value=\"edit\"/>";
             String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + customer.getId() + "\" value=\"remove\"/>";
-            String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton +"</td></tr>\n";
+            String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
             output += row;
         }
         output += tableFooter;
@@ -228,5 +204,4 @@ public class AdminServlet extends HttpServlet {
         out.println(output);
         out.close();
     }
-
 }
