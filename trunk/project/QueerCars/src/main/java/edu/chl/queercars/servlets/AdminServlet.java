@@ -4,8 +4,11 @@ import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
+import edu.chl.queercars.dbhandlers.CustomerHandler;
+import edu.chl.queercars.dbhandlers.ICustomerHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="AdminServlet", urlPatterns={"/AdminServlet"})
 public class AdminServlet extends HttpServlet {
     EntityManagerFactory emf;
+    ICustomerHandler custHandler = new CustomerHandler();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -51,7 +55,6 @@ public class AdminServlet extends HttpServlet {
 
             } else if(action.equals("addCustomer")){
                 addCustomer(request);
-                response.sendRedirect("AdminServlet?action=showCustomerPage");
             } else if(action.equals("removeCustomer")){
                 removeCustomer(request);
                 response.sendRedirect("AdminServlet?action=showCustomerPage");
@@ -69,9 +72,9 @@ public class AdminServlet extends HttpServlet {
             } else if (action.equals("removeCar")){
                 removeCar(request);
                 response.sendRedirect("AdminServlet?action=showCarPage");
-            } else {
-                request.getRequestDispatcher("index.page.AWSWUZM").forward(request, response);
-            }   
+            } else if (action.equals("getCustomerTable")) {
+                sendCustomerTable(response);
+            }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -204,6 +207,26 @@ public class AdminServlet extends HttpServlet {
 
         em.close();
         emf.close();
+    }
+
+    /*
+     * Method to return a HTML table of customers with headers, content and individualized buttons for editing and deleting users.
+     */
+    private void sendCustomerTable(HttpServletResponse response) throws IOException{
+        List<Customer> allCustomers = custHandler.getAllCustomers();
+        String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
+        String tableFooter = "</table>";
+        String output = tableHeader;
+        for (Customer customer : allCustomers) {
+            String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + customer.getId() + "\" value=\"edit\"/>";
+            String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + customer.getId() + "\" value=\"remove\"/>";
+            String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton +"</td></tr>\n";
+            output += row;
+        }
+        output += tableFooter;
+        PrintWriter out = response.getWriter();
+        out.println(output);
+        out.close();
     }
 
 }
