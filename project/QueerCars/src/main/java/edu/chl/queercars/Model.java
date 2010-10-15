@@ -19,6 +19,7 @@ import javax.persistence.Id;
 public class Model implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    //Name of the model eg. Sportscar
     private String id;
     private String imgFileName;
 
@@ -69,7 +70,7 @@ public class Model implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Model[id=" + id + "]";
+        return id;
     }
 
 }

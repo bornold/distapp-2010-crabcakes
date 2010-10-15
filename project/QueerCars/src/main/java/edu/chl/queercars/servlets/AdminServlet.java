@@ -1,17 +1,18 @@
 package edu.chl.queercars.servlets;
-
 import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
+import edu.chl.queercars.dbhandlers.AdministratorHandler;
+import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
+import edu.chl.queercars.dbhandlers.IAdministratorHandler;
+import edu.chl.queercars.dbhandlers.ICarHandler;
 import edu.chl.queercars.dbhandlers.ICustomerHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,9 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminServlet extends HttpServlet {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
-    ICustomerHandler custHandler = new CustomerHandler();
+    ICustomerHandler custHandler = new CustomerHandler(emf);
+    IAdministratorHandler adminHandler = new AdministratorHandler(emf);
+    ICarHandler carHandler = new CarHandler(emf);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,46 +38,48 @@ public class AdminServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         System.out.println("************************************");
-        //TODO real pages
+
+        //TODO UPDATE x
         if (action == null) {
-            //TODO indexpage
-            //Show initial admin navigation page.
             request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
         } else if (action.equals("showCarPage")) {
-            //TODO adminPage
             request.getRequestDispatcher("WEB-INF/careditor.xhtml").forward(request, response);
         } else if (action.equals("showCustomerPage")) {
-            //TODO userPage
             request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
         } else if (action.equals("showAdministratorPage")) {
-            //TODO adminPage
             request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
 
         } else if (action.equals("saveCustomer")) {
-            saveCustomer(request,response);
+            custHandler.addCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName")));
+            sendCustomerTable(response);
         } else if (action.equals("removeCustomer")) {
-            removeCustomer(request, response);
+            custHandler.removeCustomer(request.getParameter("customerId"));
+            sendCustomerTable(response);
 
         } else if (action.equals("addAdministrator")) {
-            addAdministrator(request);
-            response.sendRedirect("AdminServlet?action=showAdministratorPage");
+            adminHandler.addAdministrator(new Administrator(request.getParameter("administratorId"), request.getParameter("administratorFname")));
+            sendAdministratorTable(response);
         } else if (action.equals("removeAdministrator")) {
-            removeAdministrator(request);
-            response.sendRedirect("AdminServlet?action=showAdministratorPage");
+            adminHandler.removeAdministrator(request.getParameter("AdministratorId"));
+            sendAdministratorTable(response);
 
         } else if (action.equals("addCar")) {
-            addCar(request);
-            response.sendRedirect("AdminServlet?action=showCarPage");
+            carHandler.addCar(new Car(request.getParameter("carId"), new Model(request.getParameter("modelId"))));
+            sendCarTable(response);
         } else if (action.equals("removeCar")) {
-            removeCar(request);
-            response.sendRedirect("AdminServlet?action=showCarPage");
+            carHandler.removeCar(request.getParameter("carId"));
+            sendCarTable(response);
+
         } else if (action.equals("getCustomerTable")) {
             sendCustomerTable(response);
+        } else if (action.equals("getAdministratorTable")) {
+            sendAdministratorTable(response);
+        } else if (action.equals("getCarTable")) {
+            sendCarTable(response);
         }
     }
 
@@ -90,6 +95,10 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+
+
+
     }
 
     /** 
@@ -103,6 +112,10 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+
+
+
     }
 
     /** 
@@ -112,78 +125,11 @@ public class AdminServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+
+
+
+
     }// </editor-fold>
-
-    private void addCar(HttpServletRequest request) {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        //Create car from input in browser
-        Car car = new Car(request.getParameter("id"), new Model(request.getParameter("model")));
-
-        tx.begin();
-        em.persist(car);
-        tx.commit();
-
-        em.close();
-    }
-
-    private void removeCar(HttpServletRequest request) {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        //Get reference to the car with link in the browser
-        Car car = em.getReference(Car.class, request.getParameter("id"));
-
-        tx.begin();
-        em.remove(car);
-        tx.commit();
-
-        em.close();
-    }
-
-    private void saveCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //Create new customer from information in browser
-        Customer customer = new Customer(request.getParameter("customerId"), request.getParameter("customerName"));
-        custHandler.addCustomer(customer);
-        sendCustomerTable(response);
-    }
-
-    private void removeCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Customer customer = new Customer(request.getParameter("customerId"), request.getParameter("customerName"));
-        custHandler.removeCustomer(customer.getId());
-        sendCustomerTable(response);
-    }
-    //TODO possible refactor
-
-    private void addAdministrator(HttpServletRequest request) {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        //Create new customer from information in browser
-        Administrator administrator = new Administrator(request.getParameter("id"), request.getParameter("fname"));
-
-        tx.begin();
-        em.persist(administrator);
-        tx.commit();
-
-        em.close();
-    }
-    //TODO possible refactor
-
-    private void removeAdministrator(HttpServletRequest request) {
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        //Get reference to the car with link in the browser
-        Administrator administrator = em.getReference(Administrator.class, request.getParameter("id"));
-
-        tx.begin();
-        em.remove(administrator);
-        tx.commit();
-
-        em.close();
-    }
 
     /*
      * Method to return a HTML table of customers with headers, content and individualized buttons for editing and deleting users.
@@ -193,12 +139,52 @@ public class AdminServlet extends HttpServlet {
         String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
         String tableFooter = "</table>";
         String output = tableHeader;
+
         for (Customer customer : allCustomers) {
             String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + customer.getId() + "\" value=\"edit\"/>";
             String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + customer.getId() + "\" value=\"remove\"/>";
             String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
             output += row;
         }
+
+        output += tableFooter;
+        PrintWriter out = response.getWriter();
+        out.println(output);
+        out.close();
+    }
+
+    private void sendAdministratorTable(HttpServletResponse response) throws IOException {
+        List<Administrator> allAdministrators = adminHandler.getAllAdministrators();
+        String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
+        String tableFooter = "</table>";
+        String output = tableHeader;
+
+        for (Administrator administrator : allAdministrators) {
+            String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + administrator.getId() + "\" value=\"edit\"/>";
+            String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + administrator.getId() + "\" value=\"remove\"/>";
+            String row = "<tr><td>" + administrator.getId() + "</td><td>" + administrator.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+            output += row;
+        }
+
+        output += tableFooter;
+        PrintWriter out = response.getWriter();
+        out.println(output);
+        out.close();
+    }
+
+    private void sendCarTable(HttpServletResponse response) throws IOException {
+        List<Car> allCars = carHandler.getAllCars();
+        String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
+        String tableFooter = "</table>";
+        String output = tableHeader;
+
+        for (Car car : allCars) {
+            String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + car.getId() + "\" value=\"edit\"/>";
+            String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + car.getId() + "\" value=\"remove\"/>";
+            String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+            output += row;
+        }
+
         output += tableFooter;
         PrintWriter out = response.getWriter();
         out.println(output);

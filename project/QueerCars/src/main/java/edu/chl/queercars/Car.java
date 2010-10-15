@@ -21,6 +21,14 @@ public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id; //Registreringsnummer
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
     @ManyToOne
     private Model model;
 

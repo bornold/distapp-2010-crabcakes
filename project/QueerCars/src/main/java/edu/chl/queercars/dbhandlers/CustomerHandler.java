@@ -20,8 +20,14 @@ import javax.persistence.Query;
 public class CustomerHandler implements ICustomerHandler{
     EntityManagerFactory emf;
 
+    //Use other constructor please
+    @Deprecated
     public CustomerHandler() {
         emf = Persistence.createEntityManagerFactory("queercars_pu");
+    }
+
+    public CustomerHandler(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 
 
