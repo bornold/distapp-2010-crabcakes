@@ -41,7 +41,6 @@ public class AdminServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        System.out.println("************************************");
 
         //TODO UPDATE x
         if (action == null) {
@@ -59,7 +58,6 @@ public class AdminServlet extends HttpServlet {
         } else if (action.equals("removeCustomer")) {
             custHandler.removeCustomer(request.getParameter("customerId"));
             sendCustomerTable(response);
-
         } else if (action.equals("addAdministrator")) {
             adminHandler.addAdministrator(new Administrator(request.getParameter("administratorId"), request.getParameter("administratorFname")));
             sendAdministratorTable(response);
