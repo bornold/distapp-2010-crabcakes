@@ -38,7 +38,7 @@ public class CustomerHandler implements ICustomerHandler{
     public void removeCustomer(String id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        
+
         Customer c = em.getReference(Customer.class, id);
         tx.begin();
         em.remove(c);
@@ -49,7 +49,21 @@ public class CustomerHandler implements ICustomerHandler{
 
     @Override
     public void addCustomer(Customer c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Customer existingCustomer = em.find(Customer.class, c.getId());
+
+        if (existingCustomer != null) { //Customer exists, update the record.
+            tx.begin();
+            em.merge(c);
+            tx.commit();
+        } else { //Customer is new, add a record.
+            tx.begin();
+            em.persist(c);
+            tx.commit();
+        }
+        em.close();
     }
 
     @Override
