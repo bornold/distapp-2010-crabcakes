@@ -3,7 +3,11 @@
   <persistence-unit name="queercars_pu" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>queercars</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>edu.chl.queercars.Administrator</class>
+    <class>edu.chl.queercars.Car</class>
+    <class>edu.chl.queercars.Customer</class>
+    <class>edu.chl.queercars.Model</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
