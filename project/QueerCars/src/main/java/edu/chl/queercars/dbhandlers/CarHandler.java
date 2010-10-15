@@ -23,12 +23,6 @@ public class CarHandler implements ICarHandler {
 
     EntityManagerFactory emf;
 
-    //use other constructor please
-    @Deprecated
-    public CarHandler() {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
-    }
-
     public CarHandler(EntityManagerFactory emf) {
         this.emf = emf;
     }

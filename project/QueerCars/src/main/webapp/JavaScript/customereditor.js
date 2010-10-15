@@ -14,22 +14,22 @@ function saveButtonClicked(){
         action: "saveCustomer",
         customerId: customerId,
         customerName: customerName
-    });
-    refreshTableButtonListeners();
+    },refreshTableButtonListeners);
+    customerId = $("#customerId").val("");
+    customerName = $("#customerName").val("");
 }
 
 function loadCustomers(){
     $("#customerlistarea").load("AdminServlet", {
         action: "getCustomerTable"
-    })
-    refreshTableButtonListeners();
+    },refreshTableButtonListeners)
+    
 }
 
 function refreshTableButtonListeners(){
     $(".editButton").click(function() {
         editId = $(this).parent().parent().find("td:eq(0)").html();
         editName = $(this).parent().parent().find("td:eq(1)").html();
-        alert("");
         $("#customerId").val(editId);
         $("#customerName").val(editName);
     });
@@ -37,9 +37,10 @@ function refreshTableButtonListeners(){
 }
 
 function removeButtonFunction(){
+    customerId = this.id;
     $("#customerlistarea").load("AdminServlet", {
         action: "removeCustomer",
         customerId: customerId,
-        customerName: customerName
-    });
+        customerName: ""
+    },refreshTableButtonListeners);
 }

@@ -18,14 +18,7 @@ import javax.persistence.Query;
  */
 public class AdministratorHandler implements IAdministratorHandler {
 
-    //TODO Only one EMF
     EntityManagerFactory emf;
-
-    //use the other constructor...
-    @Deprecated
-    public AdministratorHandler() {
-        emf = Persistence.createEntityManagerFactory("queercars_pu");
-    }
 
     public AdministratorHandler(EntityManagerFactory emf) {
         this.emf = emf;
