@@ -58,11 +58,11 @@ public class AdminServlet extends HttpServlet {
         } else if (action.equals("removeCustomer")) {
             custHandler.removeCustomer(request.getParameter("customerId"));
             sendCustomerTable(response);
-        } else if (action.equals("addAdministrator")) {
-            adminHandler.addAdministrator(new Administrator(request.getParameter("administratorId"), request.getParameter("administratorFname")));
+        } else if (action.equals("saveAdministrator")) {
+            adminHandler.addAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
             sendAdministratorTable(response);
         } else if (action.equals("removeAdministrator")) {
-            adminHandler.removeAdministrator(request.getParameter("AdministratorId"));
+            adminHandler.removeAdministrator(request.getParameter("adminId"));
             sendAdministratorTable(response);
 
         } else if (action.equals("addCar")) {

@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -27,7 +26,7 @@ public class AdministratorHandler implements IAdministratorHandler {
     @Override
     public List<Administrator> getAllAdministrators() {
         EntityManager em = emf.createEntityManager();
-        String allAdministrators = "SELECT a FROM administrator a";
+        String allAdministrators = "SELECT a FROM Administrator a";
         Query q = em.createQuery(allAdministrators);
         List<Administrator> results = q.getResultList();
         return results;
@@ -48,7 +47,21 @@ public class AdministratorHandler implements IAdministratorHandler {
 
     @Override
     public void addAdministrator(Administrator a) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Administrator existingAdmin = em.find(Administrator.class, a.getId());
+
+        if (existingAdmin != null) { //Administrator exists, update the record.
+            tx.begin();
+            em.merge(a);
+            tx.commit();
+        } else { //Administrator is new, add a record.
+            tx.begin();
+            em.persist(a);
+            tx.commit();
+        }
+        em.close();
     }
 
     @Override
