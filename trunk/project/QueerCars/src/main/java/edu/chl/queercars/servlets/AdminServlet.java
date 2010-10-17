@@ -65,8 +65,8 @@ public class AdminServlet extends HttpServlet {
             adminHandler.removeAdministrator(request.getParameter("adminId"));
             sendAdministratorTable(response);
 
-        } else if (action.equals("addCar")) {
-            carHandler.addCar(new Car(request.getParameter("carId"), new Model(request.getParameter("modelId"))));
+        } else if (action.equals("saveCar")) {
+            carHandler.addCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
             sendCarTable(response);
         } else if (action.equals("removeCar")) {
             carHandler.removeCar(request.getParameter("carId"));
@@ -172,7 +172,7 @@ public class AdminServlet extends HttpServlet {
 
     private void sendCarTable(HttpServletResponse response) throws IOException {
         List<Car> allCars = carHandler.getAllCars();
-        String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
+        String tableHeader = "<table>\n<tr><th>id</th><th>model</th></tr>\n";
         String tableFooter = "</table>";
         String output = tableHeader;
 

@@ -51,7 +51,21 @@ public class CarHandler implements ICarHandler {
 
     @Override
     public void addCar(Car c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Car existingCar = em.find(Car.class, c.getId());
+
+        if (existingCar != null) {
+            tx.begin();
+            em.merge(c);
+            tx.commit();
+        } else {
+            tx.begin();
+            em.persist(c);
+            tx.commit();
+        }
+        em.close();
     }
 
     @Override
