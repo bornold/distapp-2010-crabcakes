@@ -15,5 +15,5 @@ import java.util.List;
 public interface ICarHandler {
     public List<Car> getAllCars();
     public void removeCar(String id);
-    public void addCar(Car c);
+    public void saveCar(Car c);
 }

@@ -23,11 +23,14 @@ public class Model implements Serializable {
     private String id;
     private String imgFileName;
 
-    public Model()
-    {
+    public Model(){
     }
-    public Model(String id)
-    {
+
+    /**
+     *
+     * @param id name of the model
+     */
+    public Model(String id){
         this.id=id;
         this.imgFileName = id + ".jpg";
     }
@@ -40,10 +43,18 @@ public class Model implements Serializable {
         this.imgFileName = imgFileName;
     }
 
+    /**
+     *
+     * @return name of the model
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id name of the model
+     */
     public void setId(String id) {
         this.id = id;
     }
