@@ -63,9 +63,4 @@ public class AdministratorHandler implements IAdministratorHandler {
         }
         em.close();
     }
-
-    @Override
-    public void updateAdministrator(Administrator a) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }
