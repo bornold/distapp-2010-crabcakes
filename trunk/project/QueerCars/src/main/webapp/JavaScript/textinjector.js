@@ -14,8 +14,10 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#carsText").load("html_res/carsText.ihtml", loadCarInfo);
 });
+$(document).ready(function(){
+    $("#newsFeed").load("InformationServlet", {action: "getNewsFeed"});
+});
+
 function loadCarInfo(){
-    $("#carsInfo").load("InformationServlet", {
-        action: "getDetailedCarTable"
-    });
+    $("#carsInfo").load("InformationServlet", {action: "getDetailedCarTable"});
 }

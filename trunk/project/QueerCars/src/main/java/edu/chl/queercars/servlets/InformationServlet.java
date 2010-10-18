@@ -5,10 +5,15 @@
 package edu.chl.queercars.servlets;
 
 import edu.chl.queercars.Car;
+import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.ICarHandler;
+import edu.chl.queercars.dbhandlers.INewsItemHandler;
+import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,6 +30,7 @@ public class InformationServlet extends HttpServlet {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
     ICarHandler carHandler = new CarHandler(emf);
+    INewsItemHandler newsHandler = new NewsItemHandler(emf);
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,6 +46,8 @@ public class InformationServlet extends HttpServlet {
         if (action == null) {
         } else if (action.equals("getDetailedCarTable")) {
             sendDetailedCarTable(response);
+        } else if (action.equals("getNewsFeed")) {
+            sendNewsFeed(response);
         }
     }
 
@@ -94,6 +102,18 @@ public class InformationServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(output);
         out.close();
-        System.out.println(output);
+    }
+
+    private void sendNewsFeed(HttpServletResponse response) throws IOException{
+        List<NewsItem> allNews = newsHandler.getAllNewsItems();
+        String newsFeed = "";
+        for (NewsItem newsItem : allNews) {
+            String newsEntry = "<p><b>" + newsItem.getEntryDate().toString() + " " + newsItem.getHeadline() + "</b><br/>" +
+                    newsItem.getContent() + "</p>";
+            newsFeed += newsEntry;
+        }
+        PrintWriter out = response.getWriter();
+        out.println(newsFeed);
+        out.close();
     }
 }
