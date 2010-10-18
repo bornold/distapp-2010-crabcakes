@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.Administrator;
@@ -19,19 +15,32 @@ public class AdministratorHandler implements IAdministratorHandler {
 
     EntityManagerFactory emf;
 
+    /**
+     * 
+     * @param emf The entityManagerFactory to use
+     */
     public AdministratorHandler(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
+    /**
+     *
+     * @return list of all administrators
+     */
     @Override
     public List<Administrator> getAllAdministrators() {
         EntityManager em = emf.createEntityManager();
         String allAdministrators = "SELECT a FROM Administrator a";
         Query q = em.createQuery(allAdministrators);
         List<Administrator> results = q.getResultList();
+        em.close();
         return results;
     }
 
+    /**
+     *
+     * @param id the id of the admin to remove
+     */
     @Override
     public void removeAdministrator(String id) {
         EntityManager em = emf.createEntityManager();
@@ -45,8 +54,12 @@ public class AdministratorHandler implements IAdministratorHandler {
         em.close();
     }
 
+    /**
+     *
+     * @param a the administrator to save (if old it updates the database with new information)
+     */
     @Override
-    public void addAdministrator(Administrator a) {
+    public void saveAdministrator(Administrator a) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 

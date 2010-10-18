@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.Customer;
@@ -16,24 +11,36 @@ import javax.persistence.Query;
  *
  * @author flipmo
  */
-public class CustomerHandler implements ICustomerHandler{
+public class CustomerHandler implements ICustomerHandler {
+
     EntityManagerFactory emf;
 
-    //Use other constructor please
+    /**
+     *
+     * @param emf The entityManagerFactory to use
+     */
     public CustomerHandler(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-
+    /**
+     *
+     * @return a list of all the customers
+     */
     @Override
     public List<Customer> getAllCustomers() {
         EntityManager em = emf.createEntityManager();
         String allCustomers = "SELECT c FROM Customer c";
         Query q = em.createQuery(allCustomers);
         List<Customer> results = q.getResultList();
+        em.close();
         return results;
     }
 
+    /**
+     *
+     * @param id the id of the customer to remove
+     */
     @Override
     public void removeCustomer(String id) {
         EntityManager em = emf.createEntityManager();
@@ -47,8 +54,12 @@ public class CustomerHandler implements ICustomerHandler{
         em.close();
     }
 
+    /**
+     *
+     * @param c the customer to save (if old it updates the database with new information)
+     */
     @Override
-    public void addCustomer(Customer c) {
+    public void saveCustomer(Customer c) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 

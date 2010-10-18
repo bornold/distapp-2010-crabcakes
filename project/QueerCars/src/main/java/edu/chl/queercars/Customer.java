@@ -33,15 +33,28 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
+    /**
+     *
+     * @param id personal ID-number
+     * @param fname first name
+     */
     public Customer(String id, String fname) {
         this.id = id;
         this.fname = fname;
     }
 
+    /**
+     *
+     * @return the personal ID-number
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id personal ID-number
+     */
     public void setId(String id) {
         this.id = id;
     }
@@ -68,7 +81,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Customer[id=" + id + "]";
+        return "[" + id + ", " + fname + "]";
     }
 
 }

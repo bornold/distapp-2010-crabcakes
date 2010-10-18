@@ -35,15 +35,28 @@ public class Administrator implements Serializable {
     public Administrator() {
     }
 
+    /**
+     *
+     * @param id username
+     * @param fname firstname
+     */
     public Administrator(String id, String fname) {
         this.id = id;
         this.fname = fname;
     }
 
+    /**
+     *
+     * @return the usernameID
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id username
+     */
     public void setId(String id) {
         this.id = id;
     }
@@ -70,7 +83,6 @@ public class Administrator implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Administrator[id=" + id + "]";
+        return "[" + id + ", " + fname + "]";
     }
-
 }

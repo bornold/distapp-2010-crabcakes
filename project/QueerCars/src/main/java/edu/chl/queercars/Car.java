@@ -7,8 +7,6 @@ package edu.chl.queercars;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -32,20 +30,32 @@ public class Car implements Serializable {
     @ManyToOne
     private Model model;
 
-    public Car()
-    {
+    public Car(){
     }
 
+    /**
+     *
+     * @param id registration number
+     * @param model the model
+     */
     public Car(String id, Model model)
     {
         this.id = id;
         this.model=model;
     }
-    
+
+    /**
+     *
+     * @return registration number
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id registration number
+     */
     public void setId(String id) {
         this.id = id;
     }
@@ -72,7 +82,6 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Car[id=" + id + "]";
+       return "[" + id + ", " + model + "]";
     }
-
 }
