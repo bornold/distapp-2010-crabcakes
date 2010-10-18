@@ -125,11 +125,11 @@ public class InitServlet extends HttpServlet {
         Car car6 = new Car("KKN666", m2);
         Administrator admin1 = new Administrator("jakob", "Jakob");
         Administrator admin2 = new Administrator("damien", "Damien");
-        NewsItem news1 = new NewsItem(new Date(System.currentTimeMillis()), "Dewey defeats Nixon!", "OMG Dewey is new president! Totally true! Not at all a misjudgement!");
-        NewsItem news2 = new NewsItem(new Date(System.currentTimeMillis()), "LHC Disaster", "LHC created a huge black hole and swallowed the earth, is totally sorry.");
-        NewsItem news3 = new NewsItem(new Date(System.currentTimeMillis()), "Young people have fun", "Young people apparently like to do fun stuff, old people are appaled by this.");
-        NewsItem news4 = new NewsItem(new Date(System.currentTimeMillis()), "Nixon really sad", "Richard Nixon responded to initial report of his loss by being really sad and wanting to be alone for a while.");
-        NewsItem news5 = new NewsItem(new Date(System.currentTimeMillis()), "Nixon vindicated", "Promises not to be a jerk while in office, for reals.");
+        NewsItem news1 = new NewsItem("Dewey defeats Nixon!", "OMG Dewey is new president! Totally true! Not at all a misjudgement!");
+        NewsItem news2 = new NewsItem("LHC Disaster", "LHC created a huge black hole and swallowed the earth, is totally sorry.");
+        NewsItem news3 = new NewsItem("Young people have fun", "Young people apparently like to do fun stuff, old people are appaled by this.");
+        NewsItem news4 = new NewsItem("Nixon really sad", "Richard Nixon responded to initial report of his loss by being really sad and wanting to be alone for a while.");
+        NewsItem news5 = new NewsItem("Nixon vindicated", "Promises not to be a jerk while in office, for reals.");
 
         tx.begin();
         em.persist(cust1);

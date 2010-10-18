@@ -31,8 +31,14 @@ public class NewsItem implements Serializable {
     public NewsItem() {
     }
 
-    public NewsItem(Date entryDate, String headline, String content) {
-        this.entryDate = entryDate;
+    public NewsItem(String headline, String content) {
+        this.entryDate = new Date(System.currentTimeMillis());
+        this.headline = headline;
+        this.content = content;
+    }
+    public NewsItem(Long id, String headline, String content) {
+        this.id = id;
+        this.entryDate = new Date(System.currentTimeMillis());
         this.headline = headline;
         this.content = content;
     }
