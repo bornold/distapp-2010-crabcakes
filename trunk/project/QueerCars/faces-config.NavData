@@ -2,11 +2,12 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
+        <Node id="WEB-INF/adminindex.xhtml" x="150" y="450" zoom="true"/>
         <Node id="services.xhtml" x="400" y="300" zoom="true"/>
         <Node id="index.xhtml" x="150" y="150" zoom="true"/>
         <Node id="cars.xhtml" x="400" y="150" zoom="true"/>
         <Node id="queerclub.xhtml" x="650" y="150" zoom="true"/>
-        <Node id="rules/dynamic/failure.xhtml" x="619" y="295" zoom="true"/>
+        <Node id="rules/dynamic/failure.xhtml" x="725" y="314" zoom="true"/>
         <Node id="terms.xhtml" x="150" y="300" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>

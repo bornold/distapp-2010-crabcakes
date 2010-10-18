@@ -14,7 +14,6 @@ and open the template in the editor.
         <title>Queer Cars - Club</title>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/showTopHat.js" type="text/javascript"/>
-	<!--	<script src="JavaScript/showClubText.js" type="text/javascript"/>-->
     </h:head>
     <h:body>
         <div class="topHat" id="topHat"></div>
@@ -27,7 +26,19 @@ and open the template in the editor.
 		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" /><br/>
 		<h:commandButton id="btnOK" value="Login" action="#{Login.doLogin}"/>
 	    </h:form>
-	    <br/><br/><br/><br/>
+
+
+	    <br/><br/>
+	    <form id="loginfrom" method="post" action="SessionLogin">
+		Login <br/>
+		<input type="text" name="username" >
+		</input>
+		<br/>
+		<input type="submit" name="username" value="Login" />
+	    </form>
+
+
+	    <br/><br/>
 	    <h:form>
 		<h:outputLabel for="txtValue" value="Admin Login" /><br/>
 		<h:inputText  id="txtValue" value="#{AdminLogin.id}">
@@ -37,5 +48,6 @@ and open the template in the editor.
 		<h:commandButton id="btnOK" value="Login" action="#{AdminLogin.doLogin}"/>
 	    </h:form>
 	</div>
+	<a href="?logout=true">Logga ut</a>
     </h:body>
 </html>
