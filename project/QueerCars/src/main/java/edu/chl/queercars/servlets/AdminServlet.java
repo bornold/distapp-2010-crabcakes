@@ -187,5 +187,6 @@ public class AdminServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(output);
         out.close();
+        System.out.println(output);
     }
 }
