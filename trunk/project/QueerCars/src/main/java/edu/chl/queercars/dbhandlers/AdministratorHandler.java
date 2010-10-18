@@ -76,4 +76,13 @@ public class AdministratorHandler implements IAdministratorHandler {
         }
         em.close();
     }
+
+    @Override
+    public Administrator getAdministrator(String id) {
+        EntityManager em = emf.createEntityManager();
+
+        Administrator administrator = em.find(Administrator.class, id);
+        em.close();
+        return administrator;
+    }
 }

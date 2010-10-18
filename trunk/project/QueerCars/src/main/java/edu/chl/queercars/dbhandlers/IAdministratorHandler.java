@@ -16,4 +16,5 @@ public interface IAdministratorHandler {
     public List<Administrator> getAllAdministrators();
     public void removeAdministrator(String id);
     public void saveAdministrator(Administrator a);
+    public Administrator getAdministrator(String id);
 }
