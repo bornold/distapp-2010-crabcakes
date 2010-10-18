@@ -76,4 +76,13 @@ public class CarHandler implements ICarHandler {
         }
         em.close();
     }
+
+    @Override
+    public Car getCar(String id){
+        EntityManager em = emf.createEntityManager();
+
+        Car car = em.find(Car.class, id);
+        em.close();
+        return car;
+    }
 }
