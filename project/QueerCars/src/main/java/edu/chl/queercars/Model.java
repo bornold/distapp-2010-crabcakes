@@ -7,8 +7,6 @@ package edu.chl.queercars;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -32,7 +30,7 @@ public class Model implements Serializable {
      */
     public Model(String id){
         this.id=id;
-        this.imgFileName = id + ".jpg";
+        this.imgFileName = id + ".png";
     }
 
     public String getImgFileName() {

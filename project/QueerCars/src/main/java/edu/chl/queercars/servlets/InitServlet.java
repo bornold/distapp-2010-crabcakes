@@ -8,8 +8,10 @@ import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
+import edu.chl.queercars.NewsItem;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -123,6 +125,11 @@ public class InitServlet extends HttpServlet {
         Car car6 = new Car("KKN666", m2);
         Administrator admin1 = new Administrator("jakob", "Jakob");
         Administrator admin2 = new Administrator("damien", "Damien");
+        NewsItem news1 = new NewsItem(new Date(System.currentTimeMillis()), "Dewey defeats Nixon!", "OMG Dewey is new president! Totally true! Not at all a misjudgement!");
+        NewsItem news2 = new NewsItem(new Date(System.currentTimeMillis()), "LHC Disaster", "LHC created a huge black hole and swallowed the earth, is totally sorry.");
+        NewsItem news3 = new NewsItem(new Date(System.currentTimeMillis()), "Young people have fun", "Young people apparently like to do fun stuff, old people are appaled by this.");
+        NewsItem news4 = new NewsItem(new Date(System.currentTimeMillis()), "Nixon really sad", "Richard Nixon responded to initial report of his loss by being really sad and wanting to be alone for a while.");
+        NewsItem news5 = new NewsItem(new Date(System.currentTimeMillis()), "Nixon vindicated", "Promises not to be a jerk while in office, for reals.");
 
         tx.begin();
         em.persist(cust1);
@@ -142,6 +149,11 @@ public class InitServlet extends HttpServlet {
         em.persist(car6);
         em.persist(admin1);
         em.persist(admin2);
+        em.persist(news1);
+        em.persist(news2);
+        em.persist(news3);
+        em.persist(news4);
+        em.persist(news5);
         tx.commit();
         em.close();
         emf.close();
