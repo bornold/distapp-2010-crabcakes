@@ -8,6 +8,7 @@
         <Node id="cars.xhtml" x="400" y="150" zoom="true"/>
         <Node id="queerclub.xhtml" x="650" y="150" zoom="true"/>
         <Node id="rules/dynamic/failure.xhtml" x="725" y="314" zoom="true"/>
+        <Node id="failure.xhtml" x="900" y="150" zoom="true"/>
         <Node id="terms.xhtml" x="150" y="300" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>

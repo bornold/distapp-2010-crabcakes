@@ -70,7 +70,7 @@ public class SessionLogin extends HttpServlet {
 		} else {
 		    //TODO Fel inloggningsuppgifter
 		    response.setContentType("loginError");
-		    response.sendRedirect("queerclub.xhtml");
+		    response.sendRedirect("failure.xhtml");
 		}
 	    }
 	} else {
