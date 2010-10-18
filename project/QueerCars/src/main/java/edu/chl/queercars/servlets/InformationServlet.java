@@ -85,7 +85,7 @@ public class InformationServlet extends HttpServlet {
         String tableFooter = "</table>";
         String output = tableHeader;
         for (Car car : allCars) {
-            String imgTag = "<img src=images/\"" + car.getModel().getImgFileName() + "/>";
+            String imgTag = "<img src=\"images/" + car.getModel().getImgFileName() + "\"/>";
             String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + imgTag + "</td></tr>";
             output += row;
         }
