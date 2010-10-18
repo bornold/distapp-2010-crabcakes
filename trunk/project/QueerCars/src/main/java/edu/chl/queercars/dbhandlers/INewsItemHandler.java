@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface INewsItemHandler {
     public List<NewsItem> getAllNewsItems();
-    public void removeNewsItem(String id);
-    public void saveNewsItem(NewsItem c);
-    public NewsItem getNewsItem(String id);
+    public void removeNewsItem(Long id);
+    public void saveNewsItem(NewsItem ni);
+    public NewsItem getNewsItem(Long id);
 }

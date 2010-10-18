@@ -1,14 +1,18 @@
 package edu.chl.queercars.servlets;
+
 import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
+import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.dbhandlers.AdministratorHandler;
 import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
 import edu.chl.queercars.dbhandlers.IAdministratorHandler;
 import edu.chl.queercars.dbhandlers.ICarHandler;
 import edu.chl.queercars.dbhandlers.ICustomerHandler;
+import edu.chl.queercars.dbhandlers.INewsItemHandler;
+import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -30,6 +34,7 @@ public class AdminServlet extends HttpServlet {
     ICustomerHandler custHandler = new CustomerHandler(emf);
     IAdministratorHandler adminHandler = new AdministratorHandler(emf);
     ICarHandler carHandler = new CarHandler(emf);
+    INewsItemHandler newsHandler = new NewsItemHandler(emf);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -51,13 +56,16 @@ public class AdminServlet extends HttpServlet {
         } else if (action.equals("showAdministratorPage")) {
             request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
 
+        } else if (action.equals("showNewsEditorPage")) {
+            request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
+
         } else if (action.equals("saveCustomer")) {
             custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName")));
             sendCustomerTable(response);
         } else if (action.equals("removeCustomer")) {
             custHandler.removeCustomer(request.getParameter("customerId"));
             sendCustomerTable(response);
-            
+
         } else if (action.equals("saveAdministrator")) {
             adminHandler.saveAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
             sendAdministratorTable(response);
@@ -72,12 +80,28 @@ public class AdminServlet extends HttpServlet {
             carHandler.removeCar(request.getParameter("carId"));
             sendCarTable(response);
 
+
+        } else if (action.equals("saveNewsItem")) {
+            String newsId = request.getParameter("newsId");
+            if(newsId.equals("")){
+                newsHandler.saveNewsItem(new NewsItem(request.getParameter("newsHeadline"), request.getParameter("newsContent")));
+            } else {
+                newsHandler.saveNewsItem(new NewsItem(Long.parseLong(newsId), request.getParameter("newsHeadline"), request.getParameter("newsContent")));
+            }
+            sendNewsItems(response);
+        } else if (action.equals("removeNewsItem")) {
+            newsHandler.removeNewsItem(Long.parseLong(request.getParameter("newsId")));
+            sendNewsItems(response);
+
+
         } else if (action.equals("getCustomerTable")) {
             sendCustomerTable(response);
         } else if (action.equals("getAdministratorTable")) {
             sendAdministratorTable(response);
         } else if (action.equals("getCarTable")) {
             sendCarTable(response);
+        } else if (action.equals("getNewsItems")) {
+            sendNewsItems(response);
         }
     }
 
@@ -187,6 +211,19 @@ public class AdminServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(output);
         out.close();
-        System.out.println(output);
+    }
+
+    private void sendNewsItems(HttpServletResponse response) throws IOException {
+        List<NewsItem> allNews = newsHandler.getAllNewsItems();
+        String output = "";
+
+        for (NewsItem newsItem : allNews) {
+            output += "<p><h3>" + newsItem.getHeadline() + "</h3>\n" +
+                    "<p>" + newsItem.getContent() + "</p><input type=\"button\" value=\"edit\" class=\"editButton\" id=\"" + newsItem.getId() + "\"/>" + "<input type=\"button\" value=\"remove\" class=\"removeButton\" id=\"" + newsItem.getId() + "\"/>" + "</p>";
+        }
+
+        PrintWriter out = response.getWriter();
+        out.println(output);
+        out.close();
     }
 }
