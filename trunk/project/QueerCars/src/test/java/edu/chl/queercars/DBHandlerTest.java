@@ -1,0 +1,149 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package edu.chl.queercars;
+
+import edu.chl.queercars.dbhandlers.AdministratorHandler;
+import edu.chl.queercars.dbhandlers.CarHandler;
+import edu.chl.queercars.dbhandlers.CustomerHandler;
+import edu.chl.queercars.dbhandlers.IAdministratorHandler;
+import edu.chl.queercars.dbhandlers.ICarHandler;
+import edu.chl.queercars.dbhandlers.ICustomerHandler;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author mviktor
+ */
+public class DBHandlerTest {
+
+    private static EntityManagerFactory emf;
+    private static ICustomerHandler custHandler;
+    private static IAdministratorHandler adminHandler;
+    private static ICarHandler carHandler;
+
+    public DBHandlerTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+        emf.close();
+    }
+
+    @Before
+    public void setUp() {
+        emf = Persistence.createEntityManagerFactory("queercars_pu");
+        custHandler = new CustomerHandler(emf);
+        adminHandler = new AdministratorHandler(emf);
+        carHandler = new CarHandler(emf);
+    }
+
+    @After
+    public void tearDown() {
+    }
+
+    @Test
+    public void testAddCar() {
+
+        Model m = new Model("blackCar");
+        Car car = new Car("TAC123", m);
+
+        assertFalse(carHandler.getCar("TAC123").equals(car));
+
+        carHandler.saveCar(car);
+
+        assertTrue(carHandler.getCar("TAC123").equals(car));
+    }
+
+    @Test
+    public void testAddCustomer() {
+
+        Customer customer = new Customer("8903091122", "Vixen");
+
+        assertFalse(custHandler.getCustomer("8903091122").equals(customer));
+
+        custHandler.saveCustomer(customer);
+
+        assertTrue(custHandler.getCustomer("8903091122").equals(customer));
+    }
+
+    @Test
+    public void testAddAdmin() {
+        Administrator administrator = new Administrator("SecretIDIDID", "BeardedDude");
+
+        assertFalse(adminHandler.getAdministrator("SecretIDIDID").equals(administrator));
+
+        adminHandler.saveAdministrator(administrator);
+
+        assertFalse(adminHandler.getAdministrator("SecretIDIDID").equals(administrator));
+    }
+
+    @Test
+    public void testUpdateCar() {
+
+        Model m1 = new Model("blackCar");
+        Car car = new Car("TUC123", m1);
+
+        carHandler.saveCar(car);
+
+        Model m2 = new Model("mercuryCar");
+        Car newCar = new Car("TUC123", m2);
+        carHandler.saveCar(newCar); //Overwrite car1.
+
+        Car checkCar = carHandler.getCar("TUC123");
+        assertTrue(checkCar.getModel().equals(m2));
+    }
+
+    @Test
+    public void testUpdateCustomer() {
+
+        Customer cust = new Customer("8805055555", "Charlie");
+
+        custHandler.saveCustomer(cust);
+
+        Customer newCustomer = new Customer("8805055555", "Amanda");
+        custHandler.saveCustomer(newCustomer);
+
+        Customer checkCustomer = custHandler.getCustomer("8805055555");
+        assertTrue(checkCustomer.getFname().equals(newCustomer.getFname()));
+    }
+
+    @Test
+    public void testUpdateAdmin() {
+
+        Administrator admin = new Administrator("adminidid", "Balthasar");
+
+        adminHandler.saveAdministrator(admin);
+
+        Administrator newAdministrator = new Administrator("adminidid", "Balto");
+        adminHandler.saveAdministrator(newAdministrator);
+
+        Administrator checkAdministrator = adminHandler.getAdministrator("adminidid");
+        assertTrue(checkAdministrator.getFname().equals(newAdministrator.getFname()));
+    }
+
+    @Test
+    public void testDeleteCar() {
+
+        Model m1 = new Model("blackCar");
+        Car car1 = new Car("TDC123", m1);
+
+        carHandler.saveCar(car1);
+
+        carHandler.removeCar("TDC123");
+
+        assertTrue(carHandler.getCar("TDC123") == null);
+    }
+}
