@@ -12,12 +12,26 @@ $(document).ready(function(){
     $("#termsText").load("html_res/termsText.ihtml");
 });
 $(document).ready(function(){
-    $("#carsText").load("html_res/carsText.ihtml", loadCarInfo);
+    $("#carsTable").load("html_res/carsText.ihtml", loadCarInfo);
 });
 $(document).ready(function(){
     $("#newsFeed").load("InformationServlet", {action: "getNewsFeed"});
 });
 
 function loadCarInfo(){
-    $("#carsInfo").load("InformationServlet", {action: "getDetailedCarTable"});
+    $("#carsTable").load("InformationServlet", {
+        action: "getDetailedCarTable"
+    },refreshTableButtonListeners);
+}
+
+function refreshTableButtonListeners(){
+    $(".showButton").click(function() {
+        model = this.id;
+        $("#carInfo").load("html_res/modelText_" + model + ".ihtml", scrollBack);
+    });
+    $(".rentButton").click(rentButtonFunction);
+}
+function scrollBack()
+{
+    window.scrollTo(0,document.body.scrollHeight);
 }
