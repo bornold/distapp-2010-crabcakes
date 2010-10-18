@@ -1,5 +1,5 @@
 /*
- * Är det rätt, är det fel?
+ * Ã„r det rÃ¤tt, Ã¤r det fel?
  */
 package edu.chl.queercars.servlets;
 
@@ -64,7 +64,7 @@ public class SessionLogin extends HttpServlet {
 		    sessionConnection.setConnection(connection);
 		    session.setAttribute("sessionconnection", sessionConnection);
 
-		    //TODO Rätt inloggningsuppfifter
+		    //TODO RÃ¤tt inloggningsuppfifter
 		    request.getRequestDispatcher("/WEB-INF/logginWelcome.xhtml").forward(request, response);
 
 		} else {
