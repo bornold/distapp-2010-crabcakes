@@ -16,5 +16,4 @@ public interface ICustomerHandler {
     public List<Customer> getAllCustomers();
     public void removeCustomer(String id);
     public void addCustomer(Customer c);
-    public void updateCustomer(Customer c);
 }

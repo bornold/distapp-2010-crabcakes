@@ -4,15 +4,11 @@
  */
 package edu.chl.queercars.dbhandlers;
 
-import edu.chl.queercars.Administrator;
 import edu.chl.queercars.Car;
-import edu.chl.queercars.Customer;
 import java.util.List;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -66,10 +62,5 @@ public class CarHandler implements ICarHandler {
             tx.commit();
         }
         em.close();
-    }
-
-    @Override
-    public void updateCar(Car c) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

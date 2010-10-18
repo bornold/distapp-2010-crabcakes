@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -66,10 +65,4 @@ public class CustomerHandler implements ICustomerHandler{
         }
         em.close();
     }
-
-    @Override
-    public void updateCustomer(Customer c) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }

@@ -16,5 +16,4 @@ public interface ICarHandler {
     public List<Car> getAllCars();
     public void removeCar(String id);
     public void addCar(Car c);
-    public void updateCar(Car c);
 }

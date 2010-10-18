@@ -42,7 +42,6 @@ public class AdminServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
 
-        //TODO UPDATE x
         if (action == null) {
             request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
         } else if (action.equals("showCarPage")) {
@@ -58,6 +57,7 @@ public class AdminServlet extends HttpServlet {
         } else if (action.equals("removeCustomer")) {
             custHandler.removeCustomer(request.getParameter("customerId"));
             sendCustomerTable(response);
+            
         } else if (action.equals("saveAdministrator")) {
             adminHandler.addAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
             sendAdministratorTable(response);
