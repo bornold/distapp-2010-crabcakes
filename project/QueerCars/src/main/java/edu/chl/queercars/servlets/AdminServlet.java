@@ -52,21 +52,21 @@ public class AdminServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
 
         } else if (action.equals("saveCustomer")) {
-            custHandler.addCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName")));
+            custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName")));
             sendCustomerTable(response);
         } else if (action.equals("removeCustomer")) {
             custHandler.removeCustomer(request.getParameter("customerId"));
             sendCustomerTable(response);
             
         } else if (action.equals("saveAdministrator")) {
-            adminHandler.addAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
+            adminHandler.saveAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
             sendAdministratorTable(response);
         } else if (action.equals("removeAdministrator")) {
             adminHandler.removeAdministrator(request.getParameter("adminId"));
             sendAdministratorTable(response);
 
         } else if (action.equals("saveCar")) {
-            carHandler.addCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
+            carHandler.saveCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
             sendCarTable(response);
         } else if (action.equals("removeCar")) {
             carHandler.removeCar(request.getParameter("carId"));
