@@ -91,10 +91,14 @@ public class InformationServlet extends HttpServlet {
         List<Car> allCars = carHandler.getAllCars();
         String tableHeader = "<table>";
         String tableFooter = "</table>";
+        
         String output = tableHeader;
         for (Car car : allCars) {
+            String rentButtonTag = "<input type=\"submit\" class=\"rentButton\" id=\"" + car.getId() + "\" value=\"rent this car\"/>"; 
+            String showInfoButtonTag = "<input type=\"submit\" class=\"showButton\" id=\"" + car.getModel()  + "\" value=\"show Info\" />";
             String imgTag = "<img src=\"images/" + car.getModel().getImgFileName() + "\"/>";
-            String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + imgTag + "</td></tr>";
+
+            String row = "<tr><td>" + car.getId() + "</td><td>" + imgTag + "</td><td>" + showInfoButtonTag + "</td><td>" + rentButtonTag + "</td></tr>";
             output += row;
         }
 
