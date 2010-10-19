@@ -38,6 +38,9 @@ public class Customer implements Serializable {
         this.fname = fname;
     }
 
+    /**
+     * creates empty customer
+     */
     public Customer() {
     }
 
