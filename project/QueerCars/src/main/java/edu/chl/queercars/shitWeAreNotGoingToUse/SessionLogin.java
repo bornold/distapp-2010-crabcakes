@@ -1,5 +1,5 @@
 /*
- * Är det rätt, är det fel?
+ * Ã¤r det rÃ¤tt, Ã¤r det fel?
  */
 package edu.chl.queercars.shitWeAreNotGoingToUse;
 
@@ -31,22 +31,22 @@ public class SessionLogin extends HttpServlet {
 
 	/*
 	 *
-	 * Hämtar och skapar en session
+	 * HÃ¤mtar och skapar en session
 	 */
 
 	HttpSession session = request.getSession();
-	// SessionConnection är en egen klass som implimenterar HttpSessionBindingListener
+	// SessionConnection Ã¤r en egen klass som implimenterar HttpSessionBindingListener
 	SessionConnection sessionConnection =
 		(SessionConnection) session.getAttribute("sessionconnection");
 	Connection connection = null;
 
 	/*
-	 * om det gick att hänta en session hämta dess databas connection
+	 * om det gick att hÃ¤nta en session hÃ¤mta dess databas connection
 	 */
 	if (sessionConnection != null) {
 	    connection = sessionConnection.getConnection();
 	} else {
-	    //hitta på något att göra här
+	    //hitta pÃ¥ nÃ¤got att gÃ¶ra hÃ¤r
 	}
 
 
@@ -61,10 +61,10 @@ public class SessionLogin extends HttpServlet {
 
 	    } else {
 		/*
-		 * Kollar om det finns en customer med användernamnet i databasen
+		 * Kollar om det finns en customer med anvÃ¤ndernamnet i databasen
 		 *
-		 * Skall man eller kan man göra så här?
-		 * Känns väldigt fel...
+		 * Skall man eller kan man gÃ¤ra sÃ¤ hÃ¤r?
+		 * KÃ¤nns vÃ¤ldigt fel...
 		 *
 		 */
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
@@ -77,10 +77,10 @@ public class SessionLogin extends HttpServlet {
 
 		    /*
 		     * Skapar ny session.
-		     * Förstår inte varför man behöver blanda in databasen här
-		     * Finns det någon bra anledning?
-		     * Måste man skriva in användarnamn och lösenord till databasen?
-		     * Finns det något annat sätt att skapa en session?
+		     * FÃ¤rstÃ¤r inte varfÃ¤r man behÃ¤ver blanda in databasen hÃ¤r
+		     * Finns det nÃ¤gon bra anledning?
+		     * MÃ¤ste man skriva in anvÃ¤ndarnamn och lÃ¤senord till databasen?
+		     * Finns det nÃ¤got annat sÃ¤tt att skapa en session?
 		     */
 		    try {
 			connection = DriverManager.getConnection(

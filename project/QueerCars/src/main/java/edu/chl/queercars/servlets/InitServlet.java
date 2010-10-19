@@ -110,11 +110,12 @@ public class InitServlet extends HttpServlet {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
-        Customer cust1 = new Customer("4412121234","Lennart");
-        Customer cust2 = new Customer("3312121234","Emil");
-        Customer cust3 = new Customer("2212121234","Filip");
-        Customer cust4 = new Customer("1112121234","Jens");
-        Customer cust5 = new Customer("5512121234","Mio");
+        Customer cust1 = new Customer("4412121234","Lennart", "aert@mail.se");
+        Customer cust2 = new Customer("3312121234","Emil", "asdfg@mail.se");
+        Customer cust3 = new Customer("2212121234","Filip", "asdfgt@mail.se");
+        Customer cust4 = new Customer("1112121234","Jens", "aerty@mail.se");
+        Customer cust5 = new Customer("5512121234","Mio", "aeohjkt@mail.se");
+        
         Model m1 = new Model("blackCar");
         Model m2 = new Model("queerCar");
         Model m3 = new Model("mercuryCar");
