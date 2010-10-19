@@ -29,7 +29,9 @@ function refreshTableButtonListeners(){
         model = this.id;
         $("#carInfo").load("html_res/modelText_" + model + ".ihtml", scrollBack);
     });
-    $(".rentButton").click(rentButtonFunction);
+    $(".rentButton").click(function(){
+        alert("nothing here yet.");
+    });
 }
 function scrollBack()
 {
