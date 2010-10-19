@@ -60,7 +60,7 @@ public class AdminServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
 
         } else if (action.equals("saveCustomer")) {
-            custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName")));
+            custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail")));
             sendCustomerTable(response);
         } else if (action.equals("removeCustomer")) {
             custHandler.removeCustomer(request.getParameter("customerId"));
@@ -117,10 +117,6 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-
-
-
     }
 
     /** 
@@ -134,10 +130,6 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
-
-
-
     }
 
     /** 
@@ -147,10 +139,6 @@ public class AdminServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-
-
-
-
     }// </editor-fold>
 
     /**
@@ -159,14 +147,14 @@ public class AdminServlet extends HttpServlet {
      */
     private void sendCustomerTable(HttpServletResponse response) throws IOException {
         List<Customer> allCustomers = custHandler.getAllCustomers();
-        String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
+        String tableHeader = "<table>\n<tr><th>id</th><th>name</th><th>email</th></tr>\n";
         String tableFooter = "</table>";
         String output = tableHeader;
 
         for (Customer customer : allCustomers) {
             String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + customer.getId() + "\" value=\"edit\"/>";
             String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + customer.getId() + "\" value=\"remove\"/>";
-            String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+            String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + customer.getEmail() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
             output += row;
         }
 

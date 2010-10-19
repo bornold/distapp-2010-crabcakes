@@ -70,7 +70,7 @@ public class DBHandlerTest {
     @Test
     public void testAddCustomer() {
 
-        Customer customer = new Customer("8903091122", "Vixen");
+        Customer customer = new Customer("8903091122", "Vixen", "adfasdf@mail.com");
 
         assertFalse(custHandler.getCustomer("8903091122").equals(customer));
 
@@ -109,11 +109,11 @@ public class DBHandlerTest {
     @Test
     public void testUpdateCustomer() {
 
-        Customer cust = new Customer("8805055555", "Charlie");
+        Customer cust = new Customer("8805055555", "Charlie", "Chailie@fasdf.com");
 
         custHandler.saveCustomer(cust);
 
-        Customer newCustomer = new Customer("8805055555", "Amanda");
+        Customer newCustomer = new Customer("8805055555", "Amanda", "asdfasdf@mail.com");
         custHandler.saveCustomer(newCustomer);
 
         Customer checkCustomer = custHandler.getCustomer("8805055555");

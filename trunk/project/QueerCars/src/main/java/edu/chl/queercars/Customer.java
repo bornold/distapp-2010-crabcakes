@@ -21,6 +21,24 @@ public class Customer implements Serializable {
     private String id; //Personnummer.
     @NotNull
     private String fname;
+    @NotNull
+    private String email;
+
+    /**
+     *
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     *
+     * @param email sets the email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     /**
      * 
@@ -49,9 +67,10 @@ public class Customer implements Serializable {
      * @param id personal ID-number
      * @param fname first name
      */
-    public Customer(String id, String fname) {
+    public Customer(String id, String fname, String email) {
         this.id = id;
         this.fname = fname;
+        this.email = email;
     }
 
     /**
