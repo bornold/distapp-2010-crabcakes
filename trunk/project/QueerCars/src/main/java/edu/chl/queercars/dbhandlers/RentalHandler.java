@@ -7,6 +7,7 @@ package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
+import edu.chl.queercars.MailHandler;
 import edu.chl.queercars.Rental;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,9 +19,11 @@ import javax.persistence.EntityTransaction;
  */
 public class RentalHandler implements IRentalHandler {
     EntityManagerFactory emf;
+    MailHandler mh;
 
     public RentalHandler(EntityManagerFactory emf){
         this.emf = emf;
+        this.mh = new MailHandler(emf);
     }
     
     @Override
@@ -35,7 +38,9 @@ public class RentalHandler implements IRentalHandler {
         tx.begin();
         em.persist(r);
         tx.commit();
-        
+
+        mh.sendRentalInformation(r);
+
         em.close();
     }
 
