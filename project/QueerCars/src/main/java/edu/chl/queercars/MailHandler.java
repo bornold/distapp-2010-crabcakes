@@ -5,28 +5,30 @@
 package edu.chl.queercars;
 
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 
 /**
  *
  * @author mviktor
  */
 public class MailHandler {
-
+    EntityManagerFactory emf;
     Properties props;
     Message message;
 
     /**
      * creates a simple mail handler with default values for mailserver
      */
-    public MailHandler() {
+    public MailHandler(EntityManagerFactory emf) {
+        this.emf = emf;
         try {
             props = new Properties();
             props.put("mail.smtp.host", "mail.chalmers.se");
@@ -44,15 +46,20 @@ public class MailHandler {
      * @param email the emailadress to send to
      * @return true if mail sucsessfully was sent
      */
-    public boolean sendRentalInformation(InternetAddress email) {
+    public boolean sendRentalInformation(Rental rental) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
         try {
-            message.setRecipient(Message.RecipientType.TO, email);
+            Customer cu = rental.getCustomer();
+            Car ca = rental.getCar();
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(cu.getEmail()));
             message.setSubject("QueerCars - booking information");
 
-            String messageBody = "Thank you for using QueerCars as your personal car rental!\n" + "Here is your booking:\n";
+            String messageBody = "Hello " + cu.getFname() +  "!\nThank you for using QueerCars as your personal car rental!\n" + "Here is your booking:\n";
 
             //TODO get some real info to messageBody
-            messageBody += "TODO TODO TODO TODO TODO TODO REAL INFO REAL INFO REAL INFO REAL INFO\n";
+            messageBody += "You have rented a " + ca.getModel() + " with registration number " + ca.getId() + "\n";
+            messageBody += "This order was recieved at " + rental.getRentalDate() + ".\n";
 
             messageBody = messageBody + "Have a safe trip (we want the car back in one piece)\n\n" + "//QueerCars";
             message.setText(messageBody);
