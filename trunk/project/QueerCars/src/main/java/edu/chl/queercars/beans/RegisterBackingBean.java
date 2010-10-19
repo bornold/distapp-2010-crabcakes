@@ -24,7 +24,7 @@ public class RegisterBackingBean {
     String fname;
     String email;
 
-    @ManagedProperty(value = "#{registerModelBean}")
+    @ManagedProperty(value = "#{loginModelBean}")
     private LoginModelBean loginModelBean;
 
     public String getId() {
@@ -63,7 +63,9 @@ public class RegisterBackingBean {
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
 	CustomerHandler ch = new CustomerHandler(emf);
 	ch.saveCustomer(c);
-
+	loginModelBean.setId(id);
+	loginModelBean.setName(fname);
+	loginModelBean.setEmail(email);
 	emf.close();
 	return "registered";
     }
