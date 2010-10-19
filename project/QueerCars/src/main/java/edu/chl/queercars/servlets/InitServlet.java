@@ -162,5 +162,6 @@ public class InitServlet extends HttpServlet {
         tx.commit();
         em.close();
         emf.close();
+        System.out.println(new Date(System.currentTimeMillis()));
     }
 }

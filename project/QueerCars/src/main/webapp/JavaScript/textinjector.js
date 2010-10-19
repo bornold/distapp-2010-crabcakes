@@ -6,7 +6,7 @@ $(document).ready(function(){
     $("#clubText").load("html_res/clubText.ihtml");
 });
 $(document).ready(function(){
-    $("#serviceText").load("html_res/serviceText.ihtml");
+    $("#serviceText").load("html_res/serviceText.ihtml",initGoogleMaps);
 });
 $(document).ready(function(){
     $("#termsText").load("html_res/termsText.ihtml");
@@ -36,4 +36,8 @@ function refreshTableButtonListeners(){
 function scrollBack()
 {
     window.scrollTo(0,document.body.scrollHeight);
+}
+
+function initGoogleMaps(){
+    initialize();
 }
