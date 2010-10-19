@@ -8,30 +8,22 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
 <!-- Dynamic rule -->
-<navigation-rule>
-    <from-view-id>/queerclub.xhtml</from-view-id>
-    <navigation-case>
-        <from-action>#{Login.doLogin}</from-action>
-        <from-outcome>success</from-outcome>
-        <to-view-id>/queerclub.xhtml</to-view-id>
-    </navigation-case>
-    <navigation-case>
-        <from-action>#{Login.doLogin}</from-action>
-        <from-outcome>failure</from-outcome>
-        <to-view-id>failure.xhtml</to-view-id>
-    </navigation-case>
-</navigation-rule>
-<navigation-rule>
-    <from-view-id>/queerclub.xhtml</from-view-id>
-    <navigation-case>
-        <from-action>#{AdminLogin.doLogin}</from-action>
-        <from-outcome>success</from-outcome>
-        <to-view-id>/WEB-INF/adminindex.xhtml</to-view-id>
-</navigation-case>
-    <navigation-case>
-        <from-action>#{AdminLogin.doLogin}</from-action>
-        <from-outcome>failure</from-outcome>
-        <to-view-id>failure.xhtml</to-view-id>
-    </navigation-case>
-</navigation-rule>
+    <navigation-rule>
+	<from-view-id>/queerclub.xhtml</from-view-id>
+	<navigation-case>
+	    <from-action>#{queerCarBackingBean.doLogin}</from-action>
+	    <from-outcome>success</from-outcome>
+	    <to-view-id>/queerclub.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+	    <from-action>#{queerCarBackingBean.doLogin}</from-action>
+	    <from-outcome>failure</from-outcome>
+	    <to-view-id>failure.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+	    <from-action>#{queerCarBackingBean.doLogout}</from-action>
+	    <from-outcome>logout</from-outcome>
+	    <to-view-id>/queerclub.xhtml</to-view-id>
+	</navigation-case>
+    </navigation-rule>
 </faces-config>
