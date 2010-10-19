@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,25 +29,26 @@ public class Rental implements Serializable {
     private Long id;
     @ManyToOne(cascade={CascadeType.PERSIST})
     private Customer customer;
+    @OneToOne
     private Car car;
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date rentalDate;
 
     public Rental() {
     }
 
     public Rental(Customer customer, Car car) {
-        this.date = new Date(System.currentTimeMillis());
+        this.rentalDate = new Date(System.currentTimeMillis());
         this.customer = customer;
         this.car = car;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getRentalDate() {
+        return rentalDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setRentalDate(Date rentalDate) {
+        this.rentalDate = rentalDate;
     }
 
     public Long getId() {

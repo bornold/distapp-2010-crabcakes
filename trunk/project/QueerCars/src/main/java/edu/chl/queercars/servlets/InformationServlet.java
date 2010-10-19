@@ -12,8 +12,6 @@ import edu.chl.queercars.dbhandlers.INewsItemHandler;
 import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
