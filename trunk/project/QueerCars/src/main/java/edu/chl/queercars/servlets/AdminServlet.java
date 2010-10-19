@@ -11,7 +11,9 @@ import edu.chl.queercars.dbhandlers.CustomerHandler;
 import edu.chl.queercars.dbhandlers.IAdministratorHandler;
 import edu.chl.queercars.dbhandlers.ICarHandler;
 import edu.chl.queercars.dbhandlers.ICustomerHandler;
+import edu.chl.queercars.dbhandlers.IModelHandler;
 import edu.chl.queercars.dbhandlers.INewsItemHandler;
+import edu.chl.queercars.dbhandlers.ModelHandler;
 import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +37,7 @@ public class AdminServlet extends HttpServlet {
     IAdministratorHandler adminHandler = new AdministratorHandler(emf);
     ICarHandler carHandler = new CarHandler(emf);
     INewsItemHandler newsHandler = new NewsItemHandler(emf);
+    IModelHandler modelHandler = new ModelHandler(emf);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -79,8 +82,7 @@ public class AdminServlet extends HttpServlet {
         } else if (action.equals("removeCar")) {
             carHandler.removeCar(request.getParameter("carId"));
             sendCarTable(response);
-
-
+            
         } else if (action.equals("saveNewsItem")) {
             String newsId = request.getParameter("newsId");
             if (newsId.equals("")) {
@@ -102,6 +104,8 @@ public class AdminServlet extends HttpServlet {
             sendCarTable(response);
         } else if (action.equals("getNewsItems")) {
             sendNewsItems(response);
+        } else if (action.equals("getModels")) {
+            sendModels(response);
         }
     }
 
@@ -226,5 +230,16 @@ public class AdminServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(output);
         out.close();
+    }
+
+    private void sendModels(HttpServletResponse response) throws IOException {
+        List<Model> allModels = modelHandler.getAllModels();
+        String output = "";
+        for (Model model : allModels) {
+            output += "<option class=\"existingModel\" value=\"" + model.getId() + "\">" + model.getId() + "</option>\n";
+        }
+        output += "<option id=\"newModelSelection\">New...</option>\n";
+        PrintWriter out = response.getWriter();
+        out.println(output);
     }
 }
