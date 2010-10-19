@@ -22,14 +22,25 @@ public class Administrator implements Serializable {
     @NotNull
     private String fname;
 
+    /**
+     *
+     * @return gets first name
+     */
     public String getFname() {
         return fname;
     }
 
+    /**
+     *
+     * @param fname sets the first name
+     */
     public void setFname(String fname) {
         this.fname = fname;
     }
 
+    /**
+     * creates an empty administrator
+     */
     public Administrator() {
     }
 

@@ -34,6 +34,9 @@ public class Rental implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;
 
+    /**
+     * creates empty rental
+     */
     public Rental() {
     }
 
@@ -106,7 +109,7 @@ public class Rental implements Serializable {
 
     /**
      *
-     * param car sets the rented car
+     * @param car sets the rented car
      */
     public void setCar(Car car) {
         this.car = car;

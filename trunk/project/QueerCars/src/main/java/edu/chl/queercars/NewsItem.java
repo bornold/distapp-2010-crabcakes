@@ -29,6 +29,9 @@ public class NewsItem implements Serializable {
     private String headline;
     private String content;
 
+    /**
+     * creates empty newsitem
+     */
     public NewsItem() {
     }
 

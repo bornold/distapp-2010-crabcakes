@@ -21,6 +21,9 @@ public class Model implements Serializable {
     private String id;
     private String imgFileName;
 
+    /**
+     * creates empty model
+     */
     public Model(){
     }
 

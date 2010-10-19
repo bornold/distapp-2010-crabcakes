@@ -38,6 +38,10 @@ public class Car implements Serializable {
     @ManyToOne
     private Model model;
 
+    /**
+     * creates empty car
+     */
+
     public Car(){
     }
 
