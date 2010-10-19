@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet for usage by the customer page
  * @author johanssb
  */
 public class InformationServlet extends HttpServlet {
@@ -85,6 +85,11 @@ public class InformationServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    /**
+     * Sends detaild car table to show on the page
+     * @param response the servlet response
+     * @throws IOException
+     */
     private void sendDetailedCarTable(HttpServletResponse response) throws IOException {
         List<Car> allCars = carHandler.getAllAvailableCars();
         String tableHeader = "<table>";
@@ -106,6 +111,11 @@ public class InformationServlet extends HttpServlet {
         out.close();
     }
 
+    /**
+     *
+     * @param response servlet rseponse
+     * @throws IOException if IOExeption occurs
+     */
     private void sendNewsFeed(HttpServletResponse response) throws IOException{
         List<NewsItem> allNews = newsHandler.getAllNewsItems();
         String newsFeed = "";

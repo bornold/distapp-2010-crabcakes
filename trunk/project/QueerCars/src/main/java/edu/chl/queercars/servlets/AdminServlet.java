@@ -83,7 +83,7 @@ public class AdminServlet extends HttpServlet {
 
         } else if (action.equals("saveNewsItem")) {
             String newsId = request.getParameter("newsId");
-            if(newsId.equals("")){
+            if (newsId.equals("")) {
                 newsHandler.saveNewsItem(new NewsItem(request.getParameter("newsHeadline"), request.getParameter("newsContent")));
             } else {
                 newsHandler.saveNewsItem(new NewsItem(Long.parseLong(newsId), request.getParameter("newsHeadline"), request.getParameter("newsContent")));
@@ -153,8 +153,9 @@ public class AdminServlet extends HttpServlet {
 
     }// </editor-fold>
 
-    /*
+    /**
      * Method to return a HTML table of customers with headers, content and individualized buttons for editing and deleting users.
+     * @param response the httpServletResponse to get the printWriter from
      */
     private void sendCustomerTable(HttpServletResponse response) throws IOException {
         List<Customer> allCustomers = custHandler.getAllCustomers();
@@ -175,6 +176,10 @@ public class AdminServlet extends HttpServlet {
         out.close();
     }
 
+    /**
+     * Method to return a HTML table of admins with headers, content and individualized buttons for editing and deleting admins.
+     * @param response the httpServletResponse to get the printWriter from
+     */
     private void sendAdministratorTable(HttpServletResponse response) throws IOException {
         List<Administrator> allAdministrators = adminHandler.getAllAdministrators();
         String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
@@ -194,6 +199,10 @@ public class AdminServlet extends HttpServlet {
         out.close();
     }
 
+    /**
+     * Method to return a HTML table of cars with headers, content and individualized buttons for editing and deleting cars.
+     * @param response the httpServletResponse to get the printWriter from
+     */
     private void sendCarTable(HttpServletResponse response) throws IOException {
         List<Car> allCars = carHandler.getAllCars();
         String tableHeader = "<table>\n<tr><th>id</th><th>model</th></tr>\n";
@@ -213,13 +222,17 @@ public class AdminServlet extends HttpServlet {
         out.close();
     }
 
+    /**
+     * Method to return a HTML table of news items with headers, content and individualized buttons for editing and deleting newsItems.
+     * @param response the httpServletResponse to get the printWriter from
+     */
     private void sendNewsItems(HttpServletResponse response) throws IOException {
         List<NewsItem> allNews = newsHandler.getAllNewsItems();
         String output = "";
 
         for (NewsItem newsItem : allNews) {
-            output += "<p><h3>" + newsItem.getHeadline() + "</h3>\n" +
-                    "<p>" + newsItem.getContent() + "</p><input type=\"button\" value=\"edit\" class=\"editButton\" id=\"" + newsItem.getId() + "\"/>" + "<input type=\"button\" value=\"remove\" class=\"removeButton\" id=\"" + newsItem.getId() + "\"/>" + "</p>";
+            output += "<p><h3>" + newsItem.getHeadline() + "</h3>\n"
+                    + "<p>" + newsItem.getContent() + "</p><input type=\"button\" value=\"edit\" class=\"editButton\" id=\"" + newsItem.getId() + "\"/>" + "<input type=\"button\" value=\"remove\" class=\"removeButton\" id=\"" + newsItem.getId() + "\"/>" + "</p>";
         }
 
         PrintWriter out = response.getWriter();
