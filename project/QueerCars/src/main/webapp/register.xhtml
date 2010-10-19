@@ -24,21 +24,29 @@ and open the template in the editor.
 		<h:inputText  id="name" value="#{registerBackingBean.fname}">
 		    <f:validator validatorId="nameValidator" />
 		</h:inputText>
-		<h:message for="name" showSummary="true" showDetail="false" style="color: black" />
+		<h:message for="name" showSummary="true" showDetail="false" />
 		<br/>
 		Personnummer
 		<br/>
 		<h:inputText  id="prnummer" value="#{registerBackingBean.id}">
 		    <f:validator validatorId="userLoginValidator" />
 		</h:inputText>
-		<h:message for="prnummer" showSummary="true" showDetail="false" style="color: black" />
+		<h:message for="prnummer" showSummary="true" showDetail="false" />
 		<br/>
 		E-mail adress
 		<br/>
 		<h:inputText  id="email" value="#{registerBackingBean.email}">
 		    <f:validator validatorId="emailValidator" />
 		</h:inputText>
-		<h:message for="email" showSummary="true" showDetail="false" style="color: black" />
+		<h:message for="email" showSummary="true" showDetail="false"/>
+		<br/>
+		<h:selectBooleanCheckbox id="terms" value="false">
+		    <f:validator validatorId="termsValidator" />
+		</h:selectBooleanCheckbox>
+		<h:message for="terms" showSummary="true" showDetail="false"/>
+		<a href="terms.xhtml"> Terms and conditions</a>
+
+		
 		<br/>
 		<h:commandButton id="btnOK" value="Submit" action="#{registerBackingBean.doRegister}"/>
 	    </h:form>
