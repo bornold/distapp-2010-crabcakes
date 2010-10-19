@@ -8,6 +8,7 @@
     <class>edu.chl.queercars.Customer</class>
     <class>edu.chl.queercars.Model</class>
     <class>edu.chl.queercars.NewsItem</class>
+    <class>edu.chl.queercars.Rental</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>

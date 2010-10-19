@@ -9,6 +9,7 @@ import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
 import edu.chl.queercars.NewsItem;
+import edu.chl.queercars.Rental;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -123,6 +124,8 @@ public class InitServlet extends HttpServlet {
         Car car4 = new Car("KKN444", m4);
         Car car5 = new Car("KKN555", m1);
         Car car6 = new Car("KKN666", m2);
+        Rental r1 = new Rental(cust1,car1);
+        Rental r2 = new Rental(cust2,car2);
         Administrator admin1 = new Administrator("jakob", "Jakob");
         Administrator admin2 = new Administrator("damien", "Damien");
         NewsItem news1 = new NewsItem("Dewey defeats Nixon!", "OMG Dewey is new president! Totally true! Not at all a misjudgement!");
@@ -147,6 +150,8 @@ public class InitServlet extends HttpServlet {
         em.persist(car4);
         em.persist(car5);
         em.persist(car6);
+        em.persist(r1);
+        em.persist(r2);
         em.persist(admin1);
         em.persist(admin2);
         em.persist(news1);
