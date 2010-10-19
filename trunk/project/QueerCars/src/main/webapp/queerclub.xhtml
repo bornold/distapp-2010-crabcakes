@@ -18,36 +18,23 @@ and open the template in the editor.
     <h:body>
         <div class="topHat" id="topHat"></div>
         <div class="informativeText" id="clubText">
-	    <h:form>
-		<h:outputLabel for="txtValue" value="Login with ditt personnummer" /><br/>
-		<h:inputText  id="txtValue" value="#{Login.id}">
+
+	    <h:outputText rendered="#{loginModelBean.id == null}" value="Var god logga in" />
+	    <h:form rendered="#{loginModelBean.id == null}">
+		<h:inputText  id="txtValue" value="#{queerCarBackingBean.id}">
 		    <f:validator validatorId="userLoginValidator" />
 		</h:inputText >
-		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" /><br/>
-		<h:commandButton id="btnOK" value="Login" action="#{Login.doLogin}"/>
+		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" />
+		<br/>
+		<h:commandButton id="btnOK" value="Login" action="#{queerCarBackingBean.doLogin}"/>
 	    </h:form>
 
 
-	    <br/><br/>
-	    <form id="loginfrom" method="post" action="SessionLogin">
-		Login <br/>
-		<input type="text" name="username" >
-		</input>
+	    <h:form rendered="#{loginModelBean.id != null}">
+		<h:outputText value="Hej på dig #{loginModelBean.name}"/>
 		<br/>
-		<input type="submit" name="username" value="Login" />
-	    </form>
-
-
-	    <br/><br/>
-	    <h:form>
-		<h:outputLabel for="txtValue" value="Admin Login" /><br/>
-		<h:inputText  id="txtValue" value="#{AdminLogin.id}">
-		    <f:validator validatorId="adminLoginValidator" />
-		</h:inputText >
-		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" /><br/>
-		<h:commandButton id="btnOK" value="Login" action="#{AdminLogin.doLogin}"/>
+		<h:commandButton action="#{queerCarBackingBean.doLogout}" value="Logga ut"/>
 	    </h:form>
 	</div>
-	<a href="?logout=true">Logga ut</a>
     </h:body>
 </html>
