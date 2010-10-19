@@ -33,6 +33,10 @@ function saveButtonFunction(){
             productId: prodId
         },function(data){refreshTable(data);});
     }
+    $("#productName").val("");
+    $("#productCategory").val("");
+    $("#productPrice").val("");
+    $("#productId").val("");
 }
 
 function removeButtonFunction(){
