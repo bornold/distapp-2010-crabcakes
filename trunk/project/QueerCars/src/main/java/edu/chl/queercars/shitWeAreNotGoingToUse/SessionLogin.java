@@ -1,11 +1,11 @@
 /*
- * Ã„r det rÃ¤tt, Ã¤r det fel?
+ * Är det rätt, är det fel?
  */
-package edu.chl.queercars.servlets;
+package edu.chl.queercars.shitWeAreNotGoingToUse;
 
 /*
 
-JONAS MIKAEL FUCKIN' BORNOLD
+JONAS MIKAEL BORNOLD
 
  */
 import edu.chl.queercars.Customer;
@@ -22,8 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSessionBindingListener;
 
 @WebServlet(name = "SessionLogin", urlPatterns = "/SessionLogin")
 public class SessionLogin extends HttpServlet {
@@ -31,52 +29,82 @@ public class SessionLogin extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 	    throws IOException, ServletException {
 
+	/*
+	 *
+	 * Hämtar och skapar en session
+	 */
+
 	HttpSession session = request.getSession();
-	SessionConnection sessionConnection = (SessionConnection) session.getAttribute("sessionconnection");
+	// SessionConnection är en egen klass som implimenterar HttpSessionBindingListener
+	SessionConnection sessionConnection =
+		(SessionConnection) session.getAttribute("sessionconnection");
 	Connection connection = null;
+
+	/*
+	 * om det gick att hänta en session hämta dess databas connection
+	 */
 	if (sessionConnection != null) {
 	    connection = sessionConnection.getConnection();
+	} else {
+	    //hitta på något att göra här
 	}
+
+
+	/*
+	 * Om det inte redan finns en session
+	 */
 	if (connection == null) {
 	    String userName = request.getParameter("username");
 	    if (userName == null) {
-
-		//TODO redirect to NEW USER
+		//TODO redirect to NEWUSER
 		response.sendRedirect("queercars/queerclub.xhtml");
 
-
 	    } else {
+		/*
+		 * Kollar om det finns en customer med användernamnet i databasen
+		 *
+		 * Skall man eller kan man göra så här?
+		 * Känns väldigt fel...
+		 *
+		 */
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
 		EntityManager em = emf.createEntityManager();
 		Customer retcust = em.find(Customer.class, userName);
 		em.close();
 		emf.close();
+
 		if (retcust != null) {
-		    // create the connection
+
+		    /*
+		     * Skapar ny session.
+		     * Förstår inte varför man behöver blanda in databasen här
+		     * Finns det någon bra anledning?
+		     * Måste man skriva in användarnamn och lösenord till databasen?
+		     * Finns det något annat sätt att skapa en session?
+		     */
 		    try {
 			connection = DriverManager.getConnection(
 				"jdbc:derby://localhost:1527/queercars", "queercars", "manunderwood");
 		    } catch (SQLException e) {
 			System.err.println("Database not set up:\n\t" + e);
 		    }
-		    // store the connection
+		    // lagra den i sessionen
 		    sessionConnection = new SessionConnection();
 		    sessionConnection.setConnection(connection);
 		    session.setAttribute("sessionconnection", sessionConnection);
 
-		    //TODO RÃ¤tt inloggningsuppfifter
+		    //TODO Inloggning lyckades
 		    request.getRequestDispatcher("/WEB-INF/logginWelcome.xhtml").forward(request, response);
 
 		} else {
 		    //TODO Fel inloggningsuppgifter
-		    response.setContentType("loginError");
 		    response.sendRedirect("failure.xhtml");
 		}
 	    }
 	} else {
 	    String logout = request.getParameter("logout");
 	    if (logout == null) {
-		//TODO Redirect to LOGGED IN
+		//TODO redan inloggad
 		response.sendRedirect("index.xhtml");
 
 	    } else {
@@ -96,44 +124,5 @@ public class SessionLogin extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
 	    throws IOException, ServletException {
 	doGet(request, response);
-    }
-}
-
-class SessionConnection implements HttpSessionBindingListener {
-
-    Connection connection;
-
-    public SessionConnection() {
-	connection = null;
-    }
-
-    public SessionConnection(Connection connection) {
-	this.connection = connection;
-    }
-
-    public Connection getConnection() {
-	return connection;
-    }
-
-    public void setConnection(Connection connection) {
-	this.connection = connection;
-    }
-
-    public void valueBound(HttpSessionBindingEvent event) {
-	if (connection != null) {
-	    System.out.println("Binding a valid connection");
-	} else {
-	    System.out.println("Binding a null connection");
-	}
-    }
-
-    public void valueUnbound(HttpSessionBindingEvent event) {
-	if (connection != null) {
-	    System.out.println("Closing the bound connection as the session expires");
-	    try {
-		connection.close();
-	    } catch (SQLException ignore) {
-	    }
-	}
     }
 }
