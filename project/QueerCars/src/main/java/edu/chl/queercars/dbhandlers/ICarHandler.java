@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface ICarHandler {
     public List<Car> getAllCars();
+    public List<Car> getAllAvailableCars();
     public void removeCar(String id);
     public void saveCar(Car c);
     public Car getCar(String id);

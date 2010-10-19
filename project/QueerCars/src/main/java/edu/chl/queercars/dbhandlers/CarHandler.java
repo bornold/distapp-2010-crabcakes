@@ -37,6 +37,16 @@ public class CarHandler implements ICarHandler {
         return results;
     }
 
+    @Override
+    public List<Car> getAllAvailableCars(){
+        EntityManager em = emf.createEntityManager();
+        String allCars = "SELECT c FROM Car c WHERE c.id NOT IN (SELECT r.car.id FROM Rental r)";
+        Query q = em.createQuery(allCars);
+        List<Car> results = q.getResultList();
+        em.close();
+        return results;
+    }
+
     /**
      *
      * @param id the id of the car to remove

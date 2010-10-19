@@ -88,7 +88,7 @@ public class InformationServlet extends HttpServlet {
     }// </editor-fold>
 
     private void sendDetailedCarTable(HttpServletResponse response) throws IOException {
-        List<Car> allCars = carHandler.getAllCars();
+        List<Car> allCars = carHandler.getAllAvailableCars();
         String tableHeader = "<table>";
         String tableFooter = "</table>";
         
