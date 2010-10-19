@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * A servlet to init the database and such
  * @author johanssb
  */
 @WebServlet(name = "InitServlet", urlPatterns = {"/InitServlet"})
@@ -99,6 +99,7 @@ public class InitServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
     private void showMenuPage(PrintWriter out) {
         out.println("<p><a href=\"?action=recreate\">Create awesome boilerplate data for testing.</a></p>");
     }
