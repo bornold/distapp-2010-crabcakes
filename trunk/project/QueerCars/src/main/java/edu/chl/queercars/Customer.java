@@ -22,10 +22,18 @@ public class Customer implements Serializable {
     @NotNull
     private String fname;
 
+    /**
+     * 
+     * @return gets the first name
+     */
     public String getFname() {
         return fname;
     }
 
+    /**
+     *
+     * @param fname sets the first name
+     */
     public void setFname(String fname) {
         this.fname = fname;
     }

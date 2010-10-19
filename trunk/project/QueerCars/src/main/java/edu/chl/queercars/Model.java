@@ -33,10 +33,18 @@ public class Model implements Serializable {
         this.imgFileName = id + ".png";
     }
 
+    /**
+     *
+     * @return returns the filename of the image
+     */
     public String getImgFileName() {
         return imgFileName;
     }
 
+    /**
+     *
+     * @param imgFileName sets the filename for the image
+     */
     public void setImgFileName(String imgFileName) {
         this.imgFileName = imgFileName;
     }

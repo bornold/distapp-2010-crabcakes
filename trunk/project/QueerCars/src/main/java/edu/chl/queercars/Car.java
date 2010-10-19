@@ -20,10 +20,18 @@ public class Car implements Serializable {
     @Id
     private String id; //Registreringsnummer
 
+    /**
+     *
+     * @return returns the model
+     */
     public Model getModel() {
         return model;
     }
 
+    /**
+     *
+     * @param model the model to set
+     */
     public void setModel(Model model) {
         this.model = model;
     }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chl.queercars;
 
 import java.io.Serializable;
@@ -23,11 +22,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Rental implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade={CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Customer customer;
     @OneToOne
     private Car car;
@@ -37,40 +37,77 @@ public class Rental implements Serializable {
     public Rental() {
     }
 
+    /**
+     *
+     * @param customer the customer that wants to rent
+     * @param car the car that the customer rents
+     */
     public Rental(Customer customer, Car car) {
         this.rentalDate = new Date(System.currentTimeMillis());
         this.customer = customer;
         this.car = car;
     }
 
+    /**
+     *
+     * @return the date of the rental
+     */
     public Date getRentalDate() {
         return rentalDate;
     }
 
+    /**
+     * 
+     * @param rentalDate sets the rental date
+     */
     public void setRentalDate(Date rentalDate) {
         this.rentalDate = rentalDate;
     }
 
+    /**
+     *
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id sets the id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return the renting customer
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     *
+     * @param customer sets the renting customer
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
+    /**
+     *
+     * @return the rented car
+     */
     public Car getCar() {
         return car;
     }
 
+    /**
+     *
+     * param car sets the rented car
+     */
     public void setCar(Car car) {
         this.car = car;
     }
@@ -97,7 +134,6 @@ public class Rental implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.Rental[id=" + id + "]";
+        return "[" + car +", " + customer + "]";
     }
-
 }
