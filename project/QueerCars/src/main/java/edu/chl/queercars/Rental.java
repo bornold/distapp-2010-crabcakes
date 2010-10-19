@@ -27,7 +27,7 @@ public class Rental implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne
     private Customer customer;
     @OneToOne
     private Car car;

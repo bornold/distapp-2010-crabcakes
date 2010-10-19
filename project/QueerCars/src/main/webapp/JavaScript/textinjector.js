@@ -30,7 +30,7 @@ function refreshTableButtonListeners(){
         $("#carInfo").load("html_res/modelText_" + model + ".ihtml", scrollBack);
     });
     $(".rentButton").click(function(){
-        alert("nothing here yet.");
+        $("#carInfo").load("InformationServlet", {action: "doRental", carId: this.id});
     });
 }
 function scrollBack()
