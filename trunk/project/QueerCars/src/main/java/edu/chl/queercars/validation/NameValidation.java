@@ -11,12 +11,12 @@ import javax.faces.validator.ValidatorException;
  *
  * @author Joons
  */
-@FacesValidator(value = "adminLoginValidator")
-public class AdminLoginValidation implements Validator {
+@FacesValidator(value = "nameValidator")
+public class NameValidation implements Validator {
 
 
-    private int min = 5;
-    private int max = 20;
+    private int min = 2;
+    private int max = 30;
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value)
