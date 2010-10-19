@@ -1,5 +1,5 @@
 /*
- * är det rätt, är det fel?
+ * Är det rätt, är det fel?
  */
 package edu.chl.queercars.shitWeAreNotGoingToUse;
 
@@ -46,7 +46,7 @@ public class SessionLogin extends HttpServlet {
 	if (sessionConnection != null) {
 	    connection = sessionConnection.getConnection();
 	} else {
-	    //hitta på nägot att göra här
+	    //hitta på något att göra här
 	}
 
 
@@ -63,7 +63,7 @@ public class SessionLogin extends HttpServlet {
 		/*
 		 * Kollar om det finns en customer med användernamnet i databasen
 		 *
-		 * Skall man eller kan man gära sä här?
+		 * Skall man eller kan man göra så här?
 		 * Känns väldigt fel...
 		 *
 		 */
@@ -77,10 +77,10 @@ public class SessionLogin extends HttpServlet {
 
 		    /*
 		     * Skapar ny session.
-		     * Färstär inte varfär man behäver blanda in databasen här
-		     * Finns det nägon bra anledning?
-		     * Mäste man skriva in användarnamn och läsenord till databasen?
-		     * Finns det nägot annat sätt att skapa en session?
+		     * Förstår inte varför man behöver blanda in databasen här
+		     * Finns det någon bra anledning?
+		     * Måste man skriva in användarnamn och lösenord till databasen?
+		     * Finns det något annat sätt att skapa en session?
 		     */
 		    try {
 			connection = DriverManager.getConnection(
