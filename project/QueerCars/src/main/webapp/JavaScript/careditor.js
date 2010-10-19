@@ -15,15 +15,19 @@ function saveButtonClicked(){
         carId: carId,
         carModel: carModel
     },refreshTableButtonListeners);
-    carId = $("#carId").val("");
-    carName = $("#carName").val("");
+    $("#carId").val("");
+    $("#carName").val("");
+    $("#newModelName").val("");
+    $("#newModelImage").val("");
 }
 
 function loadCars(){
+    $("#carModel").load("AdminServlet", {
+        action: "getModels"
+    },setNewModelListener);
     $("#carlistarea").load("AdminServlet", {
         action: "getCarTable"
-    },refreshTableButtonListeners)
-
+    },refreshTableButtonListeners);
 }
 
 function refreshTableButtonListeners(){
@@ -32,6 +36,8 @@ function refreshTableButtonListeners(){
         editModel = $(this).parent().parent().find("td:eq(1)").html();
         $("#carId").val(editId);
         $("#carModel").val(editModel);
+        $("#newModelName").val("");
+        $("#newModelImage").val("");
     });
     $(".removeButton").click(removeButtonFunction);
 }
@@ -43,4 +49,15 @@ function removeButtonFunction(){
         carId: carId,
         carModel: ""
     },refreshTableButtonListeners);
+}
+
+function setNewModelListener(){
+    $("#newModelSelection").click(function(){
+        $("#newModelInfo").css("display", "block");
+    });
+    $(".existingModel").click(function(){
+        $("#newModelInfo").css("display", "none");
+        $("#newModelName").val("");
+        $("#newModelImage").val("");
+    });
 }
