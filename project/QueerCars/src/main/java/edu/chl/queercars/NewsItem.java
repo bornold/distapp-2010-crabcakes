@@ -27,15 +27,28 @@ public class NewsItem implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date entryDate;
     private String headline;
+    private String content;
 
     public NewsItem() {
     }
 
+    /**
+     *
+     * @param headline the headline of the news
+     * @param content content in the newsitem
+     */
     public NewsItem(String headline, String content) {
         this.entryDate = new Date(System.currentTimeMillis());
         this.headline = headline;
         this.content = content;
     }
+    
+    /**
+     * 
+     * @param id the id of the newsitem to use when you want to update
+     * @param headline the headline of the news
+     * @param content content in the newsitem
+     */
     public NewsItem(Long id, String headline, String content) {
         this.id = id;
         this.entryDate = new Date(System.currentTimeMillis());
@@ -43,35 +56,66 @@ public class NewsItem implements Serializable {
         this.content = content;
     }
 
+    /**
+     *
+     * @return returns the date of the entry
+     */
     public Date getEntryDate() {
         return entryDate;
     }
 
+    /**
+     *
+     * @param entryDate date to set
+     */
     public void setEntryDate(Date entryDate) {
         this.entryDate = entryDate;
     }
 
+    /**
+     *
+     * @return returnst the content
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     *
+     * @param content sets content
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     *
+     * @return the headline of newsitem
+     */
     public String getHeadline() {
         return headline;
     }
 
+    /**
+     *
+     * @param headline sets headline
+     */
     public void setHeadline(String headline) {
         this.headline = headline;
     }
-    private String content;
 
+    /**
+     *
+     * @return returns the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id sets id
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -98,7 +142,7 @@ public class NewsItem implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.chl.queercars.NewsItem[id=" + id + "]";
+        return "[" + id + ", " + headline + ", " + entryDate + "]";
     }
 
 }

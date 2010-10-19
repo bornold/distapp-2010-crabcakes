@@ -23,6 +23,9 @@ public class MailHandler {
     Properties props;
     Message message;
 
+    /**
+     * creates a simple mail handler with default values for mailserver
+     */
     public MailHandler() {
         try {
             props = new Properties();
@@ -36,6 +39,11 @@ public class MailHandler {
         }
     }
 
+    /**
+     * 
+     * @param email the emailadress to send to
+     * @return true if mail sucsessfully was sent
+     */
     public boolean sendRentalInformation(InternetAddress email) {
         try {
             message.setRecipient(Message.RecipientType.TO, email);
@@ -57,6 +65,10 @@ public class MailHandler {
         return true;
     }
 
+    /**
+     * @param email the emailadress to send to
+     * @return true if mail sucsessfully was sent
+     */
     public boolean sendNewAccountInfo(InternetAddress email) {
         try {
             message.setRecipient(Message.RecipientType.TO, email);
