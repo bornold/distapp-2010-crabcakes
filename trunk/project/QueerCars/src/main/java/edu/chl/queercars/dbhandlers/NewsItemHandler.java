@@ -28,7 +28,10 @@ public class NewsItemHandler implements INewsItemHandler{
         this.emf = emf;
     }
 
-
+    /**
+     *
+     * @return returns a list of all news item
+     */
     @Override
     public List<NewsItem> getAllNewsItems() {
         EntityManager em = emf.createEntityManager();
@@ -39,6 +42,10 @@ public class NewsItemHandler implements INewsItemHandler{
         return results;
     }
 
+    /**
+     *
+     * @param id the id of the news item to be removed
+     */
     @Override
     public void removeNewsItem(Long id) {
         EntityManager em = emf.createEntityManager();
@@ -52,6 +59,10 @@ public class NewsItemHandler implements INewsItemHandler{
         em.close();
     }
 
+    /**
+     *
+     * @param ni the item to save
+     */
     @Override
     public void saveNewsItem(NewsItem ni) {
         EntityManager em = emf.createEntityManager();
@@ -69,6 +80,11 @@ public class NewsItemHandler implements INewsItemHandler{
         em.close();
     }
 
+    /**
+     *
+     * @param id the id of the news item to get
+     * @return the news item
+     */
     @Override
     public NewsItem getNewsItem(Long id) {
         EntityManager em = emf.createEntityManager();

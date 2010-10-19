@@ -37,6 +37,10 @@ public class CarHandler implements ICarHandler {
         return results;
     }
 
+    /**
+     *
+     * @return a list of all the available cars
+     */
     @Override
     public List<Car> getAllAvailableCars(){
         EntityManager em = emf.createEntityManager();
@@ -87,6 +91,11 @@ public class CarHandler implements ICarHandler {
         em.close();
     }
 
+    /**
+     *
+     * @param id the id of the car (registration number)
+     * @return the car
+     */
     @Override
     public Car getCar(String id){
         EntityManager em = emf.createEntityManager();

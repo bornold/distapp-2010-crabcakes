@@ -10,8 +10,9 @@ import java.util.List;
 
 /**
  *
- * @author mviktor
+ * @author vixen
  */
+
 public interface IAdministratorHandler {
     public List<Administrator> getAllAdministrators();
     public void removeAdministrator(String id);

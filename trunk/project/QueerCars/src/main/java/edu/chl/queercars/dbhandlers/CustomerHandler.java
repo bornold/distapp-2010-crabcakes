@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author flipmo
+ * @author flipmo, vixen
  */
 public class CustomerHandler implements ICustomerHandler {
 
@@ -77,6 +77,11 @@ public class CustomerHandler implements ICustomerHandler {
         em.close();
     }
 
+    /**
+     *
+     * @param id the id of the customer to get (personal id number)
+     * @return the customer
+     */
     @Override
     public Customer getCustomer(String id) {
         EntityManager em = emf.createEntityManager();
