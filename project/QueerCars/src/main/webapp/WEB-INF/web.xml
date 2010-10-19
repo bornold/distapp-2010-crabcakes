@@ -34,12 +34,13 @@
         <url-pattern>/UserLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Servlet Faces</servlet-name>
-        <url-pattern>/queerclub.xhtml</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>InformationServlet</servlet-name>
         <url-pattern>/InformationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet Faces</servlet-name>
+        <url-pattern>/queerclub.xhtml</url-pattern>
+        <url-pattern>/register.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

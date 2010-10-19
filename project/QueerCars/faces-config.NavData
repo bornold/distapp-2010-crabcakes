@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
-    <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project">
-        <Node id="services.xhtml" x="400" y="300" zoom="true"/>
-        <Node id="index.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="cars.xhtml" x="400" y="150" zoom="true"/>
-        <Node id="queerclub.xhtml" x="650" y="150" zoom="true"/>
-        <Node id="failure.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="terms.xhtml" x="150" y="300" zoom="true"/>
+    <Scope Scope="Faces Configuration Only">
+        <Node id="queerclub.xhtml" x="642" y="150" zoom="true"/>
+        <Node id="failure.xhtml" x="673" y="24" zoom="true"/>
     </Scope>
-    <Scope Scope="All Faces Configurations"/>
+    <Scope Scope="Project">
+        <Node id="services.xhtml" x="1257" y="32" zoom="true"/>
+        <Node id="register.xhtml" x="297" y="32" zoom="true"/>
+        <Node id="index.xhtml" x="788" y="32" zoom="true"/>
+        <Node id="cars.xhtml" x="1025" y="32" zoom="true"/>
+        <Node id="queerclub.xhtml" x="34" y="32" zoom="false"/>
+        <Node id="terms.xhtml" x="548" y="32" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations">
+        <Node id="queerclub.xhtml" x="402" y="238" zoom="true"/>
+        <Node id="failure.xhtml" x="381" y="47" zoom="true"/>
+    </Scope>
 </Scene>

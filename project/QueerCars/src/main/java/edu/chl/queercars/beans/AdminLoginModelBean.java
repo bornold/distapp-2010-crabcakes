@@ -15,15 +15,14 @@ import javax.persistence.Persistence;
 
 @ManagedBean
 @RequestScoped
-public class AdminLogin {
+public class AdminLoginModelBean {
     private EntityManagerFactory emf;
-    private Administrator ad;
 
     private String id;
 
     public String doLogin(){
 
-	ad = validateUser(id);
+	Administrator ad = validateUser(id);
 
         if(ad != null){
             return "success";
@@ -41,8 +40,8 @@ public class AdminLogin {
     }
 
 
-    /** Creates a new instance of AdminLogin */
-    public AdminLogin() {
+    /** Creates a new instance of AdminLoginModelBean */
+    public AdminLoginModelBean() {
     }
 
     private Administrator validateUser(String username) {
@@ -53,5 +52,4 @@ public class AdminLogin {
         emf.close();
         return retadmin;
     }
-
 }

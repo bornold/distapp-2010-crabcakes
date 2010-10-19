@@ -8,35 +8,39 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>Queer Cars - Club</title>
         <link rel="stylesheet" type="text/css" href="main.css" />
+        <title>Queer Cars - Register</title>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/showTopHat.js" type="text/javascript"/>
     </h:head>
     <h:body>
         <div class="topHat" id="topHat"></div>
-        <div class="informativeText" id="clubText">
-
-	    <h:outputText rendered="#{loginModelBean.id == null}" value="Var god logga in" />
-	    <h:form rendered="#{loginModelBean.id == null}">
-		<h:inputText  id="txtValue" value="#{queerCarBackingBean.id}">
+        <div class="informativeText" id="registerText">
+	    <h:form>
+		Namn <br/>
+		<h:inputText  id="name" value="#{registerBackingBean.fname}">
+		    <f:validator validatorId="nameValidator" />
+		</h:inputText>
+		<h:message for="name" showSummary="true" showDetail="false" style="color: black" />
+		<br/>
+		Personnummer
+		<br/>
+		<h:inputText  id="prnummer" value="#{registerBackingBean.id}">
 		    <f:validator validatorId="userLoginValidator" />
-		</h:inputText >
-		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" />
+		</h:inputText>
+		<h:message for="prnummer" showSummary="true" showDetail="false" style="color: black" />
 		<br/>
-		<h:commandButton id="btnOK" value="Login" action="#{queerCarBackingBean.doLogin}"/>
+		E-mail adress
 		<br/>
-		    Inte medlem?
-		    <br/>
-		    <a href="register.xhtml">Registrera dig</a>
-	    </h:form>
-
-	    <h:form rendered="#{loginModelBean.id != null}">
-		<h:outputText value="Hej på dig #{loginModelBean.name}"/>
+		<h:inputText  id="email" value="#{registerBackingBean.email}">
+		    <f:validator validatorId="emailValidator" />
+		</h:inputText>
+		<h:message for="email" showSummary="true" showDetail="false" style="color: black" />
 		<br/>
-		<h:commandButton action="#{queerCarBackingBean.doLogout}" value="Logga ut"/>
+		<h:commandButton id="btnOK" value="Submit" action="#{registerBackingBean.doRegister}"/>
 	    </h:form>
 	</div>
     </h:body>
