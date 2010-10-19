@@ -18,6 +18,13 @@ public class QueerCarBackingBean {
     @ManagedProperty(value = "#{loginModelBean}")
     private LoginModelBean loginModelBean;
 
+    public String getId() {
+	return id;
+    }
+
+    public void setId(String id) {
+	this.id = id;
+    }
     public LoginModelBean getLoginModelBean() {
 	return loginModelBean;
     }
@@ -34,6 +41,7 @@ public class QueerCarBackingBean {
 	if (cust != null) {
 	    loginModelBean.setId(id);
 	    loginModelBean.setName(cust.getFname());
+	    loginModelBean.setEmail(cust.getEmail());
 	    return "success";
 	} else {
 	    return "failure";
@@ -49,14 +57,6 @@ public class QueerCarBackingBean {
 	    session.invalidate();
 	}
 	return "logout";
-    }
-
-    public String getId() {
-	return id;
-    }
-
-    public void setId(String id) {
-	this.id = id;
     }
 
     /** Creates a new instance of QueerCarBackingBean */
