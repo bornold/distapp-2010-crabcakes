@@ -6,6 +6,7 @@ import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
 import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.Rental;
+import edu.chl.queercars.beans.AdminLoginModelBean;
 import edu.chl.queercars.dbhandlers.AdministratorHandler;
 import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
@@ -22,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author mviktor
@@ -45,77 +47,82 @@ public class AdminServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
+	response.setContentType("text/html;charset=UTF-8");
 
-        if (action == null) {
-            request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
-        } else if (action.equals("showCarPage")) {
-            request.getRequestDispatcher("WEB-INF/careditor.xhtml").forward(request, response);
-        } else if (action.equals("showCustomerPage")) {
-            request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
-        } else if (action.equals("showAdministratorPage")) {
-            request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
-        } else if (action.equals("showNewsEditorPage")) {
-            request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
-        } else if (action.equals("showRentalEditorPage")) {
-            request.getRequestDispatcher("WEB-INF/rentaleditor.xhtml").forward(request, response);
+	String action = request.getParameter("action");
 
-        } else if (action.equals("saveCustomer")) {
-            custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail")));
-            sendCustomerTable(response);
-        } else if (action.equals("removeCustomer")) {
-            custHandler.removeCustomer(request.getParameter("customerId"));
-            sendCustomerTable(response);
+	HttpSession session = request.getSession();
+	AdminLoginModelBean almb = (AdminLoginModelBean) session.getAttribute("adminLoginModelBean");
 
-        } else if (action.equals("saveAdministrator")) {
-            adminHandler.saveAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
-            sendAdministratorTable(response);
-        } else if (action.equals("removeAdministrator")) {
-            adminHandler.removeAdministrator(request.getParameter("adminId"));
-            sendAdministratorTable(response);
+	if (almb == null || almb.getId() == null) {
+	    request.getRequestDispatcher("/adminlogin.xhtml").forward(request, response);
+	} else {
+	    if (action == null) {
+		request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
+	    } else if (action.equals("showCarPage")) {
+		request.getRequestDispatcher("WEB-INF/careditor.xhtml").forward(request, response);
+	    } else if (action.equals("showCustomerPage")) {
+		request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
+	    } else if (action.equals("showAdministratorPage")) {
+		request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
+	    } else if (action.equals("showNewsEditorPage")) {
+		request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
+	    } else if (action.equals("saveCustomer")) {
+		custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail")));
+		sendCustomerTable(response);
+	    } else if (action.equals("removeCustomer")) {
+		custHandler.removeCustomer(request.getParameter("customerId"));
+		sendCustomerTable(response);
 
-        } else if (action.equals("saveCar")) {
-            if(request.getParameter("carModel").equals("createNewModel")){
-                Model createdModel = new Model(request.getParameter("newModelId"), Double.parseDouble(request.getParameter("modelFuelConsumption")), Double.parseDouble(request.getParameter("modelEmission")));
-                carHandler.saveCar(new Car(request.getParameter("carId"), createdModel));
-            } else {
-                carHandler.saveCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
-            }
-            sendCarTable(response);
-        } else if (action.equals("removeCar")) {
-            carHandler.removeCar(request.getParameter("carId"));
-            sendCarTable(response);
+	    } else if (action.equals("saveAdministrator")) {
+		adminHandler.saveAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
+		sendAdministratorTable(response);
+	    } else if (action.equals("removeAdministrator")) {
+		adminHandler.removeAdministrator(request.getParameter("adminId"));
+		sendAdministratorTable(response);
 
-        } else if (action.equals("saveNewsItem")) {
-            String newsId = request.getParameter("newsId");
-            if (newsId.equals("")) {
-                newsHandler.saveNewsItem(new NewsItem(request.getParameter("newsHeadline"), request.getParameter("newsContent")));
-            } else {
-                newsHandler.saveNewsItem(new NewsItem(Long.parseLong(newsId), request.getParameter("newsHeadline"), request.getParameter("newsContent")));
-            }
-            sendNewsItems(response);
-        } else if (action.equals("removeNewsItem")) {
-            newsHandler.removeNewsItem(Long.parseLong(request.getParameter("newsId")));
-            sendNewsItems(response);
+	    } else if (action.equals("saveCar")) {
+		if (request.getParameter("carModel").equals("createNewModel")) {
+		    Model createdModel = new Model(request.getParameter("newModelId"), Double.parseDouble(request.getParameter("modelFuelConsumption")), Double.parseDouble(request.getParameter("modelEmission")));
+		    carHandler.saveCar(new Car(request.getParameter("carId"), createdModel));
+		} else {
+		    carHandler.saveCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
+		}
+		sendCarTable(response);
+	    } else if (action.equals("removeCar")) {
+		carHandler.removeCar(request.getParameter("carId"));
+		sendCarTable(response);
 
-        } else if (action.equals("getCustomerTable")) {
-            sendCustomerTable(response);
-        } else if (action.equals("getAdministratorTable")) {
-            sendAdministratorTable(response);
-        } else if (action.equals("getCarTable")) {
-            sendCarTable(response);
-        } else if (action.equals("getNewsItems")) {
-            sendNewsItems(response);
-        } else if (action.equals("getModels")) {
-            sendModels(response);
-        } else if (action.equals("getActiveRentalsList")) {
-            sendActiveRentals(response);
-        }
+	    } else if (action.equals("saveNewsItem")) {
+		String newsId = request.getParameter("newsId");
+		if (newsId.equals("")) {
+		    newsHandler.saveNewsItem(new NewsItem(request.getParameter("newsHeadline"), request.getParameter("newsContent")));
+		} else {
+		    newsHandler.saveNewsItem(new NewsItem(Long.parseLong(newsId), request.getParameter("newsHeadline"), request.getParameter("newsContent")));
+		}
+		sendNewsItems(response);
+	    } else if (action.equals("removeNewsItem")) {
+		newsHandler.removeNewsItem(Long.parseLong(request.getParameter("newsId")));
+		sendNewsItems(response);
+
+	    } else if (action.equals("getCustomerTable")) {
+		sendCustomerTable(response);
+	    } else if (action.equals("getAdministratorTable")) {
+		sendAdministratorTable(response);
+	    } else if (action.equals("getCarTable")) {
+		sendCarTable(response);
+	    } else if (action.equals("getNewsItems")) {
+		sendNewsItems(response);
+	    } else if (action.equals("getModels")) {
+		sendModels(response);
+	    } else if (action.equals("getActiveRentalsList")) {
+		sendActiveRentals(response);
+	    }
+	}
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -124,8 +131,8 @@ public class AdminServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+	    throws ServletException, IOException {
+	processRequest(request, response);
     }
 
     /** 
@@ -137,8 +144,8 @@ public class AdminServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+	    throws ServletException, IOException {
+	processRequest(request, response);
     }
 
     /** 
@@ -147,7 +154,7 @@ public class AdminServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+	return "Short description";
     }// </editor-fold>
 
     /**
@@ -155,22 +162,22 @@ public class AdminServlet extends HttpServlet {
      * @param response the httpServletResponse to get the printWriter from
      */
     private void sendCustomerTable(HttpServletResponse response) throws IOException {
-        List<Customer> allCustomers = custHandler.getAllCustomers();
-        String tableHeader = "<table>\n<tr><th>id</th><th>name</th><th>email</th></tr>\n";
-        String tableFooter = "</table>";
-        String output = tableHeader;
+	List<Customer> allCustomers = custHandler.getAllCustomers();
+	String tableHeader = "<table>\n<tr><th>id</th><th>name</th><th>email</th></tr>\n";
+	String tableFooter = "</table>";
+	String output = tableHeader;
 
-        for (Customer customer : allCustomers) {
-            String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + customer.getId() + "\" value=\"edit\"/>";
-            String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + customer.getId() + "\" value=\"remove\"/>";
-            String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + customer.getEmail() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
-            output += row;
-        }
+	for (Customer customer : allCustomers) {
+	    String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + customer.getId() + "\" value=\"edit\"/>";
+	    String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + customer.getId() + "\" value=\"remove\"/>";
+	    String row = "<tr><td>" + customer.getId() + "</td><td>" + customer.getFname() + "</td><td>" + customer.getEmail() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+	    output += row;
+	}
 
-        output += tableFooter;
-        PrintWriter out = response.getWriter();
-        out.println(output);
-        out.close();
+	output += tableFooter;
+	PrintWriter out = response.getWriter();
+	out.println(output);
+	out.close();
     }
 
     /**
@@ -178,22 +185,22 @@ public class AdminServlet extends HttpServlet {
      * @param response the httpServletResponse to get the printWriter from
      */
     private void sendAdministratorTable(HttpServletResponse response) throws IOException {
-        List<Administrator> allAdministrators = adminHandler.getAllAdministrators();
-        String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
-        String tableFooter = "</table>";
-        String output = tableHeader;
+	List<Administrator> allAdministrators = adminHandler.getAllAdministrators();
+	String tableHeader = "<table>\n<tr><th>id</th><th>name</th></tr>\n";
+	String tableFooter = "</table>";
+	String output = tableHeader;
 
-        for (Administrator administrator : allAdministrators) {
-            String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + administrator.getId() + "\" value=\"edit\"/>";
-            String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + administrator.getId() + "\" value=\"remove\"/>";
-            String row = "<tr><td>" + administrator.getId() + "</td><td>" + administrator.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
-            output += row;
-        }
+	for (Administrator administrator : allAdministrators) {
+	    String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + administrator.getId() + "\" value=\"edit\"/>";
+	    String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + administrator.getId() + "\" value=\"remove\"/>";
+	    String row = "<tr><td>" + administrator.getId() + "</td><td>" + administrator.getFname() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+	    output += row;
+	}
 
-        output += tableFooter;
-        PrintWriter out = response.getWriter();
-        out.println(output);
-        out.close();
+	output += tableFooter;
+	PrintWriter out = response.getWriter();
+	out.println(output);
+	out.close();
     }
 
     /**
@@ -201,22 +208,22 @@ public class AdminServlet extends HttpServlet {
      * @param response the httpServletResponse to get the printWriter from
      */
     private void sendCarTable(HttpServletResponse response) throws IOException {
-        List<Car> allCars = carHandler.getAllCars();
-        String tableHeader = "<table border=\"1\">\n<tr><th>id</th><th>model</th><th>co2 emission</th><th>fuel consumtion</th><th>odometer</th></tr>\n";
-        String tableFooter = "</table>";
-        String output = tableHeader;
+	List<Car> allCars = carHandler.getAllCars();
+	String tableHeader = "<table border=\"1\">\n<tr><th>id</th><th>model</th><th>co2 emission</th><th>fuel consumtion</th><th>odometer</th></tr>\n";
+	String tableFooter = "</table>";
+	String output = tableHeader;
 
-        for (Car car : allCars) {
-            String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + car.getId() + "\" value=\"edit\"/>";
-            String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + car.getId() + "\" value=\"remove\"/>";
-            String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + car.getModel().getEmission() + "</td><td>" + car.getModel().getFuelConsumption() + "</td><td>" + car.getOdometer() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
-            output += row;
-        }
+	for (Car car : allCars) {
+	    String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + car.getId() + "\" value=\"edit\"/>";
+	    String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + car.getId() + "\" value=\"remove\"/>";
+	    String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + car.getModel().getEmission() + "</td><td>" + car.getModel().getFuelConsumption() + "</td><td>" + car.getOdometer() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+	    output += row;
+	}
 
-        output += tableFooter;
-        PrintWriter out = response.getWriter();
-        out.println(output);
-        out.close();
+	output += tableFooter;
+	PrintWriter out = response.getWriter();
+	out.println(output);
+	out.close();
     }
 
     /**
@@ -224,41 +231,41 @@ public class AdminServlet extends HttpServlet {
      * @param response the httpServletResponse to get the printWriter from
      */
     private void sendNewsItems(HttpServletResponse response) throws IOException {
-        List<NewsItem> allNews = newsHandler.getAllNewsItems();
-        String output = "";
+	List<NewsItem> allNews = newsHandler.getAllNewsItems();
+	String output = "";
 
-        for (NewsItem newsItem : allNews) {
-            output += "<p><h3>" + newsItem.getHeadline() + "</h3>\n"
-                    + "<p>" + newsItem.getContent() + "</p><input type=\"button\" value=\"edit\" class=\"editButton\" id=\"" + newsItem.getId() + "\"/>" + "<input type=\"button\" value=\"remove\" class=\"removeButton\" id=\"" + newsItem.getId() + "\"/>" + "</p>";
-        }
+	for (NewsItem newsItem : allNews) {
+	    output += "<p><h3>" + newsItem.getHeadline() + "</h3>\n"
+		    + "<p>" + newsItem.getContent() + "</p><input type=\"button\" value=\"edit\" class=\"editButton\" id=\"" + newsItem.getId() + "\"/>" + "<input type=\"button\" value=\"remove\" class=\"removeButton\" id=\"" + newsItem.getId() + "\"/>" + "</p>";
+	}
 
-        PrintWriter out = response.getWriter();
-        out.println(output);
-        out.close();
+	PrintWriter out = response.getWriter();
+	out.println(output);
+	out.close();
     }
 
     private void sendModels(HttpServletResponse response) throws IOException {
-        List<Model> allModels = modelHandler.getAllModels();
-        String output = "";
-        for (Model model : allModels) {
-            output += "<option class=\"existingModel\" value=\"" + model.getId() + "\">" + model.getId() + "</option>\n";
-        }
-        output += "<option id=\"newModelSelection\" value=\"createNewModel\">New...</option>\n";
-        PrintWriter out = response.getWriter();
-        out.println(output);
+	List<Model> allModels = modelHandler.getAllModels();
+	String output = "";
+	for (Model model : allModels) {
+	    output += "<option class=\"existingModel\" value=\"" + model.getId() + "\">" + model.getId() + "</option>\n";
+	}
+	output += "<option id=\"newModelSelection\" value=\"createNewModel\">New...</option>\n";
+	PrintWriter out = response.getWriter();
+	out.println(output);
     }
 
     private void sendActiveRentals(HttpServletResponse response) throws IOException {
-        List<Rental> allActiveRentals = rentalHandler.getActiveRentals();
-        String output = "<table border=\"1\"><tr><th>rental id</th><th>car id</th><th>customer id</th><th>odometer value</th></tr>";
+	List<Rental> allActiveRentals = rentalHandler.getActiveRentals();
+	String output = "<table border=\"1\"><tr><th>rental id</th><th>car id</th><th>customer id</th><th>odometer value</th></tr>";
 
-        for (Rental rental : allActiveRentals) {
-            output += "<tr id=\"" + rental.getId() + "\"><td>" + rental.getId() + "</td><td>" + rental.getCar().getId() + "</td><td>" + rental.getCustomer().getId() + "</td><td>" + rental.getCar().getOdometer() + "</td>";
-            output += "<input type=\"button\" id=\"" + rental.getId() + "\" value=\"End\"/>";
-            output += "</tr>";
-        }
-        output += "</table>";
-        PrintWriter out = response.getWriter();
-        out.println(output);
+	for (Rental rental : allActiveRentals) {
+	    output += "<tr id=\"" + rental.getId() + "\"><td>" + rental.getId() + "</td><td>" + rental.getCar().getId() + "</td><td>" + rental.getCustomer().getId() + "</td><td>" + rental.getCar().getOdometer() + "</td>";
+	    output += "<input type=\"button\" id=\"" + rental.getId() + "\" value=\"End\"/>";
+	    output += "</tr>";
+	}
+	output += "</table>";
+	PrintWriter out = response.getWriter();
+	out.println(output);
     }
 }

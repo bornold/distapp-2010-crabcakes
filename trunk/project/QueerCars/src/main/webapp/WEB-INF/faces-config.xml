@@ -15,32 +15,43 @@
 	    <from-outcome>success</from-outcome>
 	    <to-view-id>/queerclub.xhtml</to-view-id>
 	</navigation-case>
+
 	<navigation-case>
 	    <from-action>#{queerCarBackingBean.doLogin}</from-action>
 	    <from-outcome>failure</from-outcome>
 	    <to-view-id>/queerclub.xhtml</to-view-id>
 	</navigation-case>
+	
 	<navigation-case>
 	    <from-action>#{queerCarBackingBean.doLogout}</from-action>
 	    <from-outcome>logout</from-outcome>
 	    <to-view-id>/queerclub.xhtml</to-view-id>
 	</navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+	<from-view-id>/adminlogin.xhtml</from-view-id>
 	<navigation-case>
 	    <from-action>#{adminBackingBean.doLogin}</from-action>
 	    <from-outcome>success</from-outcome>
 	    <to-view-id>/WEB-INF/adminindex.xhtml</to-view-id>
 	</navigation-case>
+
 	<navigation-case>
 	    <from-action>#{adminBackingBean.doLogin}</from-action>
 	    <from-outcome>failure</from-outcome>
-	    <to-view-id>/queerclub.xhtml</to-view-id>
+	    <to-view-id>/adminlogin.xhtml</to-view-id>
 	</navigation-case>
+
 	<navigation-case>
 	    <from-action>#{adminBackingBean.doLogout}</from-action>
 	    <from-outcome>logout</from-outcome>
 	    <to-view-id>/index.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
+
+
     <navigation-rule>
 	<from-view-id>/register.xhtml</from-view-id>
 	<navigation-case>

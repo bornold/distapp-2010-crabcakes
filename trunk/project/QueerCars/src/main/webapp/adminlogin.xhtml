@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+        <title>Admin login</title>
+    </head>
+    <h:body>
+	<h:message for="adminForm" showSummary="true" showDetail="false"/>
+	<h:form id="adminForm">
+	    Login as administrator
+	    <br/>
+	    <h:inputText id="txtValue" value="#{adminBackingBean.id}">
+		<f:validator validatorId="nameValidator" />
+	    </h:inputText >
+	    <h:message for="txtValue" showSummary="true" showDetail="false"/>
+	    <br/>
+	    <h:commandButton id="btnOK" value="Login" action="#{adminBackingBean.doLogin}"/>
+	</h:form>
+    </h:body>
+</html>

@@ -1,7 +1,7 @@
 package edu.chl.queercars.beans;
 
 import edu.chl.queercars.Administrator;
-import edu.chl.queercars.Customer;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -26,6 +26,7 @@ public class AdminBackingBean {
     public void setId(String id) {
 	this.id = id;
     }
+
     public AdminLoginModelBean getAdminLoginModelBean() {
 	return adminLoginModelBean;
     }
@@ -40,12 +41,17 @@ public class AdminBackingBean {
 	Administrator admin = ub.validateAdmin(id);
 	ub.closeEm();
 
+
 	if (admin != null) {
 	    adminLoginModelBean.setId(id);
 	    adminLoginModelBean.setFName(admin.getFname());
 	    return "success";
+
 	} else {
+	    FacesContext ctx = FacesContext.getCurrentInstance();
+	    ctx.addMessage("adminForm", new FacesMessage("Login unsuccessfull"));
 	    return "failure";
+
 	}
     }
 

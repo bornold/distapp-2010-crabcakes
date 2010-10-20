@@ -5,13 +5,14 @@
         <Node id="failure.xhtml" x="673" y="24" zoom="true"/>
     </Scope>
     <Scope Scope="Project">
-        <Node id="WEB-INF/adminindex.xhtml" x="158" y="132" zoom="true"/>
+        <Node id="WEB-INF/adminindex.xhtml" x="444" y="159" zoom="true"/>
         <Node id="services.xhtml" x="1257" y="32" zoom="true"/>
-        <Node id="register.xhtml" x="28" y="226" zoom="true"/>
-        <Node id="index.xhtml" x="788" y="32" zoom="true"/>
+        <Node id="register.xhtml" x="41" y="304" zoom="true"/>
+        <Node id="index.xhtml" x="407" y="95" zoom="true"/>
         <Node id="cars.xhtml" x="1025" y="32" zoom="true"/>
-        <Node id="queerclub.xhtml" x="34" y="32" zoom="false"/>
-        <Node id="terms.xhtml" x="548" y="32" zoom="true"/>
+        <Node id="queerclub.xhtml" x="36" y="187" zoom="false"/>
+        <Node id="adminlogin.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="terms.xhtml" x="257" y="325" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations">
         <Node id="queerclub.xhtml" x="402" y="238" zoom="true"/>
