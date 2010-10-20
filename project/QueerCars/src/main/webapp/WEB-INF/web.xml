@@ -18,29 +18,30 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>InformationServlet</servlet-name>
-        <servlet-class>edu.chl.queercars.servlets.InformationServlet</servlet-class>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>edu.chl.queercars.servlets.CustomerServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>InitServlet</servlet-name>
-        <url-pattern>/InitServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminServlet</servlet-name>
-        <url-pattern>/AdminServlet</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserLogin</servlet-name>
         <url-pattern>/UserLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>InformationServlet</servlet-name>
-        <url-pattern>/InformationServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Servlet Faces</servlet-name>
         <url-pattern>/queerclub.xhtml</url-pattern>
         <url-pattern>/register.xhtml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/CustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InitServlet</servlet-name>
+        <url-pattern>/init</url-pattern>
+        <url-pattern>/InitServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

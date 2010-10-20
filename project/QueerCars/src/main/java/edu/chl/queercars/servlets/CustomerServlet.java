@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * Servlet for usage by the customer page
  * @author johanssb
  */
-public class InformationServlet extends HttpServlet {
+public class CustomerServlet extends HttpServlet {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
     CarHandler carHandler = new CarHandler(emf);
