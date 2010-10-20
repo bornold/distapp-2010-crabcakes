@@ -5,13 +5,13 @@
 package edu.chl.queercars.beans;
 
 import edu.chl.queercars.Customer;
+import edu.chl.queercars.MailHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.FaceletContext;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -28,6 +28,7 @@ public class RegisterBackingBean {
     String email;
     @ManagedProperty(value = "#{loginModelBean}")
     private LoginModelBean loginModelBean;
+    MailHandler mh = new MailHandler();
 
     public String getId() {
 	return id;
@@ -72,6 +73,7 @@ public class RegisterBackingBean {
 	emf.close();
 	FacesContext ctx = FacesContext.getCurrentInstance();
 	ctx.addMessage("loggin", new FacesMessage("You are now registered"));
+        mh.sendNewAccountInfo(customer);
 	return "registered";
     }
 }

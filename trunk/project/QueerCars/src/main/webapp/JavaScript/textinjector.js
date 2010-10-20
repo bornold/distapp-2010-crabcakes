@@ -15,11 +15,11 @@ $(document).ready(function(){
     $("#carsTable").load("html_res/carsText.ihtml", loadCarInfo);
 });
 $(document).ready(function(){
-    $("#newsFeed").load("InformationServlet", {action: "getNewsFeed"});
+    $("#newsFeed").load("CustomerServlet", {action: "getNewsFeed"});
 });
 
 function loadCarInfo(){
-    $("#carsTable").load("InformationServlet", {
+    $("#carsTable").load("CustomerServlet", {
         action: "getDetailedCarTable"
     },refreshTableButtonListeners);
 }
@@ -30,7 +30,7 @@ function refreshTableButtonListeners(){
         $("#carInfo").load("html_res/modelText_" + model + ".ihtml", scrollBack);
     });
     $(".rentButton").click(function(){
-        $("#carInfo").load("InformationServlet", {action: "doRental", carId: this.id},loadCarInfo);
+        $("#carInfo").load("CustomerServlet", {action: "doRental", carId: this.id},loadCarInfo);
     });
 }
 function scrollBack()

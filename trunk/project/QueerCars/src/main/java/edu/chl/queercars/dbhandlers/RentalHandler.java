@@ -25,7 +25,7 @@ public class RentalHandler {
 
     public RentalHandler(EntityManagerFactory emf) {
         this.emf = emf;
-        this.mh = new MailHandler(emf);
+        this.mh = new MailHandler();
     }
 
     public void rentCar(Customer cu, Car ca) {
@@ -46,6 +46,7 @@ public class RentalHandler {
             tx.commit();
 
             mh.sendRentalInformation(r);
+            mh.sendOrderToQueerCars(r);
         }
         em.close();
     }
