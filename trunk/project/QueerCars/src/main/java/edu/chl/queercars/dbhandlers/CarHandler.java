@@ -11,7 +11,7 @@ import javax.persistence.Query;
  *
  * @author mviktor
  */
-public class CarHandler implements ICarHandler {
+public class CarHandler {
 
     EntityManagerFactory emf;
 
@@ -27,7 +27,6 @@ public class CarHandler implements ICarHandler {
      *
      * @return a list of all cars
      */
-    @Override
     public List<Car> getAllCars() {
         EntityManager em = emf.createEntityManager();
         String allCars = "SELECT c FROM Car c";
@@ -41,7 +40,6 @@ public class CarHandler implements ICarHandler {
      *
      * @return a list of all the available cars
      */
-    @Override
     public List<Car> getAllAvailableCars(){
         EntityManager em = emf.createEntityManager();
         String allCars = "SELECT c FROM Car c WHERE c.id NOT IN (SELECT r.car.id FROM Rental r)";
@@ -55,7 +53,6 @@ public class CarHandler implements ICarHandler {
      *
      * @param id the id of the car to remove
      */
-    @Override
     public void removeCar(String id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -72,7 +69,6 @@ public class CarHandler implements ICarHandler {
      *
      * @param c the car to save (if old it updates the database with new information)
      */
-    @Override
     public void saveCar(Car c) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -96,7 +92,6 @@ public class CarHandler implements ICarHandler {
      * @param id the id of the car (registration number)
      * @return the car
      */
-    @Override
     public Car getCar(String id){
         EntityManager em = emf.createEntityManager();
 

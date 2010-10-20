@@ -5,7 +5,6 @@
 
 package edu.chl.queercars.dbhandlers;
 
-import edu.chl.queercars.Car;
 import edu.chl.queercars.Model;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,14 +16,13 @@ import javax.persistence.Query;
  *
  * @author johanssb
  */
-public class ModelHandler implements IModelHandler{
+public class ModelHandler {
     EntityManagerFactory emf;
 
     public ModelHandler(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    @Override
     public List<Model> getAllModels() {
         EntityManager em = emf.createEntityManager();
         String allModels = "SELECT m FROM Model m";
@@ -34,7 +32,6 @@ public class ModelHandler implements IModelHandler{
         return results;
     }
 
-    @Override
     public void saveModel(Model m){
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -44,5 +41,4 @@ public class ModelHandler implements IModelHandler{
         tx.commit();
         em.close();
     }
-
 }

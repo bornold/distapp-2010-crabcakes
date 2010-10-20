@@ -1,6 +1,5 @@
 package edu.chl.queercars.validation;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -20,7 +19,7 @@ public class termsValidation implements Validator {
 	    throws ValidatorException {
 
 	if (value.toString().equals("false")) {
-	    FacesMessage msg = new FacesMessage("Du måste kryssa i Terms of condition");
+	    FacesMessage msg = new FacesMessage("Du mÃ¥ste kryssa i Terms of condition");
 	    throw new ValidatorException(msg);
 	}
     }

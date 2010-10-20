@@ -18,7 +18,7 @@ import javax.persistence.Query;
  *
  * @author johanssb
  */
-public class RentalHandler implements IRentalHandler {
+public class RentalHandler {
 
     EntityManagerFactory emf;
     MailHandler mh;
@@ -28,7 +28,6 @@ public class RentalHandler implements IRentalHandler {
         this.mh = new MailHandler(emf);
     }
 
-    @Override
     public void rentCar(Customer cu, Car ca) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();

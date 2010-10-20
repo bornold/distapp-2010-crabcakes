@@ -7,9 +7,6 @@ package edu.chl.queercars;
 import edu.chl.queercars.dbhandlers.AdministratorHandler;
 import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
-import edu.chl.queercars.dbhandlers.IAdministratorHandler;
-import edu.chl.queercars.dbhandlers.ICarHandler;
-import edu.chl.queercars.dbhandlers.ICustomerHandler;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -26,9 +23,9 @@ import static org.junit.Assert.*;
 public class DBHandlerTest {
 
     private static EntityManagerFactory emf;
-    private static ICustomerHandler custHandler;
-    private static IAdministratorHandler adminHandler;
-    private static ICarHandler carHandler;
+    private static CustomerHandler custHandler;
+    private static AdministratorHandler adminHandler;
+    private static CarHandler carHandler;
 
     public DBHandlerTest() {
     }
