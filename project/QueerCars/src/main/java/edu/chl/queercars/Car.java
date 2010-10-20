@@ -20,7 +20,7 @@ public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id; //Registration number
-    @ManyToOne(cascade={CascadeType.PERSIST})
+    @ManyToOne
     private Model model;
     private int odometer; // in km
 
@@ -40,7 +40,7 @@ public class Car implements Serializable {
         this.model = model;
         odometer = 0;
     }
-
+    
     /**
      *
      * @return gets odometer (as km)

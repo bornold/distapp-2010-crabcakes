@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chl.queercars;
 
 import java.io.Serializable;
@@ -15,18 +14,19 @@ import javax.persistence.Id;
  */
 @Entity
 public class Model implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    @Id    
+    @Id
     private String id; //Name of the model eg. Sportscar
     private String imgFileName;
-    private double emission; //grams per km
+    private int emission; //grams per km
     private double fuelConsumption; //liter per km
 
     /**
      *
      * @return emission in grams/km
      */
-    public double getEmission() {
+    public int getEmission() {
         return emission;
     }
 
@@ -34,7 +34,7 @@ public class Model implements Serializable {
      *
      * @param emission sets emission in grams/km
      */
-    public void setEmission(double emission) {
+    public void setEmission(int emission) {
         this.emission = emission;
     }
 
@@ -57,7 +57,7 @@ public class Model implements Serializable {
     /**
      * creates empty model
      */
-    public Model(){
+    public Model() {
     }
 
     /**
@@ -68,15 +68,14 @@ public class Model implements Serializable {
         this.id = id;
     }
 
-
     /**
      *
      * @param id name of the model
      * @param emission emission as g/km
      * @param fuelConsumption as liter/km
      */
-    public Model(String id, double fuelConsumption, double emission){
-        this.id=id;
+    public Model(String id, double fuelConsumption, int emission) {
+        this.id = id;
         this.emission = emission;
         this.fuelConsumption = fuelConsumption;
         this.imgFileName = id + ".png";
@@ -138,5 +137,4 @@ public class Model implements Serializable {
     public String toString() {
         return id;
     }
-
 }
