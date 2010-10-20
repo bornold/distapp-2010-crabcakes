@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chl.queercars;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -16,9 +16,46 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Car implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    private String id; //Registreringsnummer
+    private String id; //Registration number
+    @ManyToOne(cascade={CascadeType.PERSIST})
+    private Model model;
+    private int odometer; // in km
+
+    /**
+     * creates empty car
+     */
+    public Car() {
+    }
+
+    /**
+     *
+     * @param id registration number
+     * @param model the model
+     */
+    public Car(String id, Model model) {
+        this.id = id;
+        this.model = model;
+        odometer = 0;
+    }
+
+    /**
+     *
+     * @return gets odometer (as km)
+     */
+    public int getOdometer() {
+        return odometer;
+    }
+
+    /**
+     *
+     * @param odometer sets odometer (km)
+     */
+    public void setOdometer(int odometer) {
+        this.odometer = odometer;
+    }
 
     /**
      *
@@ -34,26 +71,6 @@ public class Car implements Serializable {
      */
     public void setModel(Model model) {
         this.model = model;
-    }
-    @ManyToOne
-    private Model model;
-
-    /**
-     * creates empty car
-     */
-
-    public Car(){
-    }
-
-    /**
-     *
-     * @param id registration number
-     * @param model the model
-     */
-    public Car(String id, Model model)
-    {
-        this.id = id;
-        this.model=model;
     }
 
     /**
@@ -94,6 +111,6 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-       return "[" + id + ", " + model + "]";
+        return "[" + id + ", " + model + "]";
     }
 }

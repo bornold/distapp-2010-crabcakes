@@ -54,7 +54,7 @@ public class DBHandlerTest {
     @Test
     public void testAddCar() {
 
-        Model m = new Model("blackCar");
+        Model m = new Model("blackCar", 0.1, 123);
         Car car = new Car("TAC123", m);
 
         assertFalse(carHandler.getCar("TAC123").equals(car));
@@ -90,12 +90,12 @@ public class DBHandlerTest {
     @Test
     public void testUpdateCar() {
 
-        Model m1 = new Model("blackCar");
+        Model m1 = new Model("blackCar", 0.1, 153);
         Car car = new Car("TUC123", m1);
 
         carHandler.saveCar(car);
 
-        Model m2 = new Model("mercuryCar");
+        Model m2 = new Model("mercuryCar", 0.03, 126);
         Car newCar = new Car("TUC123", m2);
         carHandler.saveCar(newCar); //Overwrite car1.
 
@@ -134,7 +134,7 @@ public class DBHandlerTest {
     @Test
     public void testDeleteCar() {
 
-        Model m1 = new Model("blackCar");
+        Model m1 = new Model("blackCar", 0.12, 231);
         Car car1 = new Car("TDC123", m1);
 
         carHandler.saveCar(car1);
