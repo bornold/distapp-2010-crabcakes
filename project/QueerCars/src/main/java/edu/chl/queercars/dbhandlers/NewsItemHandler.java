@@ -16,7 +16,7 @@ import javax.persistence.Query;
  *
  * @author johanssb
  */
-public class NewsItemHandler implements INewsItemHandler{
+public class NewsItemHandler {
 
     EntityManagerFactory emf;
 
@@ -32,7 +32,7 @@ public class NewsItemHandler implements INewsItemHandler{
      *
      * @return returns a list of all news item
      */
-    @Override
+
     public List<NewsItem> getAllNewsItems() {
         EntityManager em = emf.createEntityManager();
         String allNewsItems = "SELECT ni FROM NewsItem ni";
@@ -46,7 +46,7 @@ public class NewsItemHandler implements INewsItemHandler{
      *
      * @param id the id of the news item to be removed
      */
-    @Override
+
     public void removeNewsItem(Long id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -63,7 +63,6 @@ public class NewsItemHandler implements INewsItemHandler{
      *
      * @param ni the item to save
      */
-    @Override
     public void saveNewsItem(NewsItem ni) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -85,7 +84,6 @@ public class NewsItemHandler implements INewsItemHandler{
      * @param id the id of the news item to get
      * @return the news item
      */
-    @Override
     public NewsItem getNewsItem(Long id) {
         EntityManager em = emf.createEntityManager();
 

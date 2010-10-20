@@ -8,11 +8,6 @@ import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.dbhandlers.AdministratorHandler;
 import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
-import edu.chl.queercars.dbhandlers.IAdministratorHandler;
-import edu.chl.queercars.dbhandlers.ICarHandler;
-import edu.chl.queercars.dbhandlers.ICustomerHandler;
-import edu.chl.queercars.dbhandlers.IModelHandler;
-import edu.chl.queercars.dbhandlers.INewsItemHandler;
 import edu.chl.queercars.dbhandlers.ModelHandler;
 import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import java.io.IOException;
@@ -33,11 +28,11 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminServlet extends HttpServlet {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
-    ICustomerHandler custHandler = new CustomerHandler(emf);
-    IAdministratorHandler adminHandler = new AdministratorHandler(emf);
-    ICarHandler carHandler = new CarHandler(emf);
-    INewsItemHandler newsHandler = new NewsItemHandler(emf);
-    IModelHandler modelHandler = new ModelHandler(emf);
+    CustomerHandler custHandler = new CustomerHandler(emf);
+    AdministratorHandler adminHandler = new AdministratorHandler(emf);
+    CarHandler carHandler = new CarHandler(emf);
+    NewsItemHandler newsHandler = new NewsItemHandler(emf);
+    ModelHandler modelHandler = new ModelHandler(emf);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

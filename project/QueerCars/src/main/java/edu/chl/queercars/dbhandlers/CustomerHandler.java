@@ -11,7 +11,7 @@ import javax.persistence.Query;
  *
  * @author flipmo, vixen
  */
-public class CustomerHandler implements ICustomerHandler {
+public class CustomerHandler {
 
     EntityManagerFactory emf;
 
@@ -27,7 +27,6 @@ public class CustomerHandler implements ICustomerHandler {
      *
      * @return a list of all the customers
      */
-    @Override
     public List<Customer> getAllCustomers() {
         EntityManager em = emf.createEntityManager();
         String allCustomers = "SELECT c FROM Customer c";
@@ -41,7 +40,6 @@ public class CustomerHandler implements ICustomerHandler {
      *
      * @param id the id of the customer to remove
      */
-    @Override
     public void removeCustomer(String id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -58,7 +56,6 @@ public class CustomerHandler implements ICustomerHandler {
      *
      * @param c the customer to save (if old it updates the database with new information)
      */
-    @Override
     public void saveCustomer(Customer c) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -82,7 +79,6 @@ public class CustomerHandler implements ICustomerHandler {
      * @param id the id of the customer to get (personal id number)
      * @return the customer
      */
-    @Override
     public Customer getCustomer(String id) {
         EntityManager em = emf.createEntityManager();
 

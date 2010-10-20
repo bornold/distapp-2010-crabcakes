@@ -9,9 +9,6 @@ import edu.chl.queercars.Customer;
 import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.beans.LoginModelBean;
 import edu.chl.queercars.dbhandlers.CarHandler;
-import edu.chl.queercars.dbhandlers.ICarHandler;
-import edu.chl.queercars.dbhandlers.INewsItemHandler;
-import edu.chl.queercars.dbhandlers.IRentalHandler;
 import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import edu.chl.queercars.dbhandlers.RentalHandler;
 import java.io.IOException;
@@ -32,9 +29,9 @@ import javax.servlet.http.HttpSession;
 public class InformationServlet extends HttpServlet {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
-    ICarHandler carHandler = new CarHandler(emf);
-    INewsItemHandler newsHandler = new NewsItemHandler(emf);
-    IRentalHandler rentalHandler = new RentalHandler(emf);
+    CarHandler carHandler = new CarHandler(emf);
+    NewsItemHandler newsHandler = new NewsItemHandler(emf);
+    RentalHandler rentalHandler = new RentalHandler(emf);
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

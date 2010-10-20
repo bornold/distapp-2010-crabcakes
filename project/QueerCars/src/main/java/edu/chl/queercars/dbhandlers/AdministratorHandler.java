@@ -11,7 +11,7 @@ import javax.persistence.Query;
  *
  * @author mviktor
  */
-public class AdministratorHandler implements IAdministratorHandler {
+public class AdministratorHandler{
 
     EntityManagerFactory emf;
 
@@ -27,7 +27,6 @@ public class AdministratorHandler implements IAdministratorHandler {
      *
      * @return list of all administrators
      */
-    @Override
     public List<Administrator> getAllAdministrators() {
         EntityManager em = emf.createEntityManager();
         String allAdministrators = "SELECT a FROM Administrator a";
@@ -41,7 +40,6 @@ public class AdministratorHandler implements IAdministratorHandler {
      *
      * @param id the id of the admin to remove
      */
-    @Override
     public void removeAdministrator(String id) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -58,7 +56,6 @@ public class AdministratorHandler implements IAdministratorHandler {
      *
      * @param a the administrator to save (if old it updates the database with new information)
      */
-    @Override
     public void saveAdministrator(Administrator a) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -82,7 +79,6 @@ public class AdministratorHandler implements IAdministratorHandler {
      * @param id the id of the administrator to get
      * @return returns the administrator
      */
-    @Override
     public Administrator getAdministrator(String id) {
         EntityManager em = emf.createEntityManager();
 
