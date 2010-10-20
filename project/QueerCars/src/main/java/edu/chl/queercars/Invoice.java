@@ -49,9 +49,9 @@ public class Invoice {
     public String getInvoiceText(){
         String text = "INVOICE:\n";
         text += hourlyCost + " SEK - Rental duration (in hours): " + durationInHours + "\n";
-        text += totalFuelCost + " SEK - Fuel consumption (in liters): " + totalFuelConsumption + "\n";
+        text += totalFuelCost + " SEK - Fuel consumption (in liters): " + totalFuelConsumption + " calculated from your mileage of " + mileage + " km.\n";
         text += evilCost + " SEK - Total amount due excluding carbon emission compensation.\n\n";
-        text += greenCost + " SEK - Optional fee for carbon emissions.\n";
+        text += greenCost + " SEK - Optional fee for carbon emissions, calculated from your emissions of " + totalEmissions + " grams.\n";
         text += niceGuyCost + " SEK - Total amount to be payed if you wish to compensate for your carbon emissions.\n";
 
         return text;
