@@ -5,8 +5,9 @@
         <Node id="failure.xhtml" x="673" y="24" zoom="true"/>
     </Scope>
     <Scope Scope="Project">
+        <Node id="WEB-INF/adminindex.xhtml" x="158" y="132" zoom="true"/>
         <Node id="services.xhtml" x="1257" y="32" zoom="true"/>
-        <Node id="register.xhtml" x="297" y="32" zoom="true"/>
+        <Node id="register.xhtml" x="28" y="226" zoom="true"/>
         <Node id="index.xhtml" x="788" y="32" zoom="true"/>
         <Node id="cars.xhtml" x="1025" y="32" zoom="true"/>
         <Node id="queerclub.xhtml" x="34" y="32" zoom="false"/>
