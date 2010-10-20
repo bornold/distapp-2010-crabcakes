@@ -76,6 +76,7 @@ public class CarHandler {
         Car existingCar = em.find(Car.class, c.getId());
 
         if (existingCar != null) {
+            c.setOdometer(existingCar.getOdometer());
             tx.begin();
             em.merge(c);
             tx.commit();

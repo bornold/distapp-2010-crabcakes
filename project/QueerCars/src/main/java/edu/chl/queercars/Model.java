@@ -16,10 +16,43 @@ import javax.persistence.Id;
 @Entity
 public class Model implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    //Name of the model eg. Sportscar
-    private String id;
+    @Id    
+    private String id; //Name of the model eg. Sportscar
     private String imgFileName;
+    private double emission; //grams per km
+    private double fuelConsumption; //liter per km
+
+    /**
+     *
+     * @return emission in grams/km
+     */
+    public double getEmission() {
+        return emission;
+    }
+
+    /**
+     *
+     * @param emission sets emission in grams/km
+     */
+    public void setEmission(double emission) {
+        this.emission = emission;
+    }
+
+    /**
+     *
+     * @return liter/km
+     */
+    public double getFuelConsumption() {
+        return fuelConsumption;
+    }
+
+    /**
+     *
+     * @param fuelConsumption liter/km
+     */
+    public void setFuelConsumption(double fuelConsumption) {
+        this.fuelConsumption = fuelConsumption;
+    }
 
     /**
      * creates empty model
@@ -28,11 +61,24 @@ public class Model implements Serializable {
     }
 
     /**
-     *
+     * 
      * @param id name of the model
      */
-    public Model(String id){
+    public Model(String id) {
+        this.id = id;
+    }
+
+
+    /**
+     *
+     * @param id name of the model
+     * @param emission emission as g/km
+     * @param fuelConsumption as liter/km
+     */
+    public Model(String id, double fuelConsumption, double emission){
         this.id=id;
+        this.emission = emission;
+        this.fuelConsumption = fuelConsumption;
         this.imgFileName = id + ".png";
     }
 

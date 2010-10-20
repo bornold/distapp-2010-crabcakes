@@ -10,15 +10,21 @@ $(document).ready(loadCars);
 function saveButtonClicked(){
     carId = $("#carId").val();
     carModel = $("#carModel").val();
+    newModelId = $("#newModelId").val();
+    modelEmission = $("#modelEmission").val();
+    modelFuelConsumption = $("#modelFuelConsumption").val();
     $("#carlistarea").load("AdminServlet", {
         action: "saveCar",
         carId: carId,
-        carModel: carModel
+        carModel: carModel,
+        newModelId: newModelId,
+        modelEmission: modelEmission,
+        modelFuelConsumption: modelFuelConsumption
     },refreshTableButtonListeners);
     $("#carId").val("");
-    $("#carName").val("");
-    $("#newModelName").val("");
-    $("#newModelImage").val("");
+    $("#newModelId").val("");
+    $("#modelEmission").val("");
+    $("#modelFuelConsumption").val("");
 }
 
 function loadCars(){
@@ -36,8 +42,9 @@ function refreshTableButtonListeners(){
         editModel = $(this).parent().parent().find("td:eq(1)").html();
         $("#carId").val(editId);
         $("#carModel").val(editModel);
-        $("#newModelName").val("");
-        $("#newModelImage").val("");
+        $("#newModelId").val("");
+        $("#modelEmission").val("");
+        $("#modelFuelConsumption").val("");
     });
     $(".removeButton").click(removeButtonFunction);
 }
@@ -57,7 +64,8 @@ function setNewModelListener(){
     });
     $(".existingModel").click(function(){
         $("#newModelInfo").css("display", "none");
-        $("#newModelName").val("");
-        $("#newModelImage").val("");
+        $("#newModelId").val("");
+        $("#modelEmission").val("");
+        $("#modelFuelConsumption").val("");
     });
 }

@@ -27,18 +27,16 @@ and open the template in the editor.
                         Car model
                     </td>
                     <td>
-                        <select name="model" id="carModel">
-                            <!--<option value="blackCar">Black Car</option>
-                            <option value="queerCar">Queer Car</option>
-                            <option value="mercuryCar">Mercury</option>
-                            <option value="cadillacCar">Cadillac</option>-->
-                            
+                        <select name="model" id="carModel">                         
                         </select>
                     </td>
                 </tr>
             </table>
             <div style="display: none" id="newModelInfo">
-                New model: <input type="text" id="newModelName" name="newModelName" value=""/><input type="file" id="newModelImage" name="newModelImage" value=""/>
+                New model: <input type="text" id="newModelId" name="newModelId" value=""/><br/>
+                FuelConsumption (liter/km): <input type="text" id="modelFuelConsumption" name="modelFuelConsumption" value=""/> <br/>
+                Emission (g/km): <input type="text" id="modelEmission" name="modelEmission" value=""/>
+
             </div>
             <input type="button" value="Save" id="carSubmitButton"/>
         </p>

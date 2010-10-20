@@ -57,7 +57,6 @@ public class MailHandler {
 
             String messageBody = "Hello " + cu.getFname() +  "!\nThank you for using QueerCars as your personal car rental!\n" + "Here is your booking:\n";
 
-            //TODO get some real info to messageBody
             messageBody += "You have rented a " + ca.getModel() + " with registration number " + ca.getId() + "\n";
             messageBody += "This order was recieved at " + rental.getRentalDate() + ".\n";
 
@@ -81,7 +80,6 @@ public class MailHandler {
             message.setRecipient(Message.RecipientType.TO, email);
             message.setSubject("QueerCars - account information");
             String messageBody = "Thank you for creating a QueerCar account!\n" + "Here is your account information:\n";
-            //TODO get some real info to messageBody
             messageBody += "account id: " + "GETREALINFO" + "\n password: " + "GETREALINFO\n";
             messageBody = messageBody + "We have a nice collection of cars, come to our webpage and check them out!\n\n" + "//QueerCars";
             message.setText(messageBody);

@@ -53,7 +53,6 @@ public class AdminServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/customereditor.xhtml").forward(request, response);
         } else if (action.equals("showAdministratorPage")) {
             request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
-
         } else if (action.equals("showNewsEditorPage")) {
             request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
 
@@ -72,12 +71,17 @@ public class AdminServlet extends HttpServlet {
             sendAdministratorTable(response);
 
         } else if (action.equals("saveCar")) {
-            carHandler.saveCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
+            if(request.getParameter("carModel").equals("createNewModel")){
+                Model createdModel = new Model(request.getParameter("newModelId"), Double.parseDouble(request.getParameter("modelFuelConsumption")), Double.parseDouble(request.getParameter("modelEmission")));
+                carHandler.saveCar(new Car(request.getParameter("carId"), createdModel));
+            } else {
+                carHandler.saveCar(new Car(request.getParameter("carId"), new Model(request.getParameter("carModel"))));
+            }
             sendCarTable(response);
         } else if (action.equals("removeCar")) {
             carHandler.removeCar(request.getParameter("carId"));
             sendCarTable(response);
-            
+
         } else if (action.equals("saveNewsItem")) {
             String newsId = request.getParameter("newsId");
             if (newsId.equals("")) {
@@ -89,7 +93,6 @@ public class AdminServlet extends HttpServlet {
         } else if (action.equals("removeNewsItem")) {
             newsHandler.removeNewsItem(Long.parseLong(request.getParameter("newsId")));
             sendNewsItems(response);
-
 
         } else if (action.equals("getCustomerTable")) {
             sendCustomerTable(response);
@@ -192,14 +195,14 @@ public class AdminServlet extends HttpServlet {
      */
     private void sendCarTable(HttpServletResponse response) throws IOException {
         List<Car> allCars = carHandler.getAllCars();
-        String tableHeader = "<table>\n<tr><th>id</th><th>model</th></tr>\n";
+        String tableHeader = "<table border=\"1\">\n<tr><th>id</th><th>model</th><th>co2 emission</th><th>fuel consumtion</th><th>odometer</th></tr>\n";
         String tableFooter = "</table>";
         String output = tableHeader;
 
         for (Car car : allCars) {
             String editButton = "<input type=\"submit\" class=\"editButton\" id=\"" + car.getId() + "\" value=\"edit\"/>";
             String removeButton = "<input type=\"submit\" class=\"removeButton\" id=\"" + car.getId() + "\" value=\"remove\"/>";
-            String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
+            String row = "<tr><td>" + car.getId() + "</td><td>" + car.getModel() + "</td><td>" + car.getModel().getEmission() + "</td><td>" + car.getModel().getFuelConsumption() + "</td><td>" + car.getOdometer() + "</td><td>" + editButton + "</td><td>" + removeButton + "</td></tr>\n";
             output += row;
         }
 
@@ -233,7 +236,7 @@ public class AdminServlet extends HttpServlet {
         for (Model model : allModels) {
             output += "<option class=\"existingModel\" value=\"" + model.getId() + "\">" + model.getId() + "</option>\n";
         }
-        output += "<option id=\"newModelSelection\">New...</option>\n";
+        output += "<option id=\"newModelSelection\" value=\"createNewModel\">New...</option>\n";
         PrintWriter out = response.getWriter();
         out.println(output);
     }
