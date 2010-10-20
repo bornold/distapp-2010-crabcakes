@@ -49,4 +49,17 @@ public class RentalHandler {
         }
         em.close();
     }
+
+    public void endRental(Rental r) {
+    }
+
+    public List<Rental> getActiveRentals() {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        String query = "SELECT r FROM Rental r";
+        Query q = em.createQuery(query);
+
+        return q.getResultList();
+    }
 }
