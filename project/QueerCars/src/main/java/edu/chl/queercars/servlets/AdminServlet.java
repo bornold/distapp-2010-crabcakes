@@ -54,9 +54,8 @@ public class AdminServlet extends HttpServlet {
         AdminLoginModelBean almb = (AdminLoginModelBean) session.getAttribute("adminLoginModelBean");
 
         if (almb == null || almb.getId() == null) {
-            request.getRequestDispatcher("/adminlogin.xhtml").forward(request, response);
+            response.sendRedirect("adminlogin.xhtml");
         } else {
-
             if (action == null) {
                 request.getRequestDispatcher("WEB-INF/adminindex.xhtml").forward(request, response);
             } else if (action.equals("showCarPage")) {
@@ -69,6 +68,14 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
             } else if (action.equals("showRentalEditorPage")) {
                 request.getRequestDispatcher("WEB-INF/rentaleditor.xhtml").forward(request, response);
+
+                // This is not how you do it!!
+                // // How do you do it?
+            } else if (action.equals("logout")) {
+                //almb.setId(null);
+                //almb.setFName(null);
+                session.invalidate();
+                response.sendRedirect("index.xhtml");
 
             } else if (action.equals("saveCustomer")) {
                 custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail")));

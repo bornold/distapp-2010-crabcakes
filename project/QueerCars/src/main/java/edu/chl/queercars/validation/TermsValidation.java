@@ -12,14 +12,14 @@ import javax.faces.validator.ValidatorException;
  * @author Joons
  */
 @FacesValidator(value = "termsValidator")
-public class termsValidation implements Validator {
+public class TermsValidation implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value)
 	    throws ValidatorException {
 
 	if (value.toString().equals("false")) {
-	    FacesMessage msg = new FacesMessage("Du måste kryssa i Terms of condition");
+	    FacesMessage msg = new FacesMessage("Du måste kryssa i ");
 	    throw new ValidatorException(msg);
 	}
     }

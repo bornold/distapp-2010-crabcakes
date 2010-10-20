@@ -1,6 +1,5 @@
 package edu.chl.queercars.beans;
 
-import edu.chl.queercars.Administrator;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -29,19 +28,6 @@ public class AdminLoginModelBean {
 
     public void setId(String id) {
 	this.id = id;
-    }
-
-    public String doLogin() {
-
-	UtilityBean ub = new UtilityBean();
-	Administrator ad = ub.validateAdmin(id);
-	ub.closeEm();
-
-	if (ad != null) {
-	    return "success";
-	} else {
-	    return "failure";
-	}
     }
 
     /** Creates a new instance of AdminLoginModelBean */
