@@ -4,6 +4,7 @@
  */
 package edu.chl.queercars;
 
+import java.util.Date;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -56,7 +57,6 @@ public class MailHandler {
 
             messageBody = messageBody + "Have a safe trip (we want the car back in one piece)\n\n" + "//QueerCars";
             message.setText(messageBody);
-            System.out.println(messageBody);
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();
@@ -77,7 +77,6 @@ public class MailHandler {
             messageBody += "account id: " + customer.getId();
             messageBody = messageBody + "\n\nWe have a nice collection of cars, come to our webpage and check them out!\n\n" + "//QueerCars";
             message.setText(messageBody);
-            System.out.println(messageBody);
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();
@@ -103,7 +102,34 @@ public class MailHandler {
             messageBody += "This order was recieved at " + rental.getRentalDate() + ".\n";
 
             message.setText(messageBody);
-            System.out.println(messageBody);
+            Transport.send(message);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean sendInvoice(Rental rental, int diff) {
+        Date endDate = new Date(System.currentTimeMillis());
+        Long duration = endDate.getTime() - rental.getRentalDate().getTime();
+
+        Invoice invoice = new Invoice(duration, diff, rental.getCar().getModel());
+
+        try {
+            Customer cu = rental.getCustomer();
+            Car ca = rental.getCar();
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(cu.getEmail()));
+            message.setSubject("QueerCars - rental invoice");
+
+            String messageBody = "Hello " + cu.getFname() + "!\nThank you for using QueerCars as your personal car rental!\n" + "Here is your invoice:\n";
+
+            messageBody += "You have rented a " + ca.getModel() + " with registration number " + ca.getId() + "\n";
+            messageBody += "This rental order was recieved at " + rental.getRentalDate() + " and concluded at " + endDate + ".\n\n";
+            messageBody += invoice.getInvoiceText();
+
+            messageBody = messageBody + "We expect payment promptly.\n\n" + "//QueerCars";
+            message.setText(messageBody);
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();

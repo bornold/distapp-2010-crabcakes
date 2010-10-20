@@ -41,4 +41,11 @@ public class ModelHandler {
         tx.commit();
         em.close();
     }
+
+    public Model getModel(String id){
+        EntityManager em = emf.createEntityManager();
+        Model m = em.find(Model.class, id);
+        em.close();
+        return m;
+    }
 }

@@ -6,6 +6,7 @@ package edu.chl.queercars;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +27,9 @@ public class Rental implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.PERSIST})
     private Customer customer;
-    @OneToOne
+    @OneToOne(cascade={CascadeType.PERSIST})
     private Car car;
     @Temporal(TemporalType.TIMESTAMP)
     private Date rentalDate;

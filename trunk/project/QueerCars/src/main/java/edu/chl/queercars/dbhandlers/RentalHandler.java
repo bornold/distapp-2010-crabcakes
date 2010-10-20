@@ -22,10 +22,12 @@ public class RentalHandler {
 
     EntityManagerFactory emf;
     MailHandler mh;
+    CarHandler carHandler;
 
     public RentalHandler(EntityManagerFactory emf) {
         this.emf = emf;
         this.mh = new MailHandler();
+        this.carHandler = new CarHandler(emf);
     }
 
     public void rentCar(Customer cu, Car ca) {
@@ -51,9 +53,6 @@ public class RentalHandler {
         em.close();
     }
 
-    public void endRental(Rental r) {
-    }
-
     public List<Rental> getActiveRentals() {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -62,5 +61,29 @@ public class RentalHandler {
         Query q = em.createQuery(query);
 
         return q.getResultList();
+    }
+
+    public void endRental(String rentalId, String odometerValue) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        System.out.println(odometerValue);
+        Long id = Long.parseLong(rentalId);
+        
+        
+        Rental rental = em.find(Rental.class, id);
+        Car c = rental.getCar();
+
+        int odometer = Integer.parseInt(odometerValue);
+        int diff = odometer - c.getOdometer(); //How many miles the car has travelled.
+
+        c.setOdometer(odometer);
+        carHandler.saveCar(c);
+
+        mh.sendInvoice(rental, diff);
+        
+        tx.begin();
+        em.remove(rental);
+        tx.commit();
+        em.close();
     }
 }

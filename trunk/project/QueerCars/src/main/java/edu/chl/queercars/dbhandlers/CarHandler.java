@@ -75,12 +75,11 @@ public class CarHandler {
 
         Car existingCar = em.find(Car.class, c.getId());
 
-        if (existingCar != null) {
-            c.setOdometer(existingCar.getOdometer());
+        if (existingCar != null) { //Saving an existing car with new values.
             tx.begin();
             em.merge(c);
             tx.commit();
-        } else {
+        } else { //Saving a completely new car.
             tx.begin();
             em.persist(c);
             tx.commit();
@@ -95,7 +94,6 @@ public class CarHandler {
      */
     public Car getCar(String id){
         EntityManager em = emf.createEntityManager();
-
         Car car = em.find(Car.class, id);
         em.close();
         return car;
