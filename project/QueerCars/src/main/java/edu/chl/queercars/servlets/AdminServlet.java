@@ -5,11 +5,13 @@ import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
 import edu.chl.queercars.Model;
 import edu.chl.queercars.NewsItem;
+import edu.chl.queercars.Rental;
 import edu.chl.queercars.dbhandlers.AdministratorHandler;
 import edu.chl.queercars.dbhandlers.CarHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
 import edu.chl.queercars.dbhandlers.ModelHandler;
 import edu.chl.queercars.dbhandlers.NewsItemHandler;
+import edu.chl.queercars.dbhandlers.RentalHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -33,6 +35,7 @@ public class AdminServlet extends HttpServlet {
     CarHandler carHandler = new CarHandler(emf);
     NewsItemHandler newsHandler = new NewsItemHandler(emf);
     ModelHandler modelHandler = new ModelHandler(emf);
+    RentalHandler rentalHandler = new RentalHandler(emf);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -55,6 +58,8 @@ public class AdminServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/admineditor.xhtml").forward(request, response);
         } else if (action.equals("showNewsEditorPage")) {
             request.getRequestDispatcher("WEB-INF/newseditor.xhtml").forward(request, response);
+        } else if (action.equals("showRentalEditorPage")) {
+            request.getRequestDispatcher("WEB-INF/rentaleditor.xhtml").forward(request, response);
 
         } else if (action.equals("saveCustomer")) {
             custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail")));
@@ -104,6 +109,8 @@ public class AdminServlet extends HttpServlet {
             sendNewsItems(response);
         } else if (action.equals("getModels")) {
             sendModels(response);
+        } else if (action.equals("getActiveRentalsList")) {
+            sendActiveRentals(response);
         }
     }
 
@@ -237,6 +244,20 @@ public class AdminServlet extends HttpServlet {
             output += "<option class=\"existingModel\" value=\"" + model.getId() + "\">" + model.getId() + "</option>\n";
         }
         output += "<option id=\"newModelSelection\" value=\"createNewModel\">New...</option>\n";
+        PrintWriter out = response.getWriter();
+        out.println(output);
+    }
+
+    private void sendActiveRentals(HttpServletResponse response) throws IOException {
+        List<Rental> allActiveRentals = rentalHandler.getActiveRentals();
+        String output = "<table border=\"1\"><tr><th>rental id</th><th>car id</th><th>customer id</th><th>odometer value</th></tr>";
+
+        for (Rental rental : allActiveRentals) {
+            output += "<tr id=\"" + rental.getId() + "\"><td>" + rental.getId() + "</td><td>" + rental.getCar().getId() + "</td><td>" + rental.getCustomer().getId() + "</td><td>" + rental.getCar().getOdometer() + "</td>";
+            output += "<input type=\"button\" id=\"" + rental.getId() + "\" value=\"End\"/>";
+            output += "</tr>";
+        }
+        output += "</table>";
         PrintWriter out = response.getWriter();
         out.println(output);
     }

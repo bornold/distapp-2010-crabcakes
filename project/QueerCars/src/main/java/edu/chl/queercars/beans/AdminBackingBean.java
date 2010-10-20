@@ -52,7 +52,7 @@ public class AdminBackingBean {
     public String doLogout() {
 	adminLoginModelBean.setId(null);
 	adminLoginModelBean.setFName(null);
-	// Behövs detta?//////////
+	// BehÃ¶vs detta?//////////
 	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	if (session != null) {
 	    session.invalidate();

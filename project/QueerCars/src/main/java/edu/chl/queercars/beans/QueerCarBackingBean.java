@@ -62,7 +62,7 @@ public class QueerCarBackingBean {
 	loginModelBean.setId(null);
 	loginModelBean.setName(null);
 	loginModelBean.setEmail(null);
-	//////Behövs detta?/////
+	//////BehÃ¶vs detta?/////
 	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	if (session != null) {
 	    session.invalidate();
