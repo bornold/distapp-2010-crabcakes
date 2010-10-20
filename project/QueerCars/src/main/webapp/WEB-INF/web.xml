@@ -26,10 +26,6 @@
         <url-pattern>/UserLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminServlet</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CustomerServlet</servlet-name>
         <url-pattern>/CustomerServlet</url-pattern>
     </servlet-mapping>
@@ -41,8 +37,12 @@
     <servlet-mapping>
         <servlet-name>Servlet Faces</servlet-name>
         <url-pattern>/queerclub.xhtml</url-pattern>
-        <url-pattern>/adminlogin.xhtml</url-pattern>
         <url-pattern>/register.xhtml</url-pattern>
+        <url-pattern>/adminlogin.xhtml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
