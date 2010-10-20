@@ -17,7 +17,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class LoginModelBean {
     private String id;
-    private String name;
+    private String fname;
     private String email;
 
     public String getEmail() {
@@ -37,10 +37,10 @@ public class LoginModelBean {
     }
 
     public String getName() {
-	return name;
+	return fname;
     }
 
     public void setName(String name) {
-	this.name = name;
+	this.fname = name;
     }
 }

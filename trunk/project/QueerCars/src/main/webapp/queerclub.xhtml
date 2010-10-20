@@ -19,24 +19,50 @@ and open the template in the editor.
         <div class="topHat" id="topHat"></div>
         <div class="informativeText" id="clubText">
 
-	    <h:outputText rendered="#{loginModelBean.id == null}" value="Var god logga in" />
-	    <h:form rendered="#{loginModelBean.id == null}">
-		<h:inputText  id="txtValue" value="#{queerCarBackingBean.id}">
-		    <f:validator validatorId="userLoginValidator" />
-		</h:inputText >
-		<h:message for="txtValue" showSummary="true" showDetail="false" style="color: black" />
-		<br/>
-		<h:commandButton id="btnOK" value="Login" action="#{queerCarBackingBean.doLogin}"/>
-		<br/>
-		    Inte medlem?
-		    <br/>
-		    <a href="register.xhtml">Registrera dig</a>
-	    </h:form>
+	    <h:message for="loggin" showSummary="true" showDetail="false"/>
+
+	    <br/>
 
 	    <h:form rendered="#{loginModelBean.id != null}">
 		<h:outputText value="Hej på dig #{loginModelBean.name}"/>
 		<br/>
 		<h:commandButton action="#{queerCarBackingBean.doLogout}" value="Logga ut"/>
+	    </h:form>
+
+
+
+
+	    <h:form rendered="#{loginModelBean.id == null}" id="loggin">
+
+		Var god logga in
+		
+		<br/>
+
+		<h:inputText  id="txtValue" value="#{queerCarBackingBean.id}">
+		    <f:validator validatorId="userLoginValidator" />
+		</h:inputText >
+		<h:message for="txtValue" showSummary="true" showDetail="false" />
+		<br/>
+		<h:commandButton id="btnOK" value="Login" action="#{queerCarBackingBean.doLogin}"/>
+		<br/>
+		    Inte medlem?
+		<br/>
+		<a href="register.xhtml">Registrera dig</a>
+	    </h:form>
+
+
+
+	    <br/>
+	    <br/>
+	    <br/>
+
+	    <h:form>
+		<h:inputText id="txtValue" value="#{adminBackingBean.id}">
+		    <f:validator validatorId="nameValidator" />
+		</h:inputText >
+		<h:message for="txtValue" showSummary="true" showDetail="false"/>
+		<br/>
+		<h:commandButton id="btnOK" value="Login" action="#{adminBackingBean.doLogin}"/>
 	    </h:form>
 	</div>
     </h:body>

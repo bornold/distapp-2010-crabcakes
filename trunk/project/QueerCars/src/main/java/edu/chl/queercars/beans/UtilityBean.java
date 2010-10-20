@@ -36,7 +36,6 @@ public class UtilityBean {
 	EntityManager em = emf.createEntityManager();
 	Customer retcust = em.find(Customer.class, username);
 	em.close();
-	emf.close();
 	return retcust;
     }
 
@@ -44,7 +43,10 @@ public class UtilityBean {
 	EntityManager em = emf.createEntityManager();
 	Administrator retadmin = em.find(Administrator.class, username);
 	em.close();
-	emf.close();
 	return retadmin;
+    }
+
+    void closeEm() {
+	emf.close();
     }
 }
