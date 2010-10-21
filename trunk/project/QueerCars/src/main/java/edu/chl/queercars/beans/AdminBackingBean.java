@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author joons
+ *
+ * AdminBackingBean for admin login validation using JSF
  */
 @ManagedBean
 @RequestScoped
@@ -35,6 +37,14 @@ public class AdminBackingBean {
 	this.adminLoginModelBean = adminLoginModelBean;
     }
 
+    /**
+     * Login metod connects to the database to check if login is valid
+     *
+     * if it is successfull injecting the adminModulebean with admin information
+     *
+     * @return String for faces redirect infromation
+     */
+
     public String doLogin() {
 
 	UtilityBean ub = new UtilityBean();
@@ -55,15 +65,18 @@ public class AdminBackingBean {
 	}
     }
 
+    /**
+     * kills the session and emptys the moduleBean
+     * @return string for redirect for faces servlet
+     */
+
     public String doLogout() {
 	adminLoginModelBean.setId(null);
 	adminLoginModelBean.setFName(null);
-	// Behövs detta?//////////
 	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	if (session != null) {
 	    session.invalidate();
 	}
-	//////////////////////////
 	return "logout";
     }
 

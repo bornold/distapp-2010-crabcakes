@@ -10,6 +10,8 @@ import javax.faces.validator.ValidatorException;
 /**
  *
  * @author Joons
+ *
+ * validates terms
  */
 @FacesValidator(value = "termsValidator")
 public class TermsValidation implements Validator {

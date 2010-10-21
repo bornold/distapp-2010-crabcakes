@@ -11,6 +11,8 @@ import javax.faces.bean.SessionScoped;
 /**
  *
  * @author joons
+ *
+ * User ManageBean that stores user information
  */
 
 @ManagedBean

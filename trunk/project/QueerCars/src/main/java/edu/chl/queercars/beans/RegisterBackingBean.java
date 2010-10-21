@@ -18,6 +18,10 @@ import javax.persistence.Persistence;
 /**
  *
  * @author joons
+ *
+ * BackingBean that register new using the CustomerHandler
+ * 
+ *
  */
 @ManagedBean
 @RequestScoped
@@ -62,6 +66,10 @@ public class RegisterBackingBean {
 	this.loginModelBean = loginModelBean;
     }
 
+    /**
+     * Register and login the user
+     * @return String to faces servlet
+     */
     public String doRegister() {
 	Customer customer = new Customer(id, fname, email);
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("queercars_pu");
