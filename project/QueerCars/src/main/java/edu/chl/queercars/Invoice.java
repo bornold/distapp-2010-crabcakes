@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.queercars;
 
 /**
- *
+ * Invoice is class used to calculate and present an invoice to the user.
  * @author johanssb
  */
 public class Invoice {
@@ -25,6 +21,12 @@ public class Invoice {
     int niceGuyCost;
     Model model;
 
+    /**
+     *
+     * @param duration the duration of the rental in milliseconds
+     * @param mileage the mileage driven during the rental in km
+     * @param model the model object of the car used in the rental
+     */
     public Invoice(long duration, int mileage, Model model) {
         this.duration = duration;
         this.mileage = mileage;
@@ -46,6 +48,10 @@ public class Invoice {
         niceGuyCost = greenCost + evilCost;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getInvoiceText(){
         String text = "INVOICE:\n";
         text += hourlyCost + " SEK - Rental duration (in hours): " + durationInHours + "\n";

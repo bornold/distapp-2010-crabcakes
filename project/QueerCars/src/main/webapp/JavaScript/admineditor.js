@@ -19,14 +19,14 @@ function saveButtonClicked(){
     adminName = $("#adminName").val("");
 }
 
-function loadAdministrators(){
+function loadAdministrators(){ //Gets and loads the list of admins.
     $("#adminlistarea").load("AdminServlet", {
         action: "getAdministratorTable"
     },refreshTableButtonListeners)
     
 }
 
-function refreshTableButtonListeners(){
+function refreshTableButtonListeners(){ //Sets button listeners after loading.
     $(".editButton").click(function() {
         editId = $(this).parent().parent().find("td:eq(0)").html();
         editName = $(this).parent().parent().find("td:eq(1)").html();

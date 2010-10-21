@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.Car;
@@ -15,7 +11,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
- *
+ * Acts as an interface to the database for managing Rental objects.
  * @author johanssb
  */
 public class RentalHandler {
@@ -24,6 +20,10 @@ public class RentalHandler {
     MailHandler mh;
     CarHandler carHandler;
 
+    /**
+     *
+     * @param emf EntityManagerFactory from parent class.
+     */
     public RentalHandler(EntityManagerFactory emf) {
         this.emf = emf;
         this.mh = new MailHandler();
@@ -66,7 +66,6 @@ public class RentalHandler {
     public void endRental(String rentalId, String odometerValue) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        System.out.println(odometerValue);
         Long id = Long.parseLong(rentalId);
         
         
@@ -85,5 +84,11 @@ public class RentalHandler {
         em.remove(rental);
         tx.commit();
         em.close();
+    }
+    public Rental getRental(Long id){
+        EntityManager em = emf.createEntityManager();
+        Rental r = em.find(Rental.class, id);
+        em.close();
+        return r;
     }
 }

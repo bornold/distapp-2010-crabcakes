@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chl.queercars;
 
 import java.io.Serializable;
@@ -11,7 +6,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * Customer is an Entity class that represents a customer.
  * @author flipmo
  */
 @Entity
@@ -66,6 +61,7 @@ public class Customer implements Serializable {
      *
      * @param id personal ID-number
      * @param fname first name
+     * @param email mailadress
      */
     public Customer(String id, String fname, String email) {
         this.id = id;

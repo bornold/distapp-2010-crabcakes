@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.Model;
@@ -13,12 +8,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
- *
+ * Acts as an interface to the database for managing Model objects.
  * @author johanssb
  */
 public class ModelHandler {
     EntityManagerFactory emf;
 
+    /**
+     * @param emf EntityManagerFactory from parent class.
+     */
     public ModelHandler(EntityManagerFactory emf) {
         this.emf = emf;
     }

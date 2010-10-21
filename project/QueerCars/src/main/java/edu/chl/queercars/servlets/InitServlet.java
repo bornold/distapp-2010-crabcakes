@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.queercars.servlets;
 
 import edu.chl.queercars.Administrator;
@@ -12,7 +8,6 @@ import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.Rental;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -24,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * A servlet to init the database and such
+ * A servlet to init the database with boilerplate data useful for testing.
  * @author johanssb
  */
 @WebServlet(name = "InitServlet", urlPatterns = {"/InitServlet"})
@@ -164,6 +159,5 @@ public class InitServlet extends HttpServlet {
         tx.commit();
         em.close();
         emf.close();
-        System.out.println(new Date(System.currentTimeMillis()));
     }
 }

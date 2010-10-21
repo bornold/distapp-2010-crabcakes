@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.NewsItem;
@@ -13,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
- *
+ * Acts as an interface to the database for managing NewsItem objects.
  * @author johanssb
  */
 public class NewsItemHandler {
@@ -86,7 +81,6 @@ public class NewsItemHandler {
      */
     public NewsItem getNewsItem(Long id) {
         EntityManager em = emf.createEntityManager();
-
         NewsItem ni = em.find(NewsItem.class, id);
         em.close();
         return ni;

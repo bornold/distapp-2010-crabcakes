@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chl.queercars;
 
 import java.io.Serializable;
@@ -11,7 +6,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * Administrator is an Entity class representing an administrator.
  * @author flipmo, also vixen!!!!!!
  */
 @Entity

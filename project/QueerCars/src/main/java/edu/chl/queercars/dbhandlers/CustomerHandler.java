@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
- *
+ * Acts as an interface to the database for managing Customer objects.
  * @author flipmo, vixen
  */
 public class CustomerHandler {
@@ -81,7 +81,6 @@ public class CustomerHandler {
      */
     public Customer getCustomer(String id) {
         EntityManager em = emf.createEntityManager();
-
         Customer customer = em.find(Customer.class, id);
         em.close();
         return customer;
