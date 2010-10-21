@@ -22,15 +22,15 @@ and open the template in the editor.
 	    <h:message for="loggin" showSummary="true" showDetail="false"/>
 
 	    <h:form rendered="#{loginModelBean.id != null}">
-		<h:outputText value="Hej på dig #{loginModelBean.name}"/>
+		<h:outputText value="Hello #{loginModelBean.name}"/>
 		<br/>
-		<h:commandButton action="#{queerCarBackingBean.doLogout}" value="Logga ut"/>
+		<h:commandButton action="#{queerCarBackingBean.doLogout}" value="Log out"/>
 	    </h:form>
 
 
 	    <h:form rendered="#{loginModelBean.id == null}" id="loggin">
 
-		Var god logga in
+		Please Log in!
 		
 		<br/>
 

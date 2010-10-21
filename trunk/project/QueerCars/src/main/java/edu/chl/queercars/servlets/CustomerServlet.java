@@ -44,7 +44,8 @@ public class CustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        LoginModelBean lmb = (LoginModelBean)session.getAttribute("loginModelBean");
+        LoginModelBean lmb = (LoginModelBean) session.getAttribute("loginModelBean");
+        boolean loggedIn = (lmb != null && lmb.getId() != null); // Valid session.
 
         String action = request.getParameter("action");
         if (action == null) {
@@ -53,14 +54,19 @@ public class CustomerServlet extends HttpServlet {
         } else if (action.equals("getNewsFeed")) {
             sendNewsFeed(response);
         } else if (action.equals("doRental")) {
-            if (lmb != null && lmb.getId() != null) { //Valid session.
+            if (loggedIn) {
                 System.out.println(lmb.getId() + " " + lmb.getName());
                 rentalHandler.rentCar(new Customer(lmb.getId(), lmb.getName(), null), new Car(request.getParameter("carId"), null));
             }
+        } else if (action.equals("isLoggedIn")) {
+            PrintWriter out = response.getWriter();
+            System.out.println(loggedIn);
+            out.println(loggedIn);
+            out.close();
         }
     }
 
-        /**
+    /**
      * Sends detaild car table to show on the page
      * @param response the servlet response
      * @throws IOException
@@ -91,7 +97,7 @@ public class CustomerServlet extends HttpServlet {
      * @param response servlet rseponse
      * @throws IOException if IOExeption occurs
      */
-    private void sendNewsFeed(HttpServletResponse response) throws IOException{
+    private void sendNewsFeed(HttpServletResponse response) throws IOException {
         List<NewsItem> allNews = newsHandler.getAllNewsItems();
         String newsFeed = "";
         for (NewsItem newsItem : allNews) {
