@@ -15,7 +15,9 @@ $(document).ready(function(){
     $("#carsTable").load("html_res/carsText.ihtml", loadCarInfo);
 });
 $(document).ready(function(){
-    $("#newsFeed").load("CustomerServlet", {action: "getNewsFeed"});
+    $("#newsFeed").load("CustomerServlet", {
+        action: "getNewsFeed"
+    });
 });
 
 function loadCarInfo(){
@@ -23,17 +25,44 @@ function loadCarInfo(){
         action: "getDetailedCarTable"
     },refreshTableButtonListeners);
 }
-
 function refreshTableButtonListeners(){
     $(".showButton").click(function() {
         model = this.id;
         $("#carInfo").load("html_res/modelText_" + model + ".ihtml", scrollBack);
     });
-    $(".rentButton").click(function(){
-        $("#carInfo").load("CustomerServlet", {action: "doRental", carId: this.id},loadCarInfo);
+    $(".rentButton").click(function()
+    {
+
+        $.post('CustomerServlet', {
+            action: "isLoggedIn"
+        },
+        function(data) {
+            loggedin = data;
+        })
+
+        carId = this.id;
+
+
+        if (loggedin == "true") {
+            var answer=confirm('Do you really want to rent this car?');
+            if (answer)
+            {
+                alert("You have rented " + carId + ". Have a look at Services to see where you can pick it up. \n An informative email has been sent to your registered email-address.");
+                $("#carInfo").load("CustomerServlet", {
+                    action: "doRental",
+                    carId: carId
+                },loadCarInfo);
+            }
+        }
+        else {
+            alert("Please login to rent a wreck")
+        }
     });
 }
 function scrollBack()
 {
     window.scrollTo(0,document.body.scrollHeight);
+}
+function setLoggedin(data) {
+
 }
