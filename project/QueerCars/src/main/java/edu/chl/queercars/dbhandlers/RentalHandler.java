@@ -6,7 +6,7 @@ package edu.chl.queercars.dbhandlers;
 
 import edu.chl.queercars.Car;
 import edu.chl.queercars.Customer;
-import edu.chl.queercars.MailHandler;
+import edu.chl.queercars.administrativeTools.MailHandler;
 import edu.chl.queercars.Rental;
 import java.util.List;
 import javax.persistence.EntityManager;

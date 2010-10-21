@@ -2,8 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.chl.queercars;
+package edu.chl.queercars.administrativeTools;
 
+import edu.chl.queercars.Car;
+import edu.chl.queercars.Customer;
+import edu.chl.queercars.Invoice;
+import edu.chl.queercars.Rental;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Message;

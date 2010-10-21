@@ -5,7 +5,7 @@
 package edu.chl.queercars.beans;
 
 import edu.chl.queercars.Customer;
-import edu.chl.queercars.MailHandler;
+import edu.chl.queercars.administrativeTools.MailHandler;
 import edu.chl.queercars.dbhandlers.CustomerHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
