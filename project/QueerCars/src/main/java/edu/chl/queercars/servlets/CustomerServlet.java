@@ -5,6 +5,7 @@ import edu.chl.queercars.Customer;
 import edu.chl.queercars.NewsItem;
 import edu.chl.queercars.beans.LoginModelBean;
 import edu.chl.queercars.dbhandlers.CarHandler;
+import edu.chl.queercars.dbhandlers.CustomerHandler;
 import edu.chl.queercars.dbhandlers.NewsItemHandler;
 import edu.chl.queercars.dbhandlers.RentalHandler;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class CustomerServlet extends HttpServlet {
     CarHandler carHandler = new CarHandler(emf);
     NewsItemHandler newsHandler = new NewsItemHandler(emf);
     RentalHandler rentalHandler = new RentalHandler(emf);
+    CustomerHandler customerHandler = new CustomerHandler(emf);
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -51,7 +53,9 @@ public class CustomerServlet extends HttpServlet {
             sendNewsFeed(response);
         } else if (action.equals("doRental")) {
             if (loggedIn) {
-                rentalHandler.rentCar(new Customer(lmb.getId(), lmb.getName(), null), new Car(request.getParameter("carId"), null));
+                Customer cust = customerHandler.getCustomer(lmb.getId());
+                Car car = carHandler.getCar(request.getParameter("carId"));
+                rentalHandler.rentCar(cust, car);
             }
         } else if (action.equals("isLoggedIn")) {
             PrintWriter out = response.getWriter();
