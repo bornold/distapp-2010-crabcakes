@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.queercars.administrativeTools;
 
 import edu.chl.queercars.Car;
@@ -18,7 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * MailHandler manages contact with the mail server and facilitates sending messages via email to the customer and staff.
  * @author mviktor
  */
 public class MailHandler {
@@ -71,6 +67,7 @@ public class MailHandler {
 
     /**
      * 
+     * @param customer the newly created customer
      * @return true if mail sucsessfully was sent
      */
     public boolean sendNewAccountInfo(Customer customer) {

@@ -32,37 +32,34 @@ function refreshTableButtonListeners(){
     });
     $(".rentButton").click(function()
     {
-
+        carId = this.id;
         $.post('CustomerServlet', {
             action: "isLoggedIn"
         },
         function(data) {
-            loggedin = data;
+            loggedin = data.toString();
+            doRental(carId,loggedin);
         })
-
-        carId = this.id;
-
-
-        if (loggedin == "true") {
-            var answer=confirm('Do you really want to rent this car?');
-            if (answer)
-            {
-                alert("You have rented " + carId + ". Have a look at Services to see where you can pick it up. \n An informative email has been sent to your registered email-address.");
-                $("#carInfo").load("CustomerServlet", {
-                    action: "doRental",
-                    carId: carId
-                },loadCarInfo);
-            }
-        }
-        else {
-            alert("Please login to rent a wreck")
-        }
     });
 }
 function scrollBack()
 {
     window.scrollTo(0,document.body.scrollHeight);
 }
-function setLoggedin(data) {
 
+function doRental(carId,loggedin){
+    if (loggedin.length == 5) { //Is 5 = true, 6 = false, ugly hack.
+        var answer=confirm('Do you really want to rent this car?');
+        if (answer)
+        {
+            alert("You have rented " + carId + ". Have a look at Services to see where you can pick it up. \n An informative email has been sent to your registered email-address.");
+            $("#carInfo").load("CustomerServlet", {
+                action: "doRental",
+                carId: carId
+            },loadCarInfo);
+        }
+    }
+    else {
+        alert("Please login to rent a wreck")
+    }
 }

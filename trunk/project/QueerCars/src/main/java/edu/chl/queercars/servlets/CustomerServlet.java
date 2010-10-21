@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.queercars.servlets;
 
 import edu.chl.queercars.Car;
@@ -23,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet for usage by the customer page
+ * Servlet for usage by the customer page, handles requests for various activities (displaying list of cars, executing rentals e.t.c.).
  * @author johanssb
  */
 public class CustomerServlet extends HttpServlet {
@@ -55,12 +51,10 @@ public class CustomerServlet extends HttpServlet {
             sendNewsFeed(response);
         } else if (action.equals("doRental")) {
             if (loggedIn) {
-                System.out.println(lmb.getId() + " " + lmb.getName());
                 rentalHandler.rentCar(new Customer(lmb.getId(), lmb.getName(), null), new Car(request.getParameter("carId"), null));
             }
         } else if (action.equals("isLoggedIn")) {
             PrintWriter out = response.getWriter();
-            System.out.println(loggedIn);
             out.println(loggedIn);
             out.close();
         }

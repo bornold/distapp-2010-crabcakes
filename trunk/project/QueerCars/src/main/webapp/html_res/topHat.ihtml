@@ -4,27 +4,27 @@
                 <ul class="menuList" id='id_menuList'>
                     <li id='id_news' class='menuListitem' >
                         <a href="index.xhtml">
-                            <img alt=""  src='news_logo.png' class="menuImg" id="id_newsImg"/>
+                            <img alt=""  src='images/news_logo.png' class="menuImg" id="id_newsImg"/>
                         </a>
                     </li>
                     <li id='id_services' class='menuListitem'>
                         <a href="services.xhtml">
-                            <img alt=""  src='services_logo.png' class="menuImg" id="id_servicesImg"/>
+                            <img alt=""  src='images/services_logo.png' class="menuImg" id="id_servicesImg"/>
                         </a>
                     </li>
                     <li id='id_cars' class='menuListitem'>
                         <a href="cars.xhtml">
-                            <img alt=""  src='cars_logo.png' class="menuImg" id="id_carsImg"/>
+                            <img alt=""  src='images/cars_logo.png' class="menuImg" id="id_carsImg"/>
                         </a>
                     </li>
                     <li id='id_queerclub' class='menuListitem'>
                         <a href="queerclub.xhtml">
-                            <img alt=""  src='club_logo.png' class="menuImg" id="id_queerclubImg"/>
+                            <img alt=""  src='images/club_logo.png' class="menuImg" id="id_queerclubImg"/>
                         </a>
                     </li>
                     <li id='id_terms' class='menuListitem'>
                         <a href="terms.xhtml">
-                            <img alt=""  src='terms_logo.png' class="menuImg" id="id_termsImg" />
+                            <img alt=""  src='images/terms_logo.png' class="menuImg" id="id_termsImg" />
                         </a>
                     </li>
                 </ul>

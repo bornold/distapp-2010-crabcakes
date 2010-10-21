@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
- *
+ * Acts as an interface to the database for managing Car objects.
  * @author mviktor
  */
 public class CarHandler {

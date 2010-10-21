@@ -16,7 +16,7 @@ public class AdministratorHandler{
     EntityManagerFactory emf;
 
     /**
-     * 
+     * Acts as an interface to the database for managing Administrator objects.
      * @param emf The entityManagerFactory to use
      */
     public AdministratorHandler(EntityManagerFactory emf) {
@@ -81,7 +81,6 @@ public class AdministratorHandler{
      */
     public Administrator getAdministrator(String id) {
         EntityManager em = emf.createEntityManager();
-
         Administrator administrator = em.find(Administrator.class, id);
         em.close();
         return administrator;
