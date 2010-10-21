@@ -13,6 +13,9 @@ import javax.persistence.Persistence;
 /**
  *
  * @author joons
+ *
+ * Bean for databasehandling utility
+ * 
  */
 public class UtilityBean {
 
@@ -31,7 +34,13 @@ public class UtilityBean {
     public boolean isAdmin(String username){
 	return (validateAdmin(username)!= null );
     }
-	
+
+    /**
+     * validate user using EntityManager
+     * @param The username to be checked
+     * @return Customer with the username or null if it doesn't exist
+     *
+     */
     public Customer validateUser(String username) {
 	EntityManager em = emf.createEntityManager();
 	Customer retcust = em.find(Customer.class, username);
@@ -39,6 +48,12 @@ public class UtilityBean {
 	return retcust;
     }
 
+     /**
+     * validate admin using EntityManager
+     * @param The username to be checked
+     * @return Admin with the name or null if it doesn't exist
+     *
+     */
     public Administrator validateAdmin(String username) {
 	EntityManager em = emf.createEntityManager();
 	Administrator retadmin = em.find(Administrator.class, username);

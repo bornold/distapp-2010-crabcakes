@@ -11,6 +11,8 @@ import javax.faces.validator.ValidatorException;
 /**
  *
  * @author Joons
+ *
+ * checks if email is correct using regular expression
  */
 @FacesValidator(value = "emailValidator")
 public class EmailValidation implements Validator {

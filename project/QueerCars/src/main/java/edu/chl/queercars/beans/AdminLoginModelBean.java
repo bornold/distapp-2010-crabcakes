@@ -6,6 +6,8 @@ import javax.faces.bean.SessionScoped;
 /**
  *
  * @author joons
+ *
+ * A ManageBean with SessionScope the stores Admins id and name
  */
 @ManagedBean
 @SessionScoped

@@ -10,6 +10,8 @@ import javax.faces.validator.ValidatorException;
 /**
  *
  * @author Joons
+ *
+ * Validates that the name is accepteble lenght
  */
 @FacesValidator(value = "nameValidator")
 public class NameValidation implements Validator {

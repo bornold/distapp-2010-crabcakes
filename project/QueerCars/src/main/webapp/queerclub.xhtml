@@ -23,17 +23,17 @@ and open the template in the editor.
 
 	    <h:form rendered="#{loginModelBean.id != null}">
 		<h:outputText value="Hello #{loginModelBean.name}"/>
+                <br/>
+		<h:outputText value="Your id is #{loginModelBean.id}"/>
+		<h:outputText value=" and your email #{loginModelBean.email}"/>
 		<br/>
 		<h:commandButton action="#{queerCarBackingBean.doLogout}" value="Log out"/>
 	    </h:form>
 
 
 	    <h:form rendered="#{loginModelBean.id == null}" id="loggin">
-
 		Please Log in!
-		
 		<br/>
-
 		<h:inputText  id="txtValue" value="#{queerCarBackingBean.id}">
 		    <f:validator validatorId="userLoginValidator" />
 		</h:inputText >
@@ -41,9 +41,8 @@ and open the template in the editor.
 		<br/>
 		<h:commandButton id="btnOK" value="Login" action="#{queerCarBackingBean.doLogin}"/>
 		<br/>
-		    Inte medlem?
-		<br/>
-		<a href="register.xhtml">Registrera dig</a>
+		    Not a member?
+		<a href="register.xhtml"> Register</a>
 	    </h:form>
 	</div>
     </h:body>

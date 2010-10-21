@@ -10,6 +10,8 @@ import javax.faces.validator.ValidatorException;
 /**
  *
  * @author Joons
+ *
+ * Validates if username is in valid lenght
  */
 @FacesValidator(value = "userLoginValidator")
 public class UserLoginValidation implements Validator {

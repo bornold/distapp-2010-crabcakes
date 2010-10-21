@@ -6,11 +6,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author johanssb & joons
+ * @author joons
+ *
+ * A manageBean that validates user logins and take care of Logouts
+ *
  */
 @ManagedBean
 @RequestScoped
@@ -36,6 +38,11 @@ public class QueerCarBackingBean {
 	this.loginModelBean = loginModelBean;
     }
 
+    /**
+     * Connects to the database to validates the user and store it in the
+     * loginModelBean with SessionScope
+     * @return String for faces servlet redirect
+     */
     public String doLogin() {
 
 	UtilityBean ub = new UtilityBean();
@@ -55,6 +62,10 @@ public class QueerCarBackingBean {
 	}
     }
 
+    /**
+     * invalidates the Session and empty the loginModelBean
+     * @return String for faces servlet
+     */
     public String doLogout() {
 	FacesContext ctx = FacesContext.getCurrentInstance();
 	ctx.addMessage("loggin", new FacesMessage("Goodbye " + loginModelBean.getName()));
@@ -62,12 +73,10 @@ public class QueerCarBackingBean {
 	loginModelBean.setId(null);
 	loginModelBean.setName(null);
 	loginModelBean.setEmail(null);
-	//////Behövs detta?/////
 	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	if (session != null) {
 	    session.invalidate();
 	}
-	////////////////////////
 	return "logout";
     }
 
