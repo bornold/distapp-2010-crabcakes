@@ -91,4 +91,13 @@ public class RentalHandler {
         em.close();
         return r;
     }
+
+    public List<Car> getAllRentedCars(String id) {
+        EntityManager em = emf.createEntityManager();
+        String allCars = "SELECT r.car FROM Rental r WHERE r.customer.id = '" + id + "'";
+        Query q = em.createQuery(allCars);
+        List<Car> results = q.getResultList();
+        em.close();
+        return results;
+    }
 }
