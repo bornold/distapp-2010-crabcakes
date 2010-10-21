@@ -3,9 +3,6 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
-    $("#clubText").load("html_res/clubText.ihtml");
-});
-$(document).ready(function(){
     $("#serviceText").load("html_res/serviceText.ihtml");
 });
 $(document).ready(function(){
@@ -15,10 +12,16 @@ $(document).ready(function(){
     $("#carsTable").load("html_res/carsText.ihtml", loadCarInfo);
 });
 $(document).ready(function(){
+    $("#rentedCarsTable").load("CustomerServlet", {
+        action: "getRentedCarTable"
+    });
+});
+$(document).ready(function(){
     $("#newsFeed").load("CustomerServlet", {
         action: "getNewsFeed"
     });
 });
+
 
 function loadCarInfo(){
     $("#carsTable").load("CustomerServlet", {
@@ -48,11 +51,14 @@ function scrollBack()
 }
 
 function doRental(carId,loggedin){
-    if (loggedin.length == 5) { //Is 5 = true, 6 = false, ugly hack.
+    loggedin = loggedin.replace("\n","");
+    
+    if (loggedin == "true") {
         var answer=confirm('Do you really want to rent this car?');
         if (answer)
         {
-            alert("You have rented " + carId + ". Have a look at Services to see where you can pick it up. \n An informative email has been sent to your registered email-address.");
+            alert("You have rented " + carId + ". Have a look at Services to see where you can pick it up."
+                + "\n An informative email has been sent to your registered email-address.");
             $("#carInfo").load("CustomerServlet", {
                 action: "doRental",
                 carId: carId

@@ -14,6 +14,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="main.css" />
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/showTopHat.js" type="text/javascript"/>
+        <script src="JavaScript/textinjector.js" type="text/javascript"/>
     </h:head>
     <h:body>
         <div class="topHat" id="topHat"></div>
@@ -45,5 +46,9 @@ and open the template in the editor.
 		<a href="register.xhtml"> Register</a>
 	    </h:form>
 	</div>
+        <div class="informativeText">
+            <h1>Your currently rented cars: </h1>
+        </div>
+        <div class="informativeText" id="rentedCarsTable"></div>
     </h:body>
 </html>

@@ -49,6 +49,9 @@ public class CustomerServlet extends HttpServlet {
         if (action == null) {
         } else if (action.equals("getDetailedCarTable")) {
             sendDetailedCarTable(response);
+        } else if (action.equals("getRentedCarTable")) {
+            if(loggedIn)
+                sendRentedCarTable(response, lmb.getId());
         } else if (action.equals("getNewsFeed")) {
             sendNewsFeed(response);
         } else if (action.equals("doRental")) {
@@ -81,6 +84,30 @@ public class CustomerServlet extends HttpServlet {
             String imgTag = "<img src=\"images/" + car.getModel().getImgFileName() + "\"/>";
 
             String row = "<tr><td>" + car.getId() + "</td><td>" + imgTag + "</td><td>" + showInfoButtonTag + "</td><td>" + rentButtonTag + "</td></tr>";
+            output += row;
+        }
+
+        output += tableFooter;
+        PrintWriter out = response.getWriter();
+        out.println(output);
+        out.close();
+    }
+
+    /**
+     * Sends table of rented cars to show on the page
+     * @param response the servlet response
+     * @throws IOException
+     */
+    private void sendRentedCarTable(HttpServletResponse response, String id) throws IOException {
+        List<Car> allCars = rentalHandler.getAllRentedCars(id);
+        String tableHeader = "<table>";
+        String tableFooter = "</table>";
+
+        String output = tableHeader;
+        for (Car car : allCars) {
+            String imgTag = "<img src=\"images/" + car.getModel().getImgFileName() + "\"/>";
+
+            String row = "<tr><td>" + car.getId() + "</td><td>" + imgTag + "</td></tr>";
             output += row;
         }
 
