@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet for interacting with the application as an administrator. Handles requests for managing most types of entities in the application.
  * @author mviktor
  */
 @WebServlet(name = "AdminServlet", urlPatterns = {"/AdminServlet"})
@@ -69,23 +70,32 @@ public class AdminServlet extends HttpServlet {
             } else if (action.equals("showRentalEditorPage")) {
                 request.getRequestDispatcher("WEB-INF/rentaleditor.xhtml").forward(request, response);
 
-                // This is not how you do it!!
-                // // How do you do it?
             } else if (action.equals("logout")) {
-                //almb.setId(null);
-                //almb.setFName(null);
                 session.invalidate();
                 response.sendRedirect("index.xhtml");
 
             } else if (action.equals("saveCustomer")) {
-                custHandler.saveCustomer(new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail")));
+                Customer cust = custHandler.getCustomer(request.getParameter("customerId"));
+                if(cust != null){ //Making a new customer.
+                    cust.setFname(request.getParameter("customerName"));
+                    cust.setEmail(request.getParameter("customerEmail"));
+                } else {
+                    cust = new Customer(request.getParameter("customerId"), request.getParameter("customerName"), request.getParameter("customerEmail"));
+                }
+                custHandler.saveCustomer(cust);
                 sendCustomerTable(response);
             } else if (action.equals("removeCustomer")) {
                 custHandler.removeCustomer(request.getParameter("customerId"));
                 sendCustomerTable(response);
 
             } else if (action.equals("saveAdministrator")) {
-                adminHandler.saveAdministrator(new Administrator(request.getParameter("adminId"), request.getParameter("adminName")));
+                Administrator admin = adminHandler.getAdministrator(request.getParameter("adminId"));
+                if(admin != null){ //Editing an existing Administrator.
+                    admin.setFname(request.getParameter("adminName"));
+                } else { //Creating a new Administrator
+                    admin = new Administrator(request.getParameter("adminId"), request.getParameter("adminName"));
+                }
+                adminHandler.saveAdministrator(admin);
                 sendAdministratorTable(response);
             } else if (action.equals("removeAdministrator")) {
                 adminHandler.removeAdministrator(request.getParameter("adminId"));
@@ -94,21 +104,17 @@ public class AdminServlet extends HttpServlet {
             } else if (action.equals("saveCar")) {
                 Model carModel;
                 if (request.getParameter("carModel").equals("createNewModel")) { //Creating a new model.
-                    System.out.println("using a new model.");
                     carModel = new Model(request.getParameter("newModelId"), Double.parseDouble(request.getParameter("modelFuelConsumption")), Integer.parseInt(request.getParameter("modelEmission")));
                     modelHandler.saveModel(carModel);
                 } else {
-                    System.out.println("using existing model.");
                     carModel = modelHandler.getModel(request.getParameter("carModel"));
                 }
 
                 Car car = carHandler.getCar(request.getParameter("carId"));
                 if (car != null) { //Car exists.
-                    System.out.println("using an existing car.");
                     car.setModel(carModel);
                     carHandler.saveCar(car);
                 } else { //Car is new.
-                    System.out.println("using a new car.");
                     car = new Car(request.getParameter("carId"), carModel);
                     carHandler.saveCar(car);
                 }
@@ -119,10 +125,15 @@ public class AdminServlet extends HttpServlet {
 
             } else if (action.equals("saveNewsItem")) {
                 String newsId = request.getParameter("newsId");
-                if (newsId.equals("")) {
-                    newsHandler.saveNewsItem(new NewsItem(request.getParameter("newsHeadline"), request.getParameter("newsContent")));
-                } else {
-                    newsHandler.saveNewsItem(new NewsItem(Long.parseLong(newsId), request.getParameter("newsHeadline"), request.getParameter("newsContent")));
+                NewsItem news;
+                if (newsId.isEmpty()) { // New news item.
+                    news = new NewsItem(request.getParameter("newsHeadline"), request.getParameter("newsContent"));
+                    newsHandler.saveNewsItem(news);
+                } else { //Existing news item.
+                    news = newsHandler.getNewsItem(Long.valueOf(newsId));
+                    news.setHeadline(request.getParameter("newsHeadline"));
+                    news.setContent(request.getParameter("newsContent"));
+                    newsHandler.saveNewsItem(news);
                 }
                 sendNewsItems(response);
             } else if (action.equals("removeNewsItem")) {
