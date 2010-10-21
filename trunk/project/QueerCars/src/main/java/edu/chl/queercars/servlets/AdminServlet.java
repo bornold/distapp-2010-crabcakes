@@ -71,6 +71,8 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/rentaleditor.xhtml").forward(request, response);
 
             } else if (action.equals("logout")) {
+                almb.setFName(null);
+                almb.setId(null);
                 session.invalidate();
                 response.sendRedirect("index.xhtml");
 
