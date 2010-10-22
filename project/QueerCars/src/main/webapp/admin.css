@@ -1,0 +1,55 @@
+/* 
+    Document   : main
+    Created on : 2010-okt-05, 15:02:36
+    Author     : Anna
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body
+{
+    font-family: Arial,Helvetica,sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background-color: #D6EDFF;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: scroll;
+}
+a
+{
+    color: black;
+
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+.contentDiv
+{
+    position:relative;
+
+    margin-right: auto;
+    margin-left: auto;
+
+    padding-right: 0px;
+    padding-left: 100px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.headline
+{
+    padding-right: 0px;
+    padding-left: 100px;
+    padding-bottom: 0px;
+    padding-top: 50px;
+}
+.headline2
+{
+    padding-right: 0px;
+    padding-left: 100px;
+    padding-bottom: 0px;
+    padding-top: 30px;
+}

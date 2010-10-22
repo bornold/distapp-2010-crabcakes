@@ -9,39 +9,58 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/careditor.js" type="text/javascript"/>
+        <link rel="stylesheet" type="text/css" href="admin.css" />
         <title>car editor</title>
     </head>
     <body>
-        <p>
-            <table>
-                <tr>
-                    <td>
-                        Car id
-                    </td>
-                    <td>
-                        <input type="text" name="carId" id="carId" value="Insert Car ID here" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Car model
-                    </td>
-                    <td>
-                        <select name="model" id="carModel">                         
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <div style="display: none" id="newModelInfo">
-                New model: <input type="text" id="newModelId" name="newModelId" value=""/><br/>
-                FuelConsumption (liter/km): <input type="text" id="modelFuelConsumption" name="modelFuelConsumption" value=""/> <br/>
-                Emission (g/km): <input type="text" id="modelEmission" name="modelEmission" value=""/>
-
+        <div class="headline">
+            <h1>
+                Edit Cars
+            </h1>
+        </div>
+        <div class="headline2">
+            <h2>
+                Add new car:
+            </h2>
+        </div>
+        <div class="contentDiv">
+            <p>
+                <table>
+                    <tr>
+                        <td>
+                            Car id
+                        </td>
+                        <td>
+                            <input type="text" name="carId" id="carId" value="Insert Car ID here" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Car model
+                        </td>
+                        <td>
+                            <select name="model" id="carModel">
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div style="display: none" id="newModelInfo">
+                    <table>
+                        <tr><td>New model: </td><td><input type="text" id="newModelId" name="newModelId" value=""/><br/></td></tr>
+                        <tr><td>FuelConsumption (liter/km): </td><td><input type="text" id="modelFuelConsumption" name="modelFuelConsumption" value=""/> <br/></td></tr>
+                        <tr><td>Emission (g/km): </td><td><input type="text" id="modelEmission" name="modelEmission" value=""/></td></tr>
+                    </table>
+                </div>
+                <input type="button" value="Save" id="carSubmitButton"/>
+            </p>
+            <div class="headline3">
+                <h2>
+                    Current cars:
+                </h2>
             </div>
-            <input type="button" value="Save" id="carSubmitButton"/>
-        </p>
-        <p>
-            <div id="carlistarea"></div>
-        </p>
+            <p>
+                <div id="carlistarea"></div>
+            </p>
+        </div>
     </body>
 </html>
