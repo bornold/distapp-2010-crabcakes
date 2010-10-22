@@ -105,22 +105,22 @@ public class InitServlet extends HttpServlet {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
-        Customer cust1 = new Customer("4412121234","Lennart", "aert@mail.se");
-        Customer cust2 = new Customer("3312121234","Emil", "asdfg@mail.se");
-        Customer cust3 = new Customer("2212121234","Filip", "asdfgt@mail.se");
-        Customer cust4 = new Customer("1112121234","Jens", "aerty@mail.se");
-        Customer cust5 = new Customer("5512121234","Mio", "aeohjkt@mail.se");
+        Customer cust1 = new Customer("5402034578","Lennart", "Lennieboy@mail.se");
+        Customer cust2 = new Customer("6504068523","Emil", "emilio_12@mail.se");
+        Customer cust3 = new Customer("7811128563","Filip", "Flippy_flopp@mail.se");
+        Customer cust4 = new Customer("8401124512","Jens", "jens_cool_kille@mail.se");
+        Customer cust5 = new Customer("7710102252","Mio", "mio_din_mio@mail.se");
         
         Model m1 = new Model("blackCar", 0.15, 200);
         Model m2 = new Model("queerCar", 0.1, 155 );
         Model m3 = new Model("mercuryCar", 0.08, 120);
         Model m4 = new Model("cadillacCar", 0.2, 250);
-        Car car1 = new Car("KKN111", m1);
-        Car car2 = new Car("KKN222", m2);
-        Car car3 = new Car("KKN333", m3);
-        Car car4 = new Car("KKN444", m4);
-        Car car5 = new Car("KKN555", m1);
-        Car car6 = new Car("KKN666", m2);
+        Car car1 = new Car("ADD510", m1);
+        Car car2 = new Car("CAR874", m2);
+        Car car3 = new Car("ELK156", m3);
+        Car car4 = new Car("MAN872", m4);
+        Car car5 = new Car("NEW933", m1);
+        Car car6 = new Car("RAD052", m2);
         Rental r1 = new Rental(cust1,car1);
         Rental r2 = new Rental(cust2,car2);
         Administrator admin1 = new Administrator("jakob", "Jakob");
