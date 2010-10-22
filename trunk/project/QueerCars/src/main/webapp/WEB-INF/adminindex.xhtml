@@ -7,14 +7,25 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="admin.css" />
         <title>admin</title>
     </head>
     <body>
-        <a href="/queercars/admin?action=showCarPage">Edit cars.</a><br/>
-        <a href="/queercars/admin?action=showRentalEditorPage">Edit rentals.</a><br/>
-        <a href="/queercars/admin?action=showCustomerPage">Edit customers.</a><br/>
-        <a href="/queercars/admin?action=showAdministratorPage">Edit administrators.</a><br/>
-        <a href="/queercars/admin?action=showNewsEditorPage">Edit news feed.</a><br/>
-        <a href="/queercars/admin?action=logout">Logout.</a><br/>
+        <div class="headline">
+            <h1>
+                Welcome to Admin Page
+            </h1>
+        </div>
+        <br/>
+        <div class="contentDiv">
+            <a href="/queercars/admin?action=showAdministratorPage">Edit Administrators</a><br/><br/>
+            <a href="/queercars/admin?action=showCustomerPage">Edit Customers</a><br/><br/>
+
+            <a href="/queercars/admin?action=showCarPage">Edit Cars</a><br/><br/>
+            <a href="/queercars/admin?action=showRentalEditorPage">End Rentals</a><br/><br/>
+
+            <a href="/queercars/admin?action=showNewsEditorPage">Edit News Feed</a><br/><br/>
+            <a href="/queercars/admin?action=logout">Logout</a><br/><br/>
+        </div>
     </body>
 </html>

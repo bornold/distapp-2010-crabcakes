@@ -9,18 +9,39 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/newseditor.js" type="text/javascript"/>
+        <link rel="stylesheet" type="text/css" href="admin.css" />
         <title>news editor</title>
     </head>
     <body>
-        <p>
-            Headline: <input type="text" value="" name="newsHeadline" id="newsHeadline"/><br/>
-            Content: <input type="text" value="" name="newsContent" id="newsContent"/><br/>
-            <input type="submit" value="Save" id="newsSubmitButton"/><br/>
-            <input type="hidden" name="action" value="addNewsItem"/>
-            <input type="hidden" value="" name="newsId" id="newsId"/>
-        </p>
-        <p>
-            <div id="newslistarea"></div>
-        </p>
+        <div class="headline">
+            <h1>
+                Edit News Feed
+            </h1>
+        </div>
+        <div class="headline2">
+            <h2>
+                Add News:
+            </h2>
+        </div>
+        <div class="contentDiv">
+            <p>
+                <table>
+                    <tr><td>Headline: </td><td><input type="text" value="" name="newsHeadline" id="newsHeadline"/><br/></td></tr>
+                    <tr><td>Content: </td><td><input type="text" value="" name="newsContent" id="newsContent"/><br/></td></tr>
+                </table>
+                <input type="submit" value="Save" id="newsSubmitButton"/><br/>
+                <input type="hidden" name="action" value="addNewsItem"/>
+                <input type="hidden" value="" name="newsId" id="newsId"/>
+            </p>
+            <br/>
+            <div class="headline3">
+                <h2>
+                    Current News:
+                </h2>
+            </div>
+            <p>
+                <div id="newslistarea"></div>
+            </p>
+        </div>
     </body>
 </html>

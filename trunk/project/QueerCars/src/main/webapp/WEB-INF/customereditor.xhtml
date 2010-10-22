@@ -9,18 +9,40 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/customereditor.js" type="text/javascript"/>
+        <link rel="stylesheet" type="text/css" href="admin.css" />
         <title>customer editor</title>
     </head>
     <body>
-        <p>
-            Customer ID: <input type="text" value="" name="customerId" id="customerId"/><br/>
-            Customer name: <input type="text" value="" name="customerName" id="customerName"/><br/>
-            Customer email: <input type="text" value="" name="customerEmail" id="customerEmail"/><br/>
-            <input type="submit" value="Save" id="customerSubmitButton"/><br/>
-            <input type="hidden" name="action" value="addCustomer"/>
-        </p>
-        <p>
-            <div id="customerlistarea"></div>
-        </p>
+        <div class="headline">
+            <h1>
+                Customer Editor
+            </h1>
+        </div>
+        <div class="headline2">
+            <h2>
+                Add new customer:
+            </h2>
+        </div>
+        <div class="contentDiv">
+            <p>
+                <table>
+                    <tr><td>Customer ID: </td><td><input type="text" value="" name="customerId" id="customerId"/><br/></td></tr>
+                    <tr><td>Customer name: </td><td><input type="text" value="" name="customerName" id="customerName"/><br/></td></tr>
+                    <tr><td>Customer email: </td><td><input type="text" value="" name="customerEmail" id="customerEmail"/><br/></td></tr>
+                </table>
+
+                    <input type="submit" value="Save" id="customerSubmitButton"/><br/>
+                    <input type="hidden" name="action" value="addCustomer"/>
+            </p>
+            <br/>
+            <div class="headline3">
+                <h2>
+                    Current admins:
+                </h2>
+            </div>
+            <p>
+                <div id="customerlistarea"></div>
+            </p>
+        </div>
     </body>
 </html>

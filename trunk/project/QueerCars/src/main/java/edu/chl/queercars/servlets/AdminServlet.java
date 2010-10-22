@@ -250,7 +250,7 @@ public class AdminServlet extends HttpServlet {
      */
     private void sendCarTable(HttpServletResponse response) throws IOException {
         List<Car> allCars = carHandler.getAllCars();
-        String tableHeader = "<table border=\"1\">\n<tr><th>id</th><th>model</th><th>co2 emission</th><th>fuel consumtion</th><th>odometer</th></tr>\n";
+        String tableHeader = "<table border=\"0\">\n<tr><th>id</th><th>model</th><th>CO2</th><th>fuel</th><th>odometer</th></tr>\n";
         String tableFooter = "</table>";
         String output = tableHeader;
 

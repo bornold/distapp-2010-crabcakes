@@ -9,17 +9,38 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script src="JavaScript/jquery-1.4.2.js" type="text/javascript"/>
         <script src="JavaScript/admineditor.js" type="text/javascript"/>
+        <link rel="stylesheet" type="text/css" href="admin.css" />
         <title>administrator editor</title>
     </head>
     <body>
-        <p>
-            Administrator ID: <input type="text" value="" name="adminId" id="adminId"/><br/>
-            Administrator name: <input type="text" value="" name="adminName" id="adminName"/><br/>
-            <input type="submit" value="Save" id="adminSubmitButton"/><br/>
-            <input type="hidden" name="action" value="addAdministrator"/>
-        </p>
-        <p>
-            <div id="adminlistarea"></div>
-        </p>
+        <div class="headline">
+            <h1>
+                Edit Administrators
+            </h1>
+        </div>
+        <div class="headline2">
+            <h2>
+                Add new admin:
+            </h2>
+        </div>
+        <div class="contentDiv">
+            <p>
+                <table>
+                    <tr><td>Administrator ID: </td><td><input type="text" value="" name="adminId" id="adminId"/><br/></td></tr>
+                    <tr><td>Administrator name: </td><td><input type="text" value="" name="adminName" id="adminName"/><br/></td></tr>
+                </table>
+                <input type="submit" value="Save" id="adminSubmitButton"/><br/>
+                <input type="hidden" name="action" value="addAdministrator"/>
+            </p>
+            <br/>
+            <div class="headline3">
+                <h2>
+                    Current admins:
+                </h2>
+            </div>
+            <p>
+                <div id="adminlistarea"></div>
+            </p>
+        </div>
     </body>
 </html>
