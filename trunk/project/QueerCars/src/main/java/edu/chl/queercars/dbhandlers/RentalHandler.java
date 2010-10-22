@@ -59,8 +59,9 @@ public class RentalHandler {
 
         String query = "SELECT r FROM Rental r";
         Query q = em.createQuery(query);
+        List<Rental> rentals = q.getResultList();
         em.close();
-        return q.getResultList();
+        return rentals;
     }
 
     public void endRental(String rentalId, String odometerValue) {
